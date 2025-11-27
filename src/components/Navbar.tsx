@@ -4,10 +4,22 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { FiMenu, FiX } from 'react-icons/fi'
 import { GiPlantSeed } from 'react-icons/gi'
+import { useScrollSpy } from '@/hooks/useScrollSpy'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
+  const navLinks = [
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Services', href: '#services' },
+    { name: 'Solutions', href: '#solutions' },
+    { name: 'Contact', href: '#contact' },
+  ]
+
+  const sectionIds = navLinks.map(link => link.href.replace('#', ''))
+  const activeSection = useScrollSpy(sectionIds, 100)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,14 +29,18 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Problem', href: '#problem' },
-    { name: 'Solution', href: '#solution' },
-    { name: 'Features', href: '#features' },
-    { name: 'How It Works', href: '#how-it-works' },
-    { name: 'Contact', href: '#contact' },
-  ]
+  const handleNavClick = (href: string) => {
+    setIsOpen(false)
+    const element = document.getElementById(href.replace('#', ''))
+    if (element) {
+      const offset = 80
+      const elementPosition = element.offsetTop - offset
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
 
   return (
     <nav
@@ -46,15 +62,23 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.replace('#', '')
+              return (
+                <button
+                  key={link.name}
+                  onClick={() => handleNavClick(link.href)}
+                  className={`relative text-gray-700 font-medium transition-all duration-300 ${
+                    isActive ? 'text-green-700' : 'hover:text-green-600'
+                  }`}
+                >
+                  {link.name}
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-green-700 rounded-full transition-all duration-300"></span>
+                  )}
+                </button>
+              )
+            })}
             <Link href="/login">
               <button className="btn-secondary mr-3">Sign In</button>
             </Link>
@@ -77,16 +101,22 @@ const Navbar = () => {
         {isOpen && (
           <div className="md:hidden mt-4 pb-4">
             <div className="flex flex-col space-y-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="text-gray-700 hover:text-primary-600 font-medium transition-colors py-2"
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href.replace('#', '')
+                return (
+                  <button
+                    key={link.name}
+                    onClick={() => handleNavClick(link.href)}
+                    className={`text-left font-medium transition-colors py-2 ${
+                      isActive 
+                        ? 'text-green-700 border-l-4 border-green-700 pl-3' 
+                        : 'text-gray-700 hover:text-green-600 pl-4'
+                    }`}
+                  >
+                    {link.name}
+                  </button>
+                )
+              })}
               <Link href="/login" onClick={() => setIsOpen(false)} className="block">
                 <button className="btn-secondary w-full mb-3">Sign In</button>
               </Link>

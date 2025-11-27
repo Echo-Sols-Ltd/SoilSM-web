@@ -5,33 +5,26 @@ import Image from 'next/image'
 import { FiCheck, FiAward, FiUsers, FiTrendingUp } from 'react-icons/fi'
 
 const WhyChooseUs = () => {
-  const reasons = [
+  const values = [
     {
-      icon: FiAward,
-      title: 'Expert Knowledge',
-      description: 'Our team of agricultural experts brings decades of experience in soil science and sustainable farming.',
+      icon: '🌱',
+      title: 'Sustainability',
+      description: 'We bring the long-term health and resource balance',
     },
     {
-      icon: FiUsers,
-      title: 'Community Support',
-      description: 'Join a thriving community of farmers who share insights and best practices for success.',
+      icon: '🤝',
+      title: 'Community',
+      description: 'Farmers' trust, and local guardians working hand in hand',
     },
     {
-      icon: FiTrendingUp,
-      title: 'Proven Results',
-      description: 'Over 10,000 farmers have increased their yields by an average of 50% using our platform.',
+      icon: '💡',
+      title: 'Innovation',
+      description: 'Simple UI and sensor tech that works offline, anywhere',
     },
-  ]
-
-  const benefits = [
-    'Real-time soil health monitoring with IoT sensors',
-    'AI-powered recommendations tailored to your crops',
-    'Automated irrigation scheduling based on weather data',
-    'Expert support available 24/7 via chat or phone',
   ]
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section id="about" className="py-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="container-custom">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Image */}
@@ -65,54 +58,43 @@ const WhyChooseUs = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-              ⭐ Why Choose Us?
+            <div className="inline-flex items-center gap-2 text-gray-600 text-sm mb-4">
+              <span className="w-8 h-px bg-gray-400"></span>
+              About us
             </div>
             
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              Transform Your Farm with Smart Technology
+              Why choose us?
             </h2>
             
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              We combine cutting-edge technology with agricultural expertise to help you make data-driven decisions 
-              that increase yields, reduce costs, and promote sustainable farming practices.
+            <p className="text-gray-600 mb-6 leading-relaxed">
+              Soilsmart began with a simple idea: what if the soil itself could guide the farmer?
+            </p>
+            
+            <p className="text-gray-600 mb-8 leading-relaxed">
+              We saw the immense economic and community burden created billowed to make soil health visible, actionable, and accessible — even next knowledge.
             </p>
 
-            {/* Benefits List */}
-            <div className="space-y-4 mb-8">
-              {benefits.map((benefit, index) => (
+            <p className="text-gray-600 mb-10 leading-relaxed">
+              From local hubs to global partnerships, we're building tools that empower smallholder farmers to save water, grow more, and protect their land for the next generation.
+            </p>
+
+            {/* Value Cards */}
+            <div className="space-y-6">
+              {values.map((value, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="flex items-start gap-3"
+                  className="flex items-start gap-4"
                 >
-                  <div className="bg-green-100 p-1 rounded-full flex-shrink-0 mt-1">
-                    <FiCheck className="text-green-700 text-sm" />
+                  <div className="text-4xl flex-shrink-0">{value.icon}</div>
+                  <div>
+                    <h3 className="font-bold text-gray-900 text-lg mb-1">{value.title}</h3>
+                    <p className="text-gray-600">{value.description}</p>
                   </div>
-                  <p className="text-gray-700">{benefit}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Reason Cards */}
-            <div className="grid sm:grid-cols-3 gap-4">
-              {reasons.map((reason, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <div className="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <reason.icon className="text-green-700 text-xl" />
-                  </div>
-                  <h3 className="font-bold text-gray-900 text-sm mb-1">{reason.title}</h3>
-                  <p className="text-xs text-gray-600">{reason.description}</p>
                 </motion.div>
               ))}
             </div>

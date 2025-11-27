@@ -33,7 +33,7 @@ const Objectives = () => {
   ]
 
   return (
-    <section id="solution" className="py-20 bg-gradient-to-br from-white to-green-50">
+    <section id="solutions" className="py-20 bg-gradient-to-br from-white to-green-50">
       <div className="container-custom">
         {/* Section Header */}
         <motion.div
