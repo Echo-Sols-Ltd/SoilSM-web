@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
-import { FiCheck, FiZap, FiPlus, FiX, FiCalendar, FiClock, FiEdit, FiTrash2, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { FiCheck, FiZap, FiPlus, FiX, FiCalendar, FiClock, FiEdit, FiTrash2, FiChevronLeft, FiChevronRight, FiArrowLeft } from 'react-icons/fi'
 
 interface Task {
   id: number
@@ -21,6 +22,7 @@ interface Reminder {
 }
 
 export default function TasksPage() {
+  const router = useRouter()
   const [activeTab, setActiveTab] = useState<'today' | 'calendar' | 'reminders'>('today')
   const [showAddTaskModal, setShowAddTaskModal] = useState(false)
   const [showAddReminderModal, setShowAddReminderModal] = useState(false)
@@ -172,9 +174,17 @@ export default function TasksPage() {
       <div className="space-y-4 sm:space-y-6 px-3 sm:px-0">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 sm:mb-6">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Tasks</h1>
-            <p className="text-sm sm:text-base text-gray-600">"What should I do today?" - one tap, one answer.</p>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => router.push('/dashboard')}
+              className="lg:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <FiArrowLeft className="text-xl" />
+            </button>
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Tasks</h1>
+              <p className="text-sm sm:text-base text-gray-600">"What should I do today?" - one tap, one answer.</p>
+            </div>
           </div>
         </div>
 
