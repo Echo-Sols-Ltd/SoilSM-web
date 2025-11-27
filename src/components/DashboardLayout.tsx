@@ -104,14 +104,17 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 key={item.name}
                 href={item.href}
                 onClick={() => setSidebarOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
                   isActive
-                    ? 'bg-primary-600 text-white shadow-lg'
-                    : 'text-gray-700 hover:bg-gray-100'
+                    ? 'bg-gradient-to-r from-emerald-500 to-green-500 text-white shadow-lg shadow-emerald-500/30 scale-105 font-bold'
+                    : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-700'
                 }`}
               >
-                <Icon className="text-xl" />
+                <Icon className={`text-xl ${isActive ? 'animate-pulse' : ''}`} />
                 <span className="font-medium">{item.name}</span>
+                {isActive && (
+                  <span className="ml-auto w-2 h-2 bg-white rounded-full" />
+                )}
               </Link>
             )
           })}

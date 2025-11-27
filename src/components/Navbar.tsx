@@ -68,13 +68,15 @@ const Navbar = () => {
                 <button
                   key={link.name}
                   onClick={() => handleNavClick(link.href)}
-                  className={`relative text-gray-700 font-medium transition-all duration-300 ${
-                    isActive ? 'text-green-700' : 'hover:text-green-600'
+                  className={`relative font-medium transition-all duration-300 ${
+                    isActive 
+                      ? 'text-emerald-600 font-bold' 
+                      : 'text-gray-700 hover:text-emerald-500'
                   }`}
                 >
                   {link.name}
                   {isActive && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-green-700 rounded-full transition-all duration-300"></span>
+                    <span className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full transition-all duration-300 shadow-lg shadow-emerald-500/50"></span>
                   )}
                 </button>
               )
@@ -107,10 +109,10 @@ const Navbar = () => {
                   <button
                     key={link.name}
                     onClick={() => handleNavClick(link.href)}
-                    className={`text-left font-medium transition-colors py-2 ${
+                    className={`text-left font-medium transition-all duration-300 py-2 rounded-r-lg ${
                       isActive 
-                        ? 'text-green-700 border-l-4 border-green-700 pl-3' 
-                        : 'text-gray-700 hover:text-green-600 pl-4'
+                        ? 'text-emerald-600 font-bold border-l-4 border-emerald-500 bg-emerald-50 pl-3 pr-4' 
+                        : 'text-gray-700 hover:text-emerald-500 hover:bg-gray-50 pl-4 pr-4'
                     }`}
                   >
                     {link.name}
