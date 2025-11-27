@@ -56,7 +56,7 @@ const Navbar = () => {
               <GiPlantSeed className="text-white text-xl sm:text-2xl" />
             </div>
             <span className="text-lg sm:text-xl md:text-2xl font-bold font-display text-gray-900">
-              Soil<span className="text-primary-600">Smart</span>
+              Soil<span className="text-[#16a34a]">Smart</span>
             </span>
           </Link>
 
