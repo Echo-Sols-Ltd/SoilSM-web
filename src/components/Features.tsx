@@ -44,7 +44,7 @@ const Features = () => {
   ]
 
   return (
-    <section id="services" className="py-20 bg-gradient-to-br from-green-900 via-green-800 to-emerald-900 relative overflow-hidden">
+    <section id="services" className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-green-900 via-green-800 to-emerald-900 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -60,20 +60,20 @@ const Features = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12 md:mb-16 px-4 sm:px-0"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-display text-white mb-4 sm:mb-6">
             Explore our wide range of services
           </h2>
           <div className="flex justify-center">
-            <button className="bg-white text-green-800 px-6 py-2 rounded-full font-semibold hover:bg-green-50 transition-colors">
+            <button className="bg-white text-green-800 px-4 sm:px-6 py-2 rounded-full font-semibold hover:bg-green-50 transition-colors text-sm sm:text-base">
               Browse Catalogue
             </button>
           </div>
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 px-4 sm:px-0">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -84,23 +84,23 @@ const Features = () => {
               className="group relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
             >
               {/* Image Area */}
-              <div className={`h-48 relative overflow-hidden bg-gradient-to-br ${service.bgGradient}`}>
+              <div className={`h-40 sm:h-48 relative overflow-hidden bg-gradient-to-br ${service.bgGradient}`}>
                 <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity z-10"></div>
                 <Image
                   src={service.image}
                   alt={service.title}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-0"></div>
               </div>
 
               {/* Content Area */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 leading-relaxed mb-4">{service.description}</p>
-                <button className="text-green-700 font-semibold hover:text-green-800 transition-colors flex items-center gap-2 group">
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">{service.title}</h3>
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-3 sm:mb-4">{service.description}</p>
+                <button className="text-green-700 font-semibold hover:text-green-800 transition-colors flex items-center gap-2 group text-sm sm:text-base">
                   Learn More
                   <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -117,12 +117,12 @@ const Features = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-center mt-12"
+          className="text-center mt-8 sm:mt-12 px-4 sm:px-0"
         >
-          <p className="text-white text-lg mb-6">
+          <p className="text-white text-base sm:text-lg mb-4 sm:mb-6">
             Ready to transform your farming with our comprehensive services?
           </p>
-          <button className="bg-white text-green-800 px-8 py-3 rounded-lg font-bold hover:bg-green-50 transition-colors shadow-lg">
+          <button className="bg-white text-green-800 px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-bold hover:bg-green-50 transition-colors shadow-lg text-sm sm:text-base">
             Get Started Today
           </button>
         </motion.div>

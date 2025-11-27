@@ -43,39 +43,39 @@ const Footer = () => {
 
   return (
     <footer className="bg-green-950 text-gray-300">
-      <div className="container-custom py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-12 mb-12">
+      <div className="container-custom py-8 sm:py-12 md:py-16 px-4 sm:px-0">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 md:gap-12 mb-8 sm:mb-12">
           {/* Brand Column */}
-          <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center space-x-2 mb-4">
-            <div className="bg-green-600 p-2 rounded-lg">
-              <GiPlantSeed className="text-white text-2xl" />
-            </div>
-            <span className="text-2xl font-bold font-display text-white">
-              Soil<span className="text-green-400">Smart</span>
-            </span>
+          <div className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-2">
+            <Link href="/" className="flex items-center space-x-2 mb-3 sm:mb-4">
+              <div className="bg-green-600 p-1.5 sm:p-2 rounded-lg">
+                <GiPlantSeed className="text-white text-xl sm:text-2xl" />
+              </div>
+              <span className="text-xl sm:text-2xl font-bold font-display text-white">
+                Soil<span className="text-green-400">Smart</span>
+              </span>
             </Link>
-            <p className="text-gray-400 mb-6 leading-relaxed">
+            <p className="text-gray-400 mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm">
               Empowering African farmers with affordable, data-driven tools for sustainable agriculture 
               and improved crop yields.
             </p>
             
             {/* Contact Info */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 text-sm">
-                <FiMail className="text-green-400" />
-                <a href="mailto:info@soilsmart.com" className="hover:text-green-400 transition-colors">
+            <div className="space-y-2 sm:space-y-3">
+              <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+                <FiMail className="text-green-400 flex-shrink-0" />
+                <a href="mailto:info@soilsmart.com" className="hover:text-green-400 transition-colors break-all">
                   info@soilsmart.com
                 </a>
               </div>
-              <div className="flex items-center gap-3 text-sm">
-                <FiPhone className="text-green-400" />
+              <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+                <FiPhone className="text-green-400 flex-shrink-0" />
                 <a href="tel:+250123456789" className="hover:text-green-400 transition-colors">
                   +250 123 456 789
                 </a>
               </div>
-              <div className="flex items-center gap-3 text-sm">
-                <FiMapPin className="text-green-400" />
+              <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+                <FiMapPin className="text-green-400 flex-shrink-0" />
                 <span>Kigali, Rwanda</span>
               </div>
             </div>
@@ -83,11 +83,11 @@ const Footer = () => {
 
           {/* Links Columns */}
           <div>
-            <h3 className="text-white font-bold mb-4">Product</h3>
-            <ul className="space-y-2">
+            <h3 className="text-white font-bold mb-3 sm:mb-4 text-sm sm:text-base">Product</h3>
+            <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.product.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="hover:text-primary-400 transition-colors text-sm">
+                  <Link href={link.href} className="hover:text-primary-400 transition-colors text-xs sm:text-sm">
                     {link.name}
                   </Link>
                 </li>
@@ -96,11 +96,11 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-white font-bold mb-4">Company</h3>
-            <ul className="space-y-2">
+            <h3 className="text-white font-bold mb-3 sm:mb-4 text-sm sm:text-base">Company</h3>
+            <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="hover:text-primary-400 transition-colors text-sm">
+                  <Link href={link.href} className="hover:text-primary-400 transition-colors text-xs sm:text-sm">
                     {link.name}
                   </Link>
                 </li>
@@ -109,11 +109,11 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-white font-bold mb-4">Resources</h3>
-            <ul className="space-y-2">
+            <h3 className="text-white font-bold mb-3 sm:mb-4 text-sm sm:text-base">Resources</h3>
+            <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="hover:text-primary-400 transition-colors text-sm">
+                  <Link href={link.href} className="hover:text-primary-400 transition-colors text-xs sm:text-sm">
                     {link.name}
                   </Link>
                 </li>
@@ -122,11 +122,11 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-white font-bold mb-4">Legal</h3>
-            <ul className="space-y-2">
+            <h3 className="text-white font-bold mb-3 sm:mb-4 text-sm sm:text-base">Legal</h3>
+            <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="hover:text-primary-400 transition-colors text-sm">
+                  <Link href={link.href} className="hover:text-primary-400 transition-colors text-xs sm:text-sm">
                     {link.name}
                   </Link>
                 </li>
@@ -136,24 +136,24 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-400">
+        <div className="border-t border-gray-800 pt-6 sm:pt-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
+            <p className="text-xs sm:text-sm text-gray-400 text-center sm:text-left">
               © {currentYear} Echo Solutions Ltd. All rights reserved.
             </p>
 
             {/* Social Links */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-green-900 hover:bg-green-600 rounded-lg flex items-center justify-center transition-colors"
+                  className="w-8 h-8 sm:w-10 sm:h-10 bg-green-900 hover:bg-green-600 rounded-lg flex items-center justify-center transition-colors"
                   aria-label={social.label}
                 >
-                  <social.icon className="text-lg" />
+                  <social.icon className="text-sm sm:text-lg" />
                 </a>
               ))}
             </div>
@@ -165,4 +165,3 @@ const Footer = () => {
 }
 
 export default Footer
-

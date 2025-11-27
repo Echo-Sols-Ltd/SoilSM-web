@@ -45,17 +45,17 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-lg py-4' : 'bg-transparent py-6'
+        scrolled ? 'bg-white shadow-lg py-3 sm:py-4' : 'bg-transparent py-4 sm:py-6'
       }`}
     >
       <div className="container-custom">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="bg-primary-600 p-2 rounded-lg group-hover:bg-primary-700 transition-colors">
-              <GiPlantSeed className="text-white text-2xl" />
+          <Link href="/" className="flex items-center space-x-1.5 sm:space-x-2 group">
+            <div className="bg-primary-600 p-1.5 sm:p-2 rounded-lg group-hover:bg-primary-700 transition-colors">
+              <GiPlantSeed className="text-white text-xl sm:text-2xl" />
             </div>
-            <span className="text-2xl font-bold font-display text-gray-900">
+            <span className="text-lg sm:text-xl md:text-2xl font-bold font-display text-gray-900">
               Soil<span className="text-primary-600">Smart</span>
             </span>
           </Link>
@@ -82,10 +82,10 @@ const Navbar = () => {
               )
             })}
             <Link href="/login">
-              <button className="btn-secondary mr-3">Sign In</button>
+              <button className="btn-secondary mr-2 sm:mr-3 text-xs sm:text-sm px-3 sm:px-6 py-2 sm:py-3">Sign In</button>
             </Link>
             <Link href="/signup">
-              <button className="btn-primary">Get Started</button>
+              <button className="btn-primary text-xs sm:text-sm px-3 sm:px-6 py-2 sm:py-3">Get Started</button>
             </Link>
           </div>
 
