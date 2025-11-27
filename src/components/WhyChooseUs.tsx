@@ -14,7 +14,7 @@ const WhyChooseUs = () => {
     {
       icon: '🤝',
       title: 'Community',
-      description: 'Farmers' trust, and local guardians working hand in hand',
+      description: "Farmers' trust, and local guardians working hand in hand",
     },
     {
       icon: '💡',
