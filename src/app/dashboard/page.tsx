@@ -80,30 +80,9 @@ export default function DashboardPage() {
     <DashboardLayout>
       <div className="space-y-4 sm:space-y-6 px-3 sm:px-0">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 sm:mb-6">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Dashboard</h1>
-            <p className="text-sm sm:text-base text-gray-600">Your soil's daily story, powered by smart sensors.</p>
-          </div>
-          <div className="flex items-center gap-3 sm:gap-4 mt-3 sm:mt-4 md:mt-0">
-            <div className="hidden md:flex items-center gap-2 bg-gray-100 rounded-lg px-3 py-2">
-              <FiSearch className="text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search posts, farmers"
-                className="bg-transparent border-none outline-none text-sm text-gray-600 w-40"
-              />
-            </div>
-            <button className="relative text-gray-600 hover:text-gray-900">
-              <FiBell className="text-xl" />
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-white flex items-center justify-center">
-                3
-              </span>
-            </button>
-            <div className="w-9 h-9 sm:w-10 sm:h-10 bg-[#16a34a] rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base">
-              U
-            </div>
-          </div>
+        <div className="mb-4 sm:mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Dashboard</h1>
+          <p className="text-sm sm:text-base text-gray-600">Your soil's daily story, powered by smart sensors.</p>
         </div>
 
         {/* Weather/Location Info */}
@@ -253,14 +232,14 @@ export default function DashboardPage() {
                 <FiMessageSquare className="text-xl sm:text-2xl text-gray-600 group-hover:text-[#16a34a] mb-1 sm:mb-2" />
                 <span className="text-xs sm:text-sm font-medium text-gray-700 group-hover:text-[#16a34a] text-center">Ask AI</span>
               </Link>
-              <button className="flex flex-col items-center justify-center p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-[#16a34a] hover:bg-green-50 transition-all group">
+              <Link href="/dashboard/reports" className="flex flex-col items-center justify-center p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-[#16a34a] hover:bg-green-50 transition-all group">
                 <FiFileText className="text-xl sm:text-2xl text-gray-600 group-hover:text-[#16a34a] mb-1 sm:mb-2" />
                 <span className="text-xs sm:text-sm font-medium text-gray-700 group-hover:text-[#16a34a] text-center">View Reports</span>
-              </button>
-              <button className="flex flex-col items-center justify-center p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-[#16a34a] hover:bg-green-50 transition-all group">
+              </Link>
+              <Link href="/dashboard/community" className="flex flex-col items-center justify-center p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-[#16a34a] hover:bg-green-50 transition-all group">
                 <FiUsers className="text-xl sm:text-2xl text-gray-600 group-hover:text-[#16a34a] mb-1 sm:mb-2" />
                 <span className="text-xs sm:text-sm font-medium text-gray-700 group-hover:text-[#16a34a] text-center">Post Update</span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>

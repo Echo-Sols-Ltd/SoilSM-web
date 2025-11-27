@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import DashboardLayout from '@/components/DashboardLayout'
 import { FiHeart, FiMessageCircle, FiShare2, FiImage, FiVideo, FiMoreVertical } from 'react-icons/fi'
 import Image from 'next/image'
@@ -18,8 +18,17 @@ interface Post {
 export default function CommunityPage() {
   const [activeTab, setActiveTab] = useState<'all' | 'region' | 'questions' | 'news'>('all')
   const [postContent, setPostContent] = useState('')
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
-  const posts: Post[] = [
+  // Load posts from localStorage or use default
+  const loadPosts = (): Post[] => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('soilsmart_posts')
+      if (stored) {
+        return JSON.parse(stored)
+      }
+    }
+    return [
     {
       id: 1,
       author: 'Farmer Kallis',
@@ -53,7 +62,17 @@ export default function CommunityPage() {
       likes: 15,
       comments: 7,
     },
-  ]
+    ]
+  }
+
+  const [posts, setPosts] = useState<Post[]>(loadPosts())
+
+  // Save posts to localStorage whenever they change
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('soilsmart_posts', JSON.stringify(posts))
+    }
+  }, [posts])
 
   const announcements = [
     { id: 1, title: 'New AI Soil Analysis update released', link: 'Read more' },
@@ -102,10 +121,25 @@ export default function CommunityPage() {
               />
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3 sm:gap-4">
-                  <button className="flex items-center gap-2 text-gray-600 hover:text-[#16a34a] transition-colors text-sm sm:text-base">
+                  <label className="flex items-center gap-2 text-gray-600 hover:text-[#16a34a] transition-colors text-sm sm:text-base cursor-pointer">
                     <FiImage className="text-lg sm:text-xl" />
                     <span className="hidden sm:inline">Photo</span>
-                  </button>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0]
+                        if (file) {
+                          const reader = new FileReader()
+                          reader.onloadend = () => {
+                            setSelectedImage(reader.result as string)
+                          }
+                          reader.readAsDataURL(file)
+                        }
+                      }}
+                    />
+                  </label>
                   <button className="flex items-center gap-2 text-gray-600 hover:text-[#16a34a] transition-colors text-sm sm:text-base">
                     <FiVideo className="text-lg sm:text-xl" />
                     <span className="hidden sm:inline">Video</span>
@@ -114,8 +148,21 @@ export default function CommunityPage() {
                 <button
                   onClick={() => {
                     if (postContent.trim()) {
+                      const user = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('soilsmart_user') || '{}') : {}
+                      const newPost: Post = {
+                        id: posts.length > 0 ? Math.max(...posts.map(p => p.id)) + 1 : 1,
+                        author: user.name || 'You',
+                        time: 'Just now',
+                        content: postContent,
+                        image: selectedImage || undefined,
+                        likes: 0,
+                        comments: 0,
+                      }
+                      const updatedPosts = [newPost, ...posts]
+                      setPosts(updatedPosts)
+                      localStorage.setItem('soilsmart_posts', JSON.stringify(updatedPosts))
                       setPostContent('')
-                      // In a real app, this would create a post
+                      setSelectedImage(null)
                     }
                   }}
                   className="px-4 sm:px-6 py-2 bg-[#16a34a] text-white rounded-lg hover:bg-[#15803d] transition-colors text-sm sm:text-base font-medium"

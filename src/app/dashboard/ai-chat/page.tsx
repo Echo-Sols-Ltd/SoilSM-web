@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { FiSend, FiMic } from 'react-icons/fi'
+import { FiSend, FiMic, FiArrowLeft } from 'react-icons/fi'
+import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
 
 interface Message {
@@ -13,6 +14,7 @@ interface Message {
 }
 
 export default function AIChatPage() {
+  const router = useRouter()
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
@@ -85,8 +87,18 @@ export default function AIChatPage() {
     <DashboardLayout>
       <div className="max-w-4xl mx-auto">
         <div className="mb-4 sm:mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">SoilSmart AI Chat</h1>
-          <p className="text-sm sm:text-base text-gray-600">Your soil's daily story, powered by smart sensors.</p>
+          <div className="flex items-center gap-3 mb-2">
+            <button
+              onClick={() => router.push('/dashboard')}
+              className="lg:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <FiArrowLeft className="text-xl" />
+            </button>
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">SoilSmart AI Chat</h1>
+              <p className="text-sm sm:text-base text-gray-600">Your soil's daily story, powered by smart sensors.</p>
+            </div>
+          </div>
         </div>
 
         <motion.div

@@ -37,6 +37,8 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     }
   }, [router])
 
+  const [showLogoutModal, setShowLogoutModal] = useState(false)
+
   const handleLogout = () => {
     localStorage.removeItem('soilsmart_user')
     router.push('/')
@@ -117,7 +119,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         {/* Log out Link */}
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#166534]">
           <button
-            onClick={handleLogout}
+            onClick={() => setShowLogoutModal(true)}
             className="w-full text-left text-white/80 hover:text-white px-4 py-2 rounded-lg hover:bg-[#166534] transition-colors text-sm font-medium flex items-center gap-2"
           >
             <FiLogOut className="text-lg" />
@@ -165,6 +167,32 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         {/* Page Content */}
         <main className="p-4 sm:p-6">{children}</main>
       </div>
+
+      {/* Logout Confirmation Modal */}
+      {showLogoutModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 relative">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Want to logout?</h2>
+            <p className="text-gray-600 mb-6 text-sm sm:text-base">
+              Are you sure you want to log out? You will be signed out of your account and any unsaved changes may be lost. You can always log back in at any time.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowLogoutModal(false)}
+                className="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all text-sm sm:text-base"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleLogout}
+                className="flex-1 px-4 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all text-sm sm:text-base"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
