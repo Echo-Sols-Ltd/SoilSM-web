@@ -2,32 +2,32 @@
 
 import { motion } from 'framer-motion'
 import { GiPlantSeed } from 'react-icons/gi'
-import { FiTarget, FiActivity, FiZap, FiCpu, FiUsers } from 'react-icons/fi'
+import { FiTarget, FiActivity, FiZap, FiCpu, FiUsers, FiSmartphone } from 'react-icons/fi'
 
 const Objectives = () => {
   const objectives = [
     {
       icon: FiActivity,
       title: 'Monitor Soil Health',
-      description: 'Real-time monitoring using affordable sensors to track moisture, pH, nutrients, and temperature.',
+      description: 'Real-time monitoring using affordable sensors.',
       gradient: 'from-green-500 to-emerald-600',
     },
     {
       icon: FiZap,
       title: 'Automate Delivery',
-      description: 'Smart automation for water and compost delivery based on real-time soil data and crop needs.',
+      description: 'Smart automation for water and compost delivery.',
       gradient: 'from-blue-500 to-cyan-600',
     },
     {
       icon: FiCpu,
       title: 'AI-Powered Guidance',
-      description: 'Intelligent recommendations for planting, fertilization, pest control, and harvest timing.',
+      description: 'Intelligent recommendations for optimal farming.',
       gradient: 'from-purple-500 to-pink-600',
     },
     {
-      icon: FiUsers,
-      title: 'Community Sharing',
-      description: 'Platform for farmers to share knowledge, best practices, and agricultural technology.',
+      icon: FiSmartphone,
+      title: 'Mobile App',
+      description: 'Access all features on-the-go with offline support.',
       gradient: 'from-orange-500 to-red-600',
     },
   ]
