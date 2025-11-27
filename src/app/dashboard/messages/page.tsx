@@ -2,12 +2,12 @@
 
 import { useState, useRef, useEffect } from 'react'
 import DashboardLayout from '@/components/DashboardLayout'
-import { FiSend, FiPaperclip, FiPhone, FiVideo, FiMoreVertical, FiSearch } from 'react-icons/fi'
+import { FiSend, FiPaperclip, FiPhone, FiVideo, FiMoreVertical, FiSearch, FiPlus } from 'react-icons/fi'
 
 interface ChatMessage {
   id: number
   text: string
-  sender: 'user' | 'other'
+  sender: 'user' | 'other' | 'system'
   timestamp: string
 }
 
@@ -25,18 +25,19 @@ export default function MessagesPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const conversations: Conversation[] = [
-    { id: 1, name: 'James Doe', lastMessage: 'Do you know what time is it?', time: 'Wednesday, 12:00 PM', unread: 2 },
+    { id: 1, name: 'James Doe', lastMessage: 'Hello, I was wondering about...', time: 'Wednesday, 12:00 PM', unread: 2 },
     { id: 2, name: 'Farmer Kallis', lastMessage: 'Thanks for the help!', time: 'Tuesday, 3:45 PM' },
     { id: 3, name: 'Farmer Albert', lastMessage: 'See you tomorrow', time: 'Monday, 5:20 PM' },
   ]
 
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { id: 1, text: "Do you know what time is it?", sender: 'other', timestamp: '12:00 PM' },
-    { id: 2, text: "It's morning in Tokyo", sender: 'user', timestamp: '12:01 PM' },
-    { id: 3, text: "Do you know what time is it?", sender: 'other', timestamp: '12:02 PM' },
-    { id: 4, text: "It's morning in Tokyo", sender: 'user', timestamp: '12:03 PM' },
-    { id: 5, text: "Do you know what time is it?", sender: 'other', timestamp: '12:04 PM' },
-    { id: 6, text: "It's morning in Tokyo", sender: 'user', timestamp: '12:05 PM' },
+    { id: 1, text: "Do you know what time is it?", sender: 'user', timestamp: '11:57' },
+    { id: 2, text: "It's morning in Tokyo ☀️", sender: 'other', timestamp: '11:57' },
+    { id: 3, text: "Do you know what time is it?", sender: 'user', timestamp: '11:58' },
+    { id: 4, text: "It's morning in Tokyo ☀️", sender: 'other', timestamp: '11:58' },
+    { id: 5, text: "Do you know what time is it?", sender: 'user', timestamp: '11:59' },
+    { id: 6, text: "It's morning in Tokyo ☀️", sender: 'other', timestamp: '11:59' },
+    { id: 7, text: "Rainfall improved soil hydration across your field today - moisture levels are stable, and you won't need additional irrigation until tomorrow.", sender: 'system', timestamp: '12:00' },
   ])
 
   const scrollToBottom = () => {
@@ -81,7 +82,7 @@ export default function MessagesPage() {
                   <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                   <input
                     type="text"
-                    placeholder="Search conversations"
+                    placeholder="Search"
                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all text-sm"
                   />
                 </div>
@@ -124,7 +125,7 @@ export default function MessagesPage() {
               {selectedConv ? (
                 <>
                   {/* Chat Header */}
-                  <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+                  <div className="p-4 border-b border-gray-200 flex items-center justify-between bg-white">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#16a34a] rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base">
                         {selectedConv.name.charAt(0)}
@@ -136,10 +137,10 @@ export default function MessagesPage() {
                     </div>
                     <div className="flex items-center gap-2">
                       <button className="p-2 text-gray-600 hover:text-[#16a34a] hover:bg-gray-100 rounded-lg transition-colors">
-                        <FiVideo className="text-lg sm:text-xl" />
+                        <FiPhone className="text-lg sm:text-xl" />
                       </button>
                       <button className="p-2 text-gray-600 hover:text-[#16a34a] hover:bg-gray-100 rounded-lg transition-colors">
-                        <FiPhone className="text-lg sm:text-xl" />
+                        <FiVideo className="text-lg sm:text-xl" />
                       </button>
                       <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
                         <FiMoreVertical className="text-lg sm:text-xl" />
@@ -150,53 +151,73 @@ export default function MessagesPage() {
                   {/* Messages */}
                   <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-gray-50">
                     <div className="space-y-4">
-                      {messages.map((message) => (
-                        <div
-                          key={message.id}
-                          className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                        >
+                      {/* Date Separator */}
+                      <div className="text-center">
+                        <span className="text-xs text-gray-500 font-medium">TODAY 11:50 PM</span>
+                      </div>
+
+                      {messages.map((message) => {
+                        if (message.sender === 'system') {
+                          return (
+                            <div key={message.id} className="flex justify-center">
+                              <div className="max-w-[85%] bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4">
+                                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">{message.text}</p>
+                              </div>
+                            </div>
+                          )
+                        }
+
+                        return (
                           <div
-                            className={`max-w-[75%] rounded-2xl p-3 sm:p-4 ${
-                              message.sender === 'user'
-                                ? 'bg-[#16a34a] text-white'
-                                : 'bg-white text-gray-900 border border-gray-200'
-                            }`}
+                            key={message.id}
+                            className={`flex ${message.sender === 'user' ? 'justify-start' : 'justify-end'}`}
                           >
-                            <p className="text-sm sm:text-base leading-relaxed">{message.text}</p>
-                            <p
-                              className={`text-xs mt-2 ${
-                                message.sender === 'user' ? 'text-green-100' : 'text-gray-500'
+                            <div
+                              className={`max-w-[75%] rounded-2xl p-3 sm:p-4 ${
+                                message.sender === 'user'
+                                  ? 'bg-gray-200 text-gray-900'
+                                  : 'bg-[#16a34a] text-white'
                               }`}
                             >
-                              {message.timestamp}
-                            </p>
+                              <p className="text-sm sm:text-base leading-relaxed">{message.text}</p>
+                              <p
+                                className={`text-xs mt-1 ${
+                                  message.sender === 'user' ? 'text-gray-500' : 'text-green-100'
+                                }`}
+                              >
+                                {message.timestamp}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        )
+                      })}
                       <div ref={messagesEndRef} />
                     </div>
                   </div>
 
                   {/* Input Area */}
                   <div className="p-4 border-t border-gray-200 bg-white">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
                       <button className="p-2 text-gray-600 hover:text-[#16a34a] hover:bg-gray-100 rounded-lg transition-colors">
-                        <FiPaperclip className="text-xl" />
+                        <FiPlus className="text-lg sm:text-xl" />
                       </button>
                       <input
                         type="text"
                         value={messageInput}
                         onChange={(e) => setMessageInput(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                        placeholder="Write a message"
+                        placeholder="Message SoilSmart AI"
                         className="flex-1 px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all text-sm sm:text-base"
                       />
+                      <button className="p-2 text-gray-600 hover:text-[#16a34a] hover:bg-gray-100 rounded-lg transition-colors">
+                        <FiPaperclip className="text-lg sm:text-xl" />
+                      </button>
                       <button
                         onClick={handleSend}
                         disabled={!messageInput.trim()}
-                        className="p-3 bg-[#16a34a] text-white rounded-lg hover:bg-[#15803d] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="p-2 sm:p-3 bg-[#16a34a] text-white rounded-lg hover:bg-[#15803d] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        <FiSend className="text-xl" />
+                        <FiSend className="text-lg sm:text-xl" />
                       </button>
                     </div>
                   </div>
@@ -209,10 +230,10 @@ export default function MessagesPage() {
             </div>
 
             {/* Mobile Chat View */}
-            <div className="md:hidden flex-1 flex-col">
+            <div className="md:hidden flex-1 flex flex-col">
               {selectedConv ? (
                 <>
-                  <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+                  <div className="p-4 border-b border-gray-200 flex items-center justify-between bg-white">
                     <button onClick={() => setSelectedConversation(0)} className="text-gray-600">
                       ← Back
                     </button>
@@ -221,38 +242,58 @@ export default function MessagesPage() {
                   </div>
                   <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
                     <div className="space-y-4">
-                      {messages.map((message) => (
-                        <div
-                          key={message.id}
-                          className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                        >
+                      <div className="text-center">
+                        <span className="text-xs text-gray-500 font-medium">TODAY 11:50 PM</span>
+                      </div>
+                      {messages.map((message) => {
+                        if (message.sender === 'system') {
+                          return (
+                            <div key={message.id} className="flex justify-center">
+                              <div className="max-w-[85%] bg-blue-50 border border-blue-200 rounded-lg p-3">
+                                <p className="text-sm text-gray-700">{message.text}</p>
+                              </div>
+                            </div>
+                          )
+                        }
+                        return (
                           <div
-                            className={`max-w-[75%] rounded-2xl p-3 ${
-                              message.sender === 'user'
-                                ? 'bg-[#16a34a] text-white'
-                                : 'bg-white text-gray-900 border border-gray-200'
-                            }`}
+                            key={message.id}
+                            className={`flex ${message.sender === 'user' ? 'justify-start' : 'justify-end'}`}
                           >
-                            <p className="text-sm leading-relaxed">{message.text}</p>
+                            <div
+                              className={`max-w-[75%] rounded-2xl p-3 ${
+                                message.sender === 'user'
+                                  ? 'bg-gray-200 text-gray-900'
+                                  : 'bg-[#16a34a] text-white'
+                              }`}
+                            >
+                              <p className="text-sm leading-relaxed">{message.text}</p>
+                              <p className={`text-xs mt-1 ${message.sender === 'user' ? 'text-gray-500' : 'text-green-100'}`}>
+                                {message.timestamp}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        )
+                      })}
                       <div ref={messagesEndRef} />
                     </div>
                   </div>
                   <div className="p-4 border-t border-gray-200 bg-white">
                     <div className="flex items-center gap-2">
                       <button className="p-2 text-gray-600">
-                        <FiPaperclip className="text-lg" />
+                        <FiPlus className="text-lg" />
                       </button>
                       <input
                         type="text"
                         value={messageInput}
                         onChange={(e) => setMessageInput(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                        placeholder="Write a message"
+                        placeholder="Message SoilSmart AI"
                         className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm"
                       />
+                      <button className="p-2 text-gray-600">
+                        <FiPaperclip className="text-lg" />
+                      </button>
                       <button
                         onClick={handleSend}
                         disabled={!messageInput.trim()}
@@ -275,4 +316,3 @@ export default function MessagesPage() {
     </DashboardLayout>
   )
 }
-
