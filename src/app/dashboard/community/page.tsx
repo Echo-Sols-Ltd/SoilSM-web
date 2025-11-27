@@ -242,11 +242,27 @@ export default function CommunityPage() {
                   )}
 
                   <div className="flex items-center gap-4 sm:gap-6 pt-3 sm:pt-4 border-t border-gray-200">
-                    <button className="flex items-center gap-2 text-gray-600 hover:text-red-500 transition-colors text-sm sm:text-base">
+                    <button 
+                      onClick={() => {
+                        const updatedPosts = posts.map(p => 
+                          p.id === post.id ? { ...p, likes: p.likes + 1 } : p
+                        )
+                        setPosts(updatedPosts)
+                      }}
+                      className="flex items-center gap-2 text-gray-600 hover:text-red-500 transition-colors text-sm sm:text-base"
+                    >
                       <FiHeart className="text-lg sm:text-xl" />
                       <span>{post.likes}</span>
                     </button>
-                    <button className="flex items-center gap-2 text-gray-600 hover:text-blue-500 transition-colors text-sm sm:text-base">
+                    <button 
+                      onClick={() => {
+                        const updatedPosts = posts.map(p => 
+                          p.id === post.id ? { ...p, comments: p.comments + 1 } : p
+                        )
+                        setPosts(updatedPosts)
+                      }}
+                      className="flex items-center gap-2 text-gray-600 hover:text-blue-500 transition-colors text-sm sm:text-base"
+                    >
                       <FiMessageCircle className="text-lg sm:text-xl" />
                       <span>{post.comments}</span>
                     </button>
