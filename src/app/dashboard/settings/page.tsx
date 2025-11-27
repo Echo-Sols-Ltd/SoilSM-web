@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import DashboardLayout from '@/components/DashboardLayout'
-import { FiUser, FiMail, FiPhone, FiSave, FiBell, FiLock, FiSettings, FiShield, FiHelpCircle, FiArrowRight, FiEye, FiEyeOff } from 'react-icons/fi'
+import { FiUser, FiMail, FiPhone, FiSave, FiBell, FiLock, FiSettings, FiShield, FiHelpCircle, FiArrowRight, FiEye, FiEyeOff, FiSun, FiGlobe, FiDownload, FiTrash2, FiX, FiCheck } from 'react-icons/fi'
 
 type SettingsTab = 'profile' | 'notification' | 'preferences' | 'privacy' | 'support'
 
@@ -39,6 +39,17 @@ export default function SettingsPage() {
     pushNotifications: true,
   })
 
+  const [appPreferences, setAppPreferences] = useState({
+    themeMode: 'light', // 'light' or 'dark'
+    language: 'en-US',
+  })
+
+  const [privacySettings, setPrivacySettings] = useState({
+    twoFactorAuth: false,
+  })
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+
   useEffect(() => {
     const storedUser = localStorage.getItem('soilsmart_user')
     if (storedUser) {
@@ -52,6 +63,12 @@ export default function SettingsPage() {
       })
       if (userData.notificationSettings) {
         setNotificationSettings(userData.notificationSettings)
+      }
+      if (userData.appPreferences) {
+        setAppPreferences(userData.appPreferences)
+      }
+      if (userData.privacySettings) {
+        setPrivacySettings(userData.privacySettings)
       }
     }
   }, [])
@@ -72,12 +89,57 @@ export default function SettingsPage() {
   const handleSave = () => {
     setIsSaving(true)
     setTimeout(() => {
-      const updatedUser = { ...user, ...formData, notificationSettings }
+      const updatedUser = { ...user, ...formData, notificationSettings, appPreferences, privacySettings }
       localStorage.setItem('soilsmart_user', JSON.stringify(updatedUser))
       setUser(updatedUser)
       setIsSaving(false)
       alert('Settings saved successfully!')
     }, 1000)
+  }
+
+  const handleSavePreferences = () => {
+    setIsSaving(true)
+    setTimeout(() => {
+      const updatedUser = { ...user, appPreferences }
+      localStorage.setItem('soilsmart_user', JSON.stringify(updatedUser))
+      setUser(updatedUser)
+      setIsSaving(false)
+      alert('Preferences saved successfully!')
+    }, 1000)
+  }
+
+  const handleToggleTwoFactor = () => {
+    setPrivacySettings(prev => ({
+      ...prev,
+      twoFactorAuth: !prev.twoFactorAuth,
+    }))
+  }
+
+  const handleDownloadData = () => {
+    // Simulate data download
+    const data = {
+      user: formData,
+      settings: { notificationSettings, appPreferences, privacySettings },
+      timestamp: new Date().toISOString(),
+    }
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `soilsmart-data-${Date.now()}.json`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+    alert('Data download started!')
+  }
+
+  const handleDeleteAccount = () => {
+    // Delete user data
+    localStorage.removeItem('soilsmart_user')
+    setShowDeleteModal(false)
+    alert('Account deleted successfully!')
+    window.location.href = '/'
   }
 
   const handleChangePassword = () => {
@@ -446,13 +508,218 @@ export default function SettingsPage() {
               </div>
             )}
 
-            {/* Other Settings Tabs Placeholder */}
-            {activeTab !== 'profile' && activeTab !== 'notification' && (
+            {/* App Preferences Tab */}
+            {activeTab === 'preferences' && (
               <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
-                  {settingsTabs.find(t => t.id === activeTab)?.label}
-                </h2>
-                <p className="text-gray-600">This section is coming soon...</p>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">App Preferences</h2>
+
+                <div className="space-y-6 sm:space-y-8">
+                  {/* Theme Mode */}
+                  <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 bg-yellow-100 rounded-lg">
+                        <FiSun className="text-yellow-600 text-xl" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">Theme Mode</h3>
+                        <p className="text-sm text-gray-600">
+                          {appPreferences.themeMode === 'light' ? 'Light mode is active' : 'Dark mode is active'}
+                        </p>
+                      </div>
+                    </div>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={appPreferences.themeMode === 'dark'}
+                        onChange={(e) => setAppPreferences({ ...appPreferences, themeMode: e.target.checked ? 'dark' : 'light' })}
+                        className="sr-only peer"
+                      />
+                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#16a34a]"></div>
+                    </label>
+                  </div>
+
+                  {/* Language */}
+                  <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 bg-blue-100 rounded-lg">
+                        <FiGlobe className="text-blue-600 text-xl" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">Language</h3>
+                        <p className="text-sm text-gray-600">English (US)</p>
+                      </div>
+                    </div>
+                    <select
+                      value={appPreferences.language}
+                      onChange={(e) => setAppPreferences({ ...appPreferences, language: e.target.value })}
+                      className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all text-sm sm:text-base"
+                    >
+                      <option value="en-US">English (US)</option>
+                      <option value="fr-FR">Français</option>
+                      <option value="sw-KE">Kiswahili</option>
+                      <option value="am-ET">Amharic</option>
+                    </select>
+                  </div>
+
+                  {/* Save Button */}
+                  <div className="pt-4 border-t border-gray-200">
+                    <button
+                      onClick={handleSavePreferences}
+                      disabled={isSaving}
+                      className="w-full px-6 py-3 bg-[#15803d] hover:bg-[#166534] text-white font-semibold rounded-lg transition-all disabled:opacity-50 text-sm sm:text-base"
+                    >
+                      {isSaving ? 'Saving...' : 'Save changes'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Privacy & Security Tab */}
+            {activeTab === 'privacy' && (
+              <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Security & Privacy</h2>
+
+                <div className="space-y-6 sm:space-y-8">
+                  {/* Two-Factor Authentication */}
+                  <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">Two-Factor Authentication</h3>
+                      <p className="text-sm text-gray-600">Add extra protection to your account</p>
+                    </div>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={privacySettings.twoFactorAuth}
+                        onChange={handleToggleTwoFactor}
+                        className="sr-only peer"
+                      />
+                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#16a34a]"></div>
+                    </label>
+                  </div>
+
+                  {/* Linked Accounts */}
+                  <div className="p-4 border border-gray-200 rounded-lg">
+                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base mb-4">Linked Accounts</h3>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <FiMail className="text-gray-600 text-xl" />
+                        <span className="text-sm sm:text-base text-gray-700">Email: {formData.email}</span>
+                      </div>
+                      <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs sm:text-sm font-medium">
+                        Connected
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Data Management */}
+                  <div className="space-y-4">
+                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Data management</h3>
+                    <div className="p-4 border border-gray-200 rounded-lg">
+                      <button
+                        onClick={handleDownloadData}
+                        className="flex items-center gap-2 px-4 py-2 border-2 border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all text-sm sm:text-base"
+                      >
+                        <FiDownload className="text-lg" />
+                        Download My Data
+                      </button>
+                      <p className="text-xs sm:text-sm text-gray-600 mt-2">Get a copy of your account data (CSV format)</p>
+                    </div>
+                  </div>
+
+                  {/* Danger Zone */}
+                  <div className="space-y-4 pt-4 border-t border-gray-200">
+                    <h3 className="font-semibold text-red-600 text-sm sm:text-base">Danger zone</h3>
+                    <div className="p-4 border-2 border-red-200 rounded-lg bg-red-50">
+                      <button
+                        onClick={() => setShowDeleteModal(true)}
+                        className="w-full px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all text-sm sm:text-base"
+                      >
+                        Delete My Account
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Support & Feedback Tab */}
+            {activeTab === 'support' && (
+              <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Support & Feedback</h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                  {/* Help Center */}
+                  <div className="p-4 sm:p-6 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base mb-2">Help Center</h3>
+                    <p className="text-sm text-gray-600 mb-4">Browse frequently asked questions</p>
+                    <button className="w-full px-4 py-2 bg-[#16a34a] hover:bg-[#15803d] text-white font-medium rounded-lg transition-all text-sm sm:text-base">
+                      Visit help center
+                    </button>
+                  </div>
+
+                  {/* Send Feedback */}
+                  <div className="p-4 sm:p-6 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base mb-2">Send Feedback</h3>
+                    <p className="text-sm text-gray-600 mb-4">Help us improve SoilSmart</p>
+                    <button className="w-full px-4 py-2 bg-[#16a34a] hover:bg-[#15803d] text-white font-medium rounded-lg transition-all text-sm sm:text-base">
+                      Share feedback
+                    </button>
+                  </div>
+
+                  {/* Report a Problem */}
+                  <div className="p-4 sm:p-6 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base mb-2">Report a Problem</h3>
+                    <p className="text-sm text-gray-600 mb-4">Tell us about any issues</p>
+                    <button className="w-full px-4 py-2 bg-[#16a34a] hover:bg-[#15803d] text-white font-medium rounded-lg transition-all text-sm sm:text-base">
+                      Report issue
+                    </button>
+                  </div>
+
+                  {/* Contact Support */}
+                  <div className="p-4 sm:p-6 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base mb-2">Contact Support</h3>
+                    <p className="text-sm text-gray-600 mb-4">Reach our support team</p>
+                    <div className="flex items-center gap-2 text-sm sm:text-base text-gray-700">
+                      <FiMail className="text-lg" />
+                      <span>{formData.email}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Delete Account Modal */}
+            {showDeleteModal && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 relative">
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Delete Account?</h2>
+                    <button
+                      onClick={() => setShowDeleteModal(false)}
+                      className="text-gray-400 hover:text-gray-600 transition-colors"
+                    >
+                      <FiX className="text-2xl" />
+                    </button>
+                  </div>
+                  <p className="text-gray-600 mb-6 text-sm sm:text-base">
+                    This will permanently delete your account and all your data. Are you sure you must to continue?
+                  </p>
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => setShowDeleteModal(false)}
+                      className="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all text-sm sm:text-base"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={handleDeleteAccount}
+                      className="flex-1 px-4 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all text-sm sm:text-base"
+                    >
+                      YES, DELETE
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
           </div>
