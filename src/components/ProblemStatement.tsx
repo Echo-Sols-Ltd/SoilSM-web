@@ -29,7 +29,7 @@ const ProblemStatement = () => {
   ]
 
   return (
-    <section id="problem" className="py-20 bg-gray-50">
+    <section id="problem" className="py-20 bg-white">
       <div className="container-custom">
         {/* Section Header */}
         <motion.div

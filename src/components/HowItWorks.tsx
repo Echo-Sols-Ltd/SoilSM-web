@@ -36,7 +36,7 @@ const HowItWorks = () => {
   ]
 
   return (
-    <section id="how-it-works" className="py-20 bg-gray-900 text-white relative overflow-hidden">
+    <section id="how-it-works" className="py-20 bg-gradient-to-br from-gray-900 via-green-900 to-emerald-900 text-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
