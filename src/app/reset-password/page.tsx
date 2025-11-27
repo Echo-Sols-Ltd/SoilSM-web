@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { FiLock, FiEye, FiEyeOff } from 'react-icons/fi'
 import { GiPlantSeed } from 'react-icons/gi'
 
@@ -42,28 +43,31 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920&q=80")',
-        }}
-      >
-        <div className="absolute inset-0 bg-green-900/40 backdrop-blur-sm" />
+    <div className="min-h-screen flex">
+      {/* Left Side - Image */}
+      <div className="hidden lg:flex lg:w-1/2 relative">
+        <Image
+          src="/images/800px-Agriculture_in_Vietnam_with_farmers.jpg"
+          alt="SoilSmart Agriculture"
+          fill
+          className="object-cover"
+          priority
+          quality={95}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-green-900/30 to-transparent"></div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="relative z-10 max-w-md w-full"
-      >
-        {/* White Card */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8">
+      {/* Right Side - Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-md"
+        >
           {/* Logo */}
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-600 rounded-full mb-4">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-[#16a34a] rounded-full mb-4">
               <GiPlantSeed className="text-white text-3xl" />
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-2">SoilSmart</h1>
@@ -86,7 +90,7 @@ export default function ResetPasswordPage() {
                   required
                   value={formData.newPassword}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
+                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all"
                   placeholder="Enter new password"
                 />
                 <button
@@ -113,7 +117,7 @@ export default function ResetPasswordPage() {
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
+                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all"
                   placeholder="Confirm new password"
                 />
                 <button
@@ -130,7 +134,7 @@ export default function ResetPasswordPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-primary-700 hover:bg-primary-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+              className="w-full bg-[#15803d] hover:bg-[#166534] text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed mt-6"
             >
               {isLoading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -142,9 +146,8 @@ export default function ResetPasswordPage() {
               )}
             </button>
           </form>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </div>
   )
 }
-
