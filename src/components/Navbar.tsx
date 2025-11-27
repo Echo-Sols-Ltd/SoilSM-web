@@ -70,13 +70,13 @@ const Navbar = () => {
                   onClick={() => handleNavClick(link.href)}
                   className={`relative font-medium transition-all duration-300 ${
                     isActive 
-                      ? 'text-emerald-600 font-bold' 
-                      : 'text-gray-700 hover:text-emerald-500'
+                      ? 'text-cyan-600 font-bold' 
+                      : 'text-gray-700 hover:text-cyan-500'
                   }`}
                 >
                   {link.name}
                   {isActive && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full transition-all duration-300 shadow-lg shadow-emerald-500/50"></span>
+                    <span className="absolute -bottom-1 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 rounded-full transition-all duration-300 shadow-lg shadow-cyan-500/60 animate-pulse"></span>
                   )}
                 </button>
               )
@@ -111,8 +111,8 @@ const Navbar = () => {
                     onClick={() => handleNavClick(link.href)}
                     className={`text-left font-medium transition-all duration-300 py-2 rounded-r-lg ${
                       isActive 
-                        ? 'text-emerald-600 font-bold border-l-4 border-emerald-500 bg-emerald-50 pl-3 pr-4' 
-                        : 'text-gray-700 hover:text-emerald-500 hover:bg-gray-50 pl-4 pr-4'
+                        ? 'text-cyan-600 font-bold border-l-4 border-cyan-500 bg-gradient-to-r from-cyan-50 to-blue-50 pl-3 pr-4 shadow-sm' 
+                        : 'text-gray-700 hover:text-cyan-500 hover:bg-gray-50 pl-4 pr-4'
                     }`}
                   >
                     {link.name}
