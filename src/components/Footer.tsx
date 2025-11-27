@@ -42,18 +42,18 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-green-950 text-gray-300">
       <div className="container-custom py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-12 mb-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center space-x-2 mb-4">
-              <div className="bg-primary-600 p-2 rounded-lg">
-                <GiPlantSeed className="text-white text-2xl" />
-              </div>
-              <span className="text-2xl font-bold font-display text-white">
-                Soil<span className="text-primary-400">Smart</span>
-              </span>
+            <div className="bg-green-600 p-2 rounded-lg">
+              <GiPlantSeed className="text-white text-2xl" />
+            </div>
+            <span className="text-2xl font-bold font-display text-white">
+              Soil<span className="text-green-400">Smart</span>
+            </span>
             </Link>
             <p className="text-gray-400 mb-6 leading-relaxed">
               Empowering African farmers with affordable, data-driven tools for sustainable agriculture 
@@ -63,19 +63,19 @@ const Footer = () => {
             {/* Contact Info */}
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm">
-                <FiMail className="text-primary-400" />
-                <a href="mailto:info@soilsmart.com" className="hover:text-primary-400 transition-colors">
+                <FiMail className="text-green-400" />
+                <a href="mailto:info@soilsmart.com" className="hover:text-green-400 transition-colors">
                   info@soilsmart.com
                 </a>
               </div>
               <div className="flex items-center gap-3 text-sm">
-                <FiPhone className="text-primary-400" />
-                <a href="tel:+250123456789" className="hover:text-primary-400 transition-colors">
+                <FiPhone className="text-green-400" />
+                <a href="tel:+250123456789" className="hover:text-green-400 transition-colors">
                   +250 123 456 789
                 </a>
               </div>
               <div className="flex items-center gap-3 text-sm">
-                <FiMapPin className="text-primary-400" />
+                <FiMapPin className="text-green-400" />
                 <span>Kigali, Rwanda</span>
               </div>
             </div>
@@ -150,7 +150,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors"
+                  className="w-10 h-10 bg-green-900 hover:bg-green-600 rounded-lg flex items-center justify-center transition-colors"
                   aria-label={social.label}
                 >
                   <social.icon className="text-lg" />
