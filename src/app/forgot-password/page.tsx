@@ -29,12 +29,12 @@ export default function ForgotPasswordPage() {
       {/* Left Side - Image */}
       <div className="hidden lg:flex lg:w-1/2 relative">
         <Image
-          src="/images/800px-Agriculture_in_Vietnam_with_farmers.jpg"
+          src="/images/Best Organic Fertilizers for Summer Growth are a… 1.png"
           alt="SoilSmart Agriculture"
           fill
           className="object-cover"
           priority
-          quality={95}
+          quality={100}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-green-900/30 to-transparent"></div>
       </div>
