@@ -1,187 +1,236 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { FiActivity, FiMapPin, FiBattery, FiClock } from 'react-icons/fi'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { useState } from 'react'
 import DashboardLayout from '@/components/DashboardLayout'
-import { sampleSensors, soilMoistureData, phData } from '@/lib/sampleData'
+import { FiDownload, FiAlertCircle, FiTrendingUp, FiCloud } from 'react-icons/fi'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts'
 
 export default function MonitoringPage() {
+  const [activeTab, setActiveTab] = useState<'nutrients' | 'temperature' | 'ph'>('nutrients')
+
+  const chartData = [
+    { time: '00:00', value: 200 },
+    { time: '04:00', value: 350 },
+    { time: '08:00', value: 500 },
+    { time: '12:00', value: 650 },
+    { time: '16:00', value: 800 },
+    { time: '20:00', value: 600 },
+    { time: '24:00', value: 400 },
+  ]
+
+  const soilReports = [
+    { id: 1, title: 'Weekly Soil Analysis', date: 'Oct 24, 2023' },
+    { id: 2, title: 'Weekly Soil Analysis', date: 'Oct 17, 2023' },
+    { id: 3, title: 'Weekly Soil Analysis', date: 'Oct 10, 2023' },
+  ]
+
   return (
     <DashboardLayout>
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6 px-3 sm:px-0">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-8 text-white"
-        >
-          <h2 className="text-3xl font-bold mb-2">Soil Monitoring</h2>
-          <p className="text-blue-100 text-lg">Real-time sensor data and analytics</p>
-        </motion.div>
-
-        {/* Sensors Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {sampleSensors.map((sensor, index) => (
-            <motion.div
-              key={sensor.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div
-                  className={`p-3 rounded-lg ${
-                    sensor.status === 'active' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'
-                  }`}
-                >
-                  <FiActivity className="text-xl" />
-                </div>
-                <div
-                  className={`w-2 h-2 rounded-full ${
-                    sensor.status === 'active' ? 'bg-green-500' : 'bg-yellow-500'
-                  } animate-pulse`}
-                />
-              </div>
-
-              <h3 className="font-bold text-gray-900 mb-1">{sensor.name}</h3>
-              <p className="text-sm text-gray-600 mb-4">{sensor.type}</p>
-
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-600">Current Value:</span>
-                  <span className="font-bold text-gray-900">
-                    {sensor.value}
-                    {sensor.unit}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-600 flex items-center gap-1">
-                    <FiBattery className="text-xs" />
-                    Battery:
-                  </span>
-                  <span className={`font-medium ${sensor.battery < 20 ? 'text-red-600' : 'text-gray-900'}`}>
-                    {sensor.battery}%
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-600 flex items-center gap-1">
-                    <FiClock className="text-xs" />
-                    Last Reading:
-                  </span>
-                  <span className="text-gray-900 text-xs">{sensor.lastReading}</span>
-                </div>
-
-                <div className="flex items-center text-sm text-gray-600">
-                  <FiMapPin className="text-xs mr-1" />
-                  <span className="text-xs">
-                    {sensor.location.lat.toFixed(4)}, {sensor.location.lng.toFixed(4)}
-                  </span>
-                </div>
-              </div>
-
-              <button className="w-full mt-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium text-gray-700 transition-colors">
-                View Details
-              </button>
-            </motion.div>
-          ))}
+        <div className="mb-4 sm:mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Your soil</h1>
+          <p className="text-sm sm:text-base text-gray-600">See your soil's health and know what it needs.</p>
         </div>
 
-        {/* Charts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Moisture Trend */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="bg-white rounded-xl p-6 shadow-sm"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold text-gray-900">Moisture Trend (7 Days)</h3>
-              <select className="px-3 py-1 border border-gray-300 rounded-lg text-sm">
-                <option>Field A - North</option>
-                <option>Field A - South</option>
-                <option>Field B - Center</option>
-                <option>Field B - East</option>
-              </select>
+        {/* Tabs */}
+        <div className="bg-white rounded-xl shadow-lg p-1 sm:p-2">
+          <div className="flex gap-2 sm:gap-4">
+            <button
+              onClick={() => setActiveTab('nutrients')}
+              className={`flex-1 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm md:text-base font-medium transition-all ${
+                activeTab === 'nutrients'
+                  ? 'bg-[#16a34a] text-white'
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              Nutrients
+            </button>
+            <button
+              onClick={() => setActiveTab('temperature')}
+              className={`flex-1 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm md:text-base font-medium transition-all ${
+                activeTab === 'temperature'
+                  ? 'bg-[#16a34a] text-white'
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              Temperature
+            </button>
+            <button
+              onClick={() => setActiveTab('ph')}
+              className={`flex-1 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm md:text-base font-medium transition-all ${
+                activeTab === 'ph'
+                  ? 'bg-[#16a34a] text-white'
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              pH
+            </button>
+          </div>
+        </div>
+
+        {/* Nutrients Tab */}
+        {activeTab === 'nutrients' && (
+          <>
+            {/* Soil Health Overview */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+              <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+                <h3 className="text-sm sm:text-base font-semibold text-gray-700 mb-3 sm:mb-4">Moisture level</h3>
+                <div className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">51.8%</div>
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div className="bg-[#16a34a] h-3 rounded-full" style={{ width: '51.8%' }}></div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+                <h3 className="text-sm sm:text-base font-semibold text-gray-700 mb-3 sm:mb-4">Nutrient Status</h3>
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm sm:text-base text-gray-600">N (Nitrogen)</span>
+                    <span className="text-lg sm:text-xl font-bold text-gray-900">45%</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm sm:text-base text-gray-600">P (Phosphorus)</span>
+                    <span className="text-lg sm:text-xl font-bold text-gray-900">32%</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm sm:text-base text-gray-600">K (Potassium)</span>
+                    <span className="text-lg sm:text-xl font-bold text-gray-900">28%</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={soilMoistureData}>
+
+            <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+              <h3 className="text-sm sm:text-base font-semibold text-gray-700 mb-2">Moisture level</h3>
+              <div className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">5.9 ppm</div>
+            </div>
+
+            {/* Graph */}
+            <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Soil Health Trend</h3>
+              <ResponsiveContainer width="100%" height={300}>
+                <AreaChart data={chartData}>
+                  <defs>
+                    <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#16a34a" stopOpacity={0.3} />
+                      <stop offset="95%" stopColor="#16a34a" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <XAxis dataKey="time" tick={{ fontSize: 12 }} />
+                  <YAxis domain={[0, 1000]} tick={{ fontSize: 12 }} />
+                  <Tooltip />
+                  <Area
+                    type="monotone"
+                    dataKey="value"
+                    stroke="#16a34a"
+                    strokeWidth={2}
+                    fillOpacity={1}
+                    fill="url(#colorValue)"
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* AI Recommendations */}
+            <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">AI Recommendations</h3>
+              <div className="space-y-3 sm:space-y-4">
+                <div className="border-l-4 border-orange-500 pl-4 py-2 bg-orange-50 rounded-r-lg">
+                  <div className="flex items-start gap-3">
+                    <FiAlertCircle className="text-orange-600 text-xl flex-shrink-0 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">Irrigation Alert</h4>
+                      <p className="text-sm sm:text-base text-gray-700">
+                        Excess irrigation detected. Current levels are above optimal range. Reduce watering frequency.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-l-4 border-blue-500 pl-4 py-2 bg-blue-50 rounded-r-lg">
+                  <div className="flex items-start gap-3">
+                    <FiTrendingUp className="text-blue-600 text-xl flex-shrink-0 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">Fertilizer Schedule</h4>
+                      <p className="text-sm sm:text-base text-gray-700">
+                        Apply nitrogen-rich fertilizer this week. Optimal range maintained.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-l-4 border-gray-500 pl-4 py-2 bg-gray-50 rounded-r-lg">
+                  <div className="flex items-start gap-3">
+                    <FiCloud className="text-gray-600 text-xl flex-shrink-0 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">Weather Advisory</h4>
+                      <p className="text-sm sm:text-base text-gray-700">
+                        Avoid irrigation during cloudy weather. Wait for clear conditions.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Soil Reports */}
+            <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Soil Reports</h3>
+              <div className="space-y-3 sm:space-y-4">
+                {soilReports.map((report) => (
+                  <div
+                    key={report.id}
+                    className="flex items-center justify-between p-3 sm:p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    <div>
+                      <h4 className="font-semibold text-gray-900 text-sm sm:text-base">{report.title}</h4>
+                      <p className="text-xs sm:text-sm text-gray-600">{report.date}</p>
+                    </div>
+                    <button className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#16a34a] text-white rounded-lg hover:bg-[#15803d] transition-colors text-xs sm:text-sm font-medium">
+                      <FiDownload className="text-sm sm:text-base" />
+                      <span className="hidden sm:inline">Download PDF</span>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* Temperature Tab */}
+        {activeTab === 'temperature' && (
+          <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Temperature Monitoring</h3>
+            <ResponsiveContainer width="100%" height={400}>
+              <LineChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="date" tick={{ fontSize: 12 }} />
+                <XAxis dataKey="time" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} />
                 <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="value" stroke="#16a34a" strokeWidth={2} name="Moisture" dot={{ fill: '#16a34a', r: 4 }} />
-                <Line type="monotone" dataKey="optimal" stroke="#94a3b8" strokeWidth={2} strokeDasharray="5 5" name="Optimal" />
+                <Line type="monotone" dataKey="value" stroke="#f59e0b" strokeWidth={2} name="Temperature (°C)" />
               </LineChart>
             </ResponsiveContainer>
-          </motion.div>
+          </div>
+        )}
 
-          {/* pH Trend */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="bg-white rounded-xl p-6 shadow-sm"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold text-gray-900">pH Levels (7 Days)</h3>
-              <select className="px-3 py-1 border border-gray-300 rounded-lg text-sm">
-                <option>Field A - North</option>
-                <option>Field A - South</option>
-                <option>Field B - Center</option>
-                <option>Field B - East</option>
-              </select>
-            </div>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={phData}>
+        {/* pH Tab */}
+        {activeTab === 'ph' && (
+          <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">pH Levels</h3>
+            <ResponsiveContainer width="100%" height={400}>
+              <LineChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="date" tick={{ fontSize: 12 }} />
+                <XAxis dataKey="time" tick={{ fontSize: 12 }} />
                 <YAxis domain={[5, 8]} tick={{ fontSize: 12 }} />
                 <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="value" stroke="#8b5cf6" strokeWidth={2} name="pH Level" dot={{ fill: '#8b5cf6', r: 4 }} />
+                <Line type="monotone" dataKey="value" stroke="#8b5cf6" strokeWidth={2} name="pH Level" />
               </LineChart>
             </ResponsiveContainer>
-          </motion.div>
-        </div>
-
-        {/* Sensor Health Status */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="bg-white rounded-xl p-6 shadow-sm"
-        >
-          <h3 className="text-lg font-bold text-gray-900 mb-4">Sensor Health Status</h3>
-          <div className="space-y-3">
-            {sampleSensors.map((sensor) => (
-              <div key={sensor.id} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                <div className="flex-1">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium text-gray-900">{sensor.id}</span>
-                    <span className={`text-sm font-medium ${sensor.status === 'active' ? 'text-green-600' : 'text-yellow-600'}`}>
-                      {sensor.status === 'active' ? 'Active' : 'Warning'}
-                    </span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className={`h-2 rounded-full ${sensor.battery < 20 ? 'bg-red-500' : sensor.battery < 50 ? 'bg-yellow-500' : 'bg-green-500'}`}
-                      style={{ width: `${sensor.battery}%` }}
-                    />
-                  </div>
-                  <p className="text-xs text-gray-600 mt-1">Battery: {sensor.battery}%</p>
-                </div>
-              </div>
-            ))}
           </div>
-        </motion.div>
+        )}
       </div>
     </DashboardLayout>
   )
 }
-
