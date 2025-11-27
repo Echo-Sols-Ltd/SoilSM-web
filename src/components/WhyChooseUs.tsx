@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { FiCheck, FiAward, FiUsers, FiTrendingUp } from 'react-icons/fi'
+import { FiCheck } from 'react-icons/fi'
 
 const WhyChooseUs = () => {
   const values = [
@@ -35,20 +35,29 @@ const WhyChooseUs = () => {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            {/* Placeholder for farm image */}
+            {/* Farm Image */}
             <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-                <div className="text-center text-white p-8">
-                  <span className="text-9xl mb-4 block">🌾</span>
-                  <p className="text-2xl font-bold">Thriving Green Farm</p>
-                  <p className="text-green-100 mt-2">Sustainable Agriculture in Action</p>
+              <Image
+                src="/images/800px-Agriculture_in_Vietnam_with_farmers.jpg"
+                alt="Thriving Green Farm - Sustainable Agriculture in Action"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                <div className="text-center">
+                  <span className="text-5xl mb-4 block">🌾</span>
+                  <p className="text-2xl font-bold mb-2">Thriving Green Farm</p>
+                  <p className="text-green-100">Sustainable Agriculture in Action</p>
                 </div>
               </div>
             </div>
             
             {/* Decorative elements */}
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-green-600 rounded-full opacity-20 blur-3xl"></div>
-            <div className="absolute -top-6 -left-6 w-32 h-32 bg-green-400 rounded-full opacity-20 blur-3xl"></div>
+            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-green-600 rounded-full opacity-20 blur-3xl hidden lg:block"></div>
+            <div className="absolute -top-6 -left-6 w-32 h-32 bg-green-400 rounded-full opacity-20 blur-3xl hidden lg:block"></div>
           </motion.div>
 
           {/* Right side - Content */}
@@ -106,4 +115,3 @@ const WhyChooseUs = () => {
 }
 
 export default WhyChooseUs
-

@@ -2,45 +2,43 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { GiPlantRoots, GiWaterDrop, GiFertilizerBag } from 'react-icons/gi'
-import { FiActivity, FiDroplet, FiTrendingUp } from 'react-icons/fi'
 
 const Features = () => {
   const services = [
     {
       title: 'Soil Testing',
       description: 'Get comprehensive soil analysis with our advanced testing technology to optimize your farming.',
-      image: '🌱',
+      image: '/images/414b4422a7252fce9cc35e06ef2e0367.jpg',
       bgGradient: 'from-green-600 to-green-700',
     },
     {
       title: 'Smart Irrigation',
       description: 'Automated water management system that saves up to 30% water while improving crop yields.',
-      image: '💧',
+      image: '/images/470188c19df5b72272dfd3048ffe1fc7.jpg',
       bgGradient: 'from-blue-600 to-cyan-600',
     },
     {
       title: 'Crop Monitoring',
       description: 'Real-time crop health monitoring with AI-powered insights and recommendations.',
-      image: '🌾',
+      image: '/images/95d225cd0eaeb990224ee01db5bb59e2.jpg',
       bgGradient: 'from-amber-600 to-orange-600',
     },
     {
       title: 'NPK Fertilizers',
       description: 'Customized fertilizer recommendations based on your soil composition and crop needs.',
-      image: '🧪',
+      image: '/images/Best Organic Fertilizers for Summer Growth are a… 1.png',
       bgGradient: 'from-purple-600 to-pink-600',
     },
     {
       title: 'Water Management',
       description: 'Efficient water distribution and conservation strategies for sustainable agriculture.',
-      image: '⛲',
+      image: '/images/470188c19df5b72272dfd3048ffe1fc7.jpg',
       bgGradient: 'from-teal-600 to-cyan-600',
     },
     {
       title: 'Sustainable Farming',
       description: 'Eco-friendly farming practices that protect the environment and increase productivity.',
-      image: '🌳',
+      image: '/images/800px-Agriculture_in_Vietnam_with_farmers.jpg',
       bgGradient: 'from-green-700 to-emerald-700',
     },
   ]
@@ -75,7 +73,7 @@ const Features = () => {
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -85,10 +83,17 @@ const Features = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="group relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
             >
-              {/* Image/Icon Area */}
-              <div className={`h-48 bg-gradient-to-br ${service.bgGradient} flex items-center justify-center relative overflow-hidden`}>
-                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                <span className="text-8xl filter drop-shadow-lg">{service.image}</span>
+              {/* Image Area */}
+              <div className={`h-48 relative overflow-hidden bg-gradient-to-br ${service.bgGradient}`}>
+                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity z-10"></div>
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-0"></div>
               </div>
 
               {/* Content Area */}
@@ -127,4 +132,3 @@ const Features = () => {
 }
 
 export default Features
-
