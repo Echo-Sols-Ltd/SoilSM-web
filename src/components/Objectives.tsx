@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { GiPlantSeed } from 'react-icons/gi'
-import { FiTarget, FiActivity, FiZap, FiBrain, FiUsers } from 'react-icons/fi'
+import { FiTarget, FiActivity, FiZap, FiCpu, FiUsers } from 'react-icons/fi'
 
 const Objectives = () => {
   const objectives = [
@@ -19,7 +19,7 @@ const Objectives = () => {
       gradient: 'from-blue-500 to-cyan-600',
     },
     {
-      icon: FiBrain,
+      icon: FiCpu,
       title: 'AI-Powered Guidance',
       description: 'Intelligent recommendations for planting, fertilization, pest control, and harvest timing.',
       gradient: 'from-purple-500 to-pink-600',
