@@ -55,7 +55,12 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <button className="btn-primary">Get Started</button>
+            <Link href="/login">
+              <button className="btn-secondary mr-3">Sign In</button>
+            </Link>
+            <Link href="/signup">
+              <button className="btn-primary">Get Started</button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -82,7 +87,12 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              <button className="btn-primary w-full">Get Started</button>
+              <Link href="/login" onClick={() => setIsOpen(false)} className="block">
+                <button className="btn-secondary w-full mb-3">Sign In</button>
+              </Link>
+              <Link href="/signup" onClick={() => setIsOpen(false)} className="block">
+                <button className="btn-primary w-full">Get Started</button>
+              </Link>
             </div>
           </div>
         )}
