@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight } from 'react-icons/fi'
+import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi'
 import { GiPlantSeed } from 'react-icons/gi'
 
 export default function LoginPage() {
@@ -14,7 +14,6 @@ export default function LoginPage() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    remember: false,
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,45 +35,51 @@ export default function LoginPage() {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target
+    const { name, value } = e.target
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: value,
     }))
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen relative flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      {/* Background Image with Overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url("https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920&q=80")',
+        }}
+      >
+        <div className="absolute inset-0 bg-green-900/40 backdrop-blur-sm" />
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="max-w-md w-full"
+        className="relative z-10 max-w-md w-full"
       >
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 group">
-            <div className="bg-primary-600 p-3 rounded-lg group-hover:bg-primary-700 transition-colors">
+        {/* White Card */}
+        <div className="bg-white rounded-2xl shadow-2xl p-8">
+          {/* Logo */}
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-600 rounded-full mb-4">
               <GiPlantSeed className="text-white text-3xl" />
             </div>
-            <span className="text-3xl font-bold font-display text-gray-900">
-              Soil<span className="text-primary-600">Smart</span>
-            </span>
-          </Link>
-          <h2 className="mt-6 text-3xl font-bold text-gray-900">Welcome back!</h2>
-          <p className="mt-2 text-gray-600">Sign in to your account to continue</p>
-        </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">SoilSmart</h1>
+            <h2 className="text-xl font-semibold text-gray-800">Login</h2>
+          </div>
 
-        {/* Login Form */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Login Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
+                Email
               </label>
               <div className="relative">
-                <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input
                   id="email"
                   name="email"
@@ -82,19 +87,24 @@ export default function LoginPage() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                  placeholder="you@example.com"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
+                  placeholder="Enter your email"
                 />
               </div>
             </div>
 
             {/* Password Field */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
+              <div className="flex items-center justify-between mb-2">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                  Password
+                </label>
+                <Link href="/forgot-password" className="text-sm text-primary-600 hover:text-primary-700">
+                  Forgot password?
+                </Link>
+              </div>
               <div className="relative">
-                <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input
                   id="password"
                   name="password"
@@ -102,55 +112,32 @@ export default function LoginPage() {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                  placeholder="••••••••"
+                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
+                  placeholder="Enter your password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
               </div>
             </div>
 
-            {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember"
-                  name="remember"
-                  type="checkbox"
-                  checked={formData.remember}
-                  onChange={handleChange}
-                  className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
-                />
-                <label htmlFor="remember" className="ml-2 block text-sm text-gray-700">
-                  Remember me
-                </label>
-              </div>
-              <Link href="/forgot-password" className="text-sm text-primary-600 hover:text-primary-700">
-                Forgot password?
-              </Link>
-            </div>
-
             {/* Submit Button */}
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-primary-700 hover:bg-primary-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed mt-6"
             >
               {isLoading ? (
-                <span className="flex items-center gap-2">
+                <span className="flex items-center justify-center gap-2">
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  Signing in...
+                  Logging in...
                 </span>
               ) : (
-                <>
-                  Sign In
-                  <FiArrowRight />
-                </>
+                'Login'
               )}
             </button>
           </form>
@@ -167,21 +154,19 @@ export default function LoginPage() {
             </div>
 
             {/* Social Login */}
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              <button className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+            <div className="mt-6 flex justify-center gap-4">
+              <button className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                   <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
                   <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                   <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
-                Google
               </button>
-              <button className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+              <button className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                <svg className="w-5 h-5" fill="#1877F2" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
-                GitHub
               </button>
             </div>
           </div>
@@ -190,19 +175,11 @@ export default function LoginPage() {
           <p className="mt-6 text-center text-sm text-gray-600">
             Don't have an account?{' '}
             <Link href="/signup" className="font-medium text-primary-600 hover:text-primary-700">
-              Sign up for free
+              Sign up
             </Link>
           </p>
-        </div>
-
-        {/* Back to Home */}
-        <div className="mt-6 text-center">
-          <Link href="/" className="text-sm text-gray-600 hover:text-gray-900">
-            ← Back to Home
-          </Link>
         </div>
       </motion.div>
     </div>
   )
 }
-

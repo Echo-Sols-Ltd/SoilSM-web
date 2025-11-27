@@ -45,12 +45,11 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   }
 
   const navItems = [
-    { name: 'Dashboard', href: '/dashboard', icon: FiHome },
-    { name: 'Soil Monitoring', href: '/dashboard/monitoring', icon: FiActivity },
-    { name: 'Irrigation', href: '/dashboard/irrigation', icon: FiDroplet },
-    { name: 'Analytics', href: '/dashboard/analytics', icon: FiBarChart2 },
-    { name: 'AI Assistant', href: '/dashboard/ai-chat', icon: FiMessageSquare },
-    { name: 'Settings', href: '/dashboard/settings', icon: FiSettings },
+    { name: 'Home', href: '/dashboard', icon: FiHome },
+    { name: 'Tasks', href: '/dashboard/tasks', icon: FiActivity },
+    { name: 'Community Hub', href: '/dashboard/community', icon: FiMessageSquare },
+    { name: 'To Yourself', href: '/dashboard/personal', icon: FiUser },
+    { name: 'Messages', href: '/dashboard/messages', icon: FiMessageSquare },
   ]
 
   if (!user) {
@@ -78,27 +77,24 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full bg-white shadow-xl z-50 transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-full bg-primary-800 shadow-xl z-50 transition-transform duration-300 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0 w-64`}
       >
         {/* Logo */}
-        <div className="p-6 border-b">
+        <div className="p-6 border-b border-primary-700">
           <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="bg-primary-600 p-2 rounded-lg">
-              <GiPlantSeed className="text-white text-2xl" />
-            </div>
-            <span className="text-xl font-bold font-display text-gray-900">
-              Soil<span className="text-primary-600">Smart</span>
+            <span className="text-xl font-bold font-display text-white">
+              SoilSmart
             </span>
           </Link>
         </div>
 
         {/* Navigation */}
-        <nav className="p-4 space-y-2">
+        <nav className="p-4 space-y-1">
           {navItems.map((item) => {
             const Icon = item.icon
-            const isActive = pathname === item.href
+            const isActive = pathname === item.href || (item.href === '/dashboard' && pathname === '/dashboard')
             return (
               <Link
                 key={item.name}
@@ -106,46 +102,33 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 onClick={() => setSidebarOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
                   isActive
-                    ? 'bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 text-white shadow-lg shadow-cyan-500/40 scale-105 font-bold'
-                    : 'text-gray-700 hover:bg-cyan-50 hover:text-cyan-700'
+                    ? 'bg-primary-600 text-white font-semibold'
+                    : 'text-primary-100 hover:bg-primary-700'
                 }`}
               >
-                <Icon className={`text-xl ${isActive ? 'animate-pulse' : ''}`} />
+                <Icon className="text-xl" />
                 <span className="font-medium">{item.name}</span>
-                {isActive && (
-                  <span className="ml-auto w-2 h-2 bg-white rounded-full animate-ping" />
-                )}
               </Link>
             )
           })}
         </nav>
 
-        {/* User Profile */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t bg-gray-50">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">
-              {user?.name?.charAt(0) || 'U'}
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">{user?.name}</p>
-              <p className="text-xs text-gray-500 truncate">{user?.email}</p>
-            </div>
-          </div>
+        {/* Log out Link */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-primary-700">
           <button
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors text-sm font-medium"
+            className="w-full text-left text-primary-100 hover:text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors text-sm font-medium"
           >
-            <FiLogOut />
-            Logout
+            Log out
           </button>
         </div>
       </aside>
 
       {/* Main Content */}
-      <div className="lg:ml-64">
+      <div className="lg:ml-64 bg-gray-50 min-h-screen">
         {/* Top Header */}
         <header className="bg-white shadow-sm sticky top-0 z-30">
-          <div className="flex items-center justify-between px-4 py-4">
+          <div className="flex items-center justify-between px-6 py-4">
             {/* Mobile Menu Button */}
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -154,27 +137,22 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               {sidebarOpen ? <FiX className="text-2xl" /> : <FiMenu className="text-2xl" />}
             </button>
 
-            {/* Page Title */}
-            <div className="flex-1 lg:ml-0">
-              <h1 className="text-xl font-bold text-gray-900">
-                {navItems.find((item) => item.href === pathname)?.name || 'Dashboard'}
-              </h1>
-            </div>
-
-            {/* Right Actions */}
-            <div className="flex items-center gap-4">
-              <button className="relative text-gray-600 hover:text-gray-900">
-                <FiBell className="text-xl" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-white flex items-center justify-center">
-                  3
-                </span>
-              </button>
-              <Link href="/dashboard/settings">
-                <div className="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold cursor-pointer hover:bg-primary-700 transition-colors">
-                  {user?.name?.charAt(0) || 'U'}
-                </div>
-              </Link>
-            </div>
+            {/* Right Actions - Only show on non-dashboard pages */}
+            {pathname !== '/dashboard' && (
+              <div className="flex items-center gap-4 ml-auto">
+                <button className="relative text-gray-600 hover:text-gray-900">
+                  <FiBell className="text-xl" />
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-white flex items-center justify-center">
+                    3
+                  </span>
+                </button>
+                <Link href="/dashboard/settings">
+                  <div className="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold cursor-pointer hover:bg-primary-700 transition-colors">
+                    {user?.name?.charAt(0) || 'U'}
+                  </div>
+                </Link>
+              </div>
+            )}
           </div>
         </header>
 
