@@ -44,6 +44,7 @@ const WhyChooseUs = () => {
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
+                quality={95}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 text-white">
@@ -89,7 +90,7 @@ const WhyChooseUs = () => {
               From local hubs to global partnerships, we're building tools that empower smallholder farmers to save water, grow more, and protect their land for the next generation.
             </p>
 
-            {/* Value Cards */}
+            {/* Value Cards - Aligned with icons */}
             <div className="space-y-4 sm:space-y-6">
               {values.map((value, index) => (
                 <motion.div
@@ -100,10 +101,10 @@ const WhyChooseUs = () => {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   className="flex items-start gap-3 sm:gap-4"
                 >
-                  <div className="text-3xl sm:text-4xl flex-shrink-0">{value.icon}</div>
-                  <div>
+                  <div className="text-3xl sm:text-4xl flex-shrink-0 w-10 sm:w-12 flex items-center justify-center">{value.icon}</div>
+                  <div className="flex-1">
                     <h3 className="font-bold text-gray-900 text-base sm:text-lg mb-1">{value.title}</h3>
-                    <p className="text-sm sm:text-base text-gray-600">{value.description}</p>
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{value.description}</p>
                   </div>
                 </motion.div>
               ))}
