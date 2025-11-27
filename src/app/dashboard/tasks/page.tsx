@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import DashboardLayout from '@/components/DashboardLayout'
-import { FiCheck, FiLightbulb } from 'react-icons/fi'
+import { FiCheck, FiZap } from 'react-icons/fi'
 import Link from 'next/link'
 
 interface Task {
@@ -158,7 +158,7 @@ export default function TasksPage() {
             {/* AI Suggestion */}
             <div className="bg-[#15803d] rounded-xl shadow-lg p-4 sm:p-6 text-white">
               <div className="flex items-start gap-3 sm:gap-4">
-                <FiLightbulb className="text-xl sm:text-2xl flex-shrink-0 mt-1" />
+                <FiZap className="text-xl sm:text-2xl flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold text-sm sm:text-base mb-1">AI Suggestion</h3>
                   <p className="text-sm sm:text-base opacity-90">
