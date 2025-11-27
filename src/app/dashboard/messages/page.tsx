@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
-import { FiSend, FiPaperclip, FiPhone, FiVideo, FiMoreVertical, FiSearch, FiPlus } from 'react-icons/fi'
+import { FiSend, FiPaperclip, FiPhone, FiVideo, FiMoreVertical, FiSearch, FiPlus, FiArrowLeft } from 'react-icons/fi'
 
 interface ChatMessage {
   id: number
@@ -20,6 +21,7 @@ interface Conversation {
 }
 
 export default function MessagesPage() {
+  const router = useRouter()
   const [selectedConversation, setSelectedConversation] = useState<number>(1)
   const [messageInput, setMessageInput] = useState('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
@@ -69,7 +71,17 @@ export default function MessagesPage() {
       <div className="space-y-4 sm:space-y-6 px-3 sm:px-0">
         {/* Header */}
         <div className="mb-4 sm:mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Messages</h1>
+          <div className="flex items-center gap-3 mb-2">
+            <button
+              onClick={() => router.push('/dashboard')}
+              className="lg:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <FiArrowLeft className="text-xl" />
+            </button>
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Messages</h1>
+            </div>
+          </div>
         </div>
 
         <div className="bg-white rounded-xl shadow-lg overflow-hidden" style={{ height: 'calc(100vh - 200px)' }}>

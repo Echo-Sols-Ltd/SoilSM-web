@@ -1,12 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
-import { FiUser, FiMail, FiPhone, FiSave, FiBell, FiLock, FiSettings, FiShield, FiHelpCircle, FiArrowRight, FiEye, FiEyeOff, FiSun, FiGlobe, FiDownload, FiTrash2, FiX, FiCheck } from 'react-icons/fi'
+import { FiUser, FiMail, FiPhone, FiSave, FiBell, FiLock, FiSettings, FiShield, FiHelpCircle, FiArrowRight, FiEye, FiEyeOff, FiSun, FiGlobe, FiDownload, FiTrash2, FiX, FiCheck, FiArrowLeft } from 'react-icons/fi'
 
 type SettingsTab = 'profile' | 'notification' | 'preferences' | 'privacy' | 'support'
 
 export default function SettingsPage() {
+  const router = useRouter()
   const [activeTab, setActiveTab] = useState<SettingsTab>('profile')
   const [user, setUser] = useState<any>(null)
   const [isSaving, setIsSaving] = useState(false)
@@ -189,8 +191,18 @@ export default function SettingsPage() {
       <div className="space-y-4 sm:space-y-6 px-3 sm:px-0">
         {/* Header */}
         <div className="mb-4 sm:mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Settings</h1>
-          <p className="text-sm sm:text-base text-gray-600">Customize your experience - your app your way.</p>
+          <div className="flex items-center gap-3 mb-2">
+            <button
+              onClick={() => router.push('/dashboard')}
+              className="lg:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <FiArrowLeft className="text-xl" />
+            </button>
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Settings</h1>
+              <p className="text-sm sm:text-base text-gray-600">Customize your experience - your app your way.</p>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">

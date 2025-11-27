@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
 import { 
   FiDroplet, 
@@ -21,7 +22,8 @@ import {
   FiSave,
   FiDollarSign,
   FiBell,
-  FiZap
+  FiZap,
+  FiArrowLeft
 } from 'react-icons/fi'
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, AreaChart, Area } from 'recharts'
 
@@ -131,10 +133,17 @@ const IrrigationPage = () => {
       <div className="space-y-6">
         {/* Header with Quick Actions */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-          <div>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => router.push('/dashboard')}
+              className="lg:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <FiArrowLeft className="text-xl" />
+            </button>
             <h1 className="text-3xl font-bold text-gray-900 font-display">
               💧 Smart Irrigation System
             </h1>
+          </div>
             <p className="mt-2 text-gray-600">
               Monitor and control your irrigation zones in real-time
             </p>
