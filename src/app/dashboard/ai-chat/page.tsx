@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { FiSend, FiMessageSquare } from 'react-icons/fi'
+import { FiSend, FiMessageSquare, FiMic } from 'react-icons/fi'
 import DashboardLayout from '@/components/DashboardLayout'
 
 interface Message {
@@ -13,14 +13,7 @@ interface Message {
 }
 
 export default function AIChatPage() {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 1,
-      text: "Hello! I'm your SoilSmart AI assistant. I can help you with soil analysis, crop recommendations, irrigation schedules, and pest management. How can I assist you today?",
-      sender: 'ai',
-      timestamp: new Date(),
-    },
-  ])
+  const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
@@ -84,118 +77,92 @@ export default function AIChatPage() {
     }, 1500)
   }
 
-  const quickQuestions = [
-    "What's my soil moisture level?",
-    "Should I water my crops today?",
-    "Recommend a fertilizer schedule",
-    "Help with pest control",
-    "Analyze my crop health",
-  ]
-
   return (
     <DashboardLayout>
       <div className="max-w-4xl mx-auto">
+        <div className="mb-4 sm:mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">SoilSmart AI Chat</h1>
+          <p className="text-sm sm:text-base text-gray-600">Your soil's daily story, powered by smart sensors.</p>
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-2xl shadow-lg overflow-hidden"
-          style={{ height: 'calc(100vh - 200px)' }}
+          style={{ minHeight: 'calc(100vh - 250px)' }}
         >
-          {/* Chat Header */}
-          <div className="bg-gradient-to-r from-primary-600 to-primary-700 p-6 text-white">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                <FiMessageSquare className="text-2xl" />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold">AI Assistant</h2>
-                <p className="text-primary-100 text-sm">Always here to help with your farming needs</p>
-              </div>
-            </div>
-          </div>
-
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-4" style={{ height: 'calc(100% - 240px)' }}>
-            {messages.map((message) => (
-              <motion.div
-                key={message.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`max-w-[75%] rounded-2xl p-4 ${
-                    message.sender === 'user'
-                      ? 'bg-primary-600 text-white'
-                      : 'bg-gray-100 text-gray-900'
-                  }`}
-                >
-                  <p className="text-sm leading-relaxed">{message.text}</p>
-                  <p
-                    className={`text-xs mt-2 ${
-                      message.sender === 'user' ? 'text-primary-100' : 'text-gray-500'
-                    }`}
-                  >
-                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </p>
+          <div className="flex-1 overflow-y-auto p-6 sm:p-8" style={{ minHeight: 'calc(100vh - 350px)' }}>
+            {messages.length === 0 ? (
+              <div className="flex items-center justify-center h-full min-h-[400px]">
+                <div className="text-center">
+                  <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">What can I help with?</h2>
                 </div>
-              </motion.div>
-            ))}
-
-            {isTyping && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="flex justify-start"
-              >
-                <div className="bg-gray-100 rounded-2xl p-4">
-                  <div className="flex gap-2">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            <div ref={messagesEndRef} />
-          </div>
-
-          {/* Quick Questions */}
-          {messages.length === 1 && (
-            <div className="px-6 pb-4">
-              <p className="text-sm text-gray-600 mb-3">Quick questions:</p>
-              <div className="flex flex-wrap gap-2">
-                {quickQuestions.map((question, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setInput(question)}
-                    className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm text-gray-700 transition-colors"
-                  >
-                    {question}
-                  </button>
-                ))}
               </div>
-            </div>
-          )}
+            ) : (
+              <div className="space-y-4">
+                {messages.map((message) => (
+                  <motion.div
+                    key={message.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div
+                      className={`max-w-[75%] rounded-2xl p-4 ${
+                        message.sender === 'user'
+                          ? 'bg-[#16a34a] text-white'
+                          : 'bg-gray-100 text-gray-900'
+                      }`}
+                    >
+                      <p className="text-sm sm:text-base leading-relaxed">{message.text}</p>
+                    </div>
+                  </motion.div>
+                ))}
+
+                {isTyping && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="flex justify-start"
+                  >
+                    <div className="bg-gray-100 rounded-2xl p-4">
+                      <div className="flex gap-2">
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                <div ref={messagesEndRef} />
+              </div>
+            )}
+          </div>
 
           {/* Input Area */}
-          <div className="border-t p-4">
+          <div className="border-t p-4 sm:p-6 bg-gray-50">
             <div className="flex gap-3">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="Ask me anything about your farm..."
-                className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              />
+              <div className="flex-1 relative">
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                  placeholder="Message SoilSmart AI"
+                  className="w-full px-4 py-3 sm:py-4 pr-20 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all text-sm sm:text-base"
+                />
+                <button className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-2">
+                  <FiMic className="text-xl" />
+                </button>
+              </div>
               <button
                 onClick={handleSend}
                 disabled={!input.trim()}
-                className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-[#16a34a] hover:bg-[#15803d] text-white px-6 py-3 sm:py-4 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
               >
-                <FiSend />
+                <FiSend className="text-xl" />
               </button>
             </div>
           </div>
@@ -204,4 +171,3 @@ export default function AIChatPage() {
     </DashboardLayout>
   )
 }
-
