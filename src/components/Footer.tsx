@@ -42,17 +42,17 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="bg-green-950 text-gray-300">
+    <footer className="bg-[#14532d] text-gray-300">
       <div className="container-custom py-8 sm:py-12 md:py-16 px-4 sm:px-0">
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 md:gap-12 mb-8 sm:mb-12">
           {/* Brand Column */}
           <div className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-2">
             <Link href="/" className="flex items-center space-x-2 mb-3 sm:mb-4">
-              <div className="bg-green-600 p-1.5 sm:p-2 rounded-lg">
+              <div className="bg-[#16a34a] p-1.5 sm:p-2 rounded-lg">
                 <GiPlantSeed className="text-white text-xl sm:text-2xl" />
               </div>
               <span className="text-xl sm:text-2xl font-bold font-display text-white">
-                Soil<span className="text-green-400">Smart</span>
+                Soil<span className="text-[#4ade80]">Smart</span>
               </span>
             </Link>
             <p className="text-gray-400 mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm">
@@ -62,20 +62,20 @@ const Footer = () => {
             
             {/* Contact Info */}
             <div className="space-y-2 sm:space-y-3">
-              <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm">
-                <FiMail className="text-green-400 flex-shrink-0" />
-                <a href="mailto:info@soilsmart.com" className="hover:text-green-400 transition-colors break-all">
+              <div className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm">
+                <FiMail className="text-[#4ade80] flex-shrink-0 mt-0.5" />
+                <a href="mailto:info@soilsmart.com" className="hover:text-[#4ade80] transition-colors break-all">
                   info@soilsmart.com
                 </a>
               </div>
-              <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm">
-                <FiPhone className="text-green-400 flex-shrink-0" />
-                <a href="tel:+250123456789" className="hover:text-green-400 transition-colors">
+              <div className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm">
+                <FiPhone className="text-[#4ade80] flex-shrink-0 mt-0.5" />
+                <a href="tel:+250123456789" className="hover:text-[#4ade80] transition-colors">
                   +250 123 456 789
                 </a>
               </div>
-              <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm">
-                <FiMapPin className="text-green-400 flex-shrink-0" />
+              <div className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm">
+                <FiMapPin className="text-[#4ade80] flex-shrink-0 mt-0.5" />
                 <span>Kigali, Rwanda</span>
               </div>
             </div>
@@ -87,7 +87,7 @@ const Footer = () => {
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.product.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="hover:text-primary-400 transition-colors text-xs sm:text-sm">
+                  <Link href={link.href} className="hover:text-[#4ade80] transition-colors text-xs sm:text-sm">
                     {link.name}
                   </Link>
                 </li>
@@ -100,7 +100,7 @@ const Footer = () => {
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="hover:text-primary-400 transition-colors text-xs sm:text-sm">
+                  <Link href={link.href} className="hover:text-[#4ade80] transition-colors text-xs sm:text-sm">
                     {link.name}
                   </Link>
                 </li>
@@ -113,7 +113,7 @@ const Footer = () => {
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="hover:text-primary-400 transition-colors text-xs sm:text-sm">
+                  <Link href={link.href} className="hover:text-[#4ade80] transition-colors text-xs sm:text-sm">
                     {link.name}
                   </Link>
                 </li>
@@ -126,7 +126,7 @@ const Footer = () => {
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="hover:text-primary-400 transition-colors text-xs sm:text-sm">
+                  <Link href={link.href} className="hover:text-[#4ade80] transition-colors text-xs sm:text-sm">
                     {link.name}
                   </Link>
                 </li>
@@ -136,7 +136,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-6 sm:pt-8">
+        <div className="border-t border-[#166534] pt-6 sm:pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
             <p className="text-xs sm:text-sm text-gray-400 text-center sm:text-left">
               © {currentYear} Echo Solutions Ltd. All rights reserved.
@@ -150,7 +150,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 sm:w-10 sm:h-10 bg-green-900 hover:bg-green-600 rounded-lg flex items-center justify-center transition-colors"
+                  className="w-8 h-8 sm:w-10 sm:h-10 bg-[#166534] hover:bg-[#16a34a] rounded-lg flex items-center justify-center transition-colors"
                   aria-label={social.label}
                 >
                   <social.icon className="text-sm sm:text-lg" />
