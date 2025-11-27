@@ -20,10 +20,6 @@ export const metadata: Metadata = {
   description: 'Empowering African farmers with affordable, data-driven tools for soil health monitoring, smart irrigation, and AI-powered agricultural guidance.',
   keywords: 'agriculture, soil health, smart farming, IoT sensors, sustainable farming, Africa',
   authors: [{ name: 'Echo Solutions Ltd' }],
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/icon.png',
-  },
   openGraph: {
     title: 'SoilSmart - Smart Agricultural Technology',
     description: 'Data-driven tools for sustainable farming and soil health management',
