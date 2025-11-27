@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
-import { FiHeart, FiMessageCircle, FiShare2, FiImage, FiVideo, FiMoreVertical } from 'react-icons/fi'
+import { FiHeart, FiMessageCircle, FiShare2, FiImage, FiVideo, FiMoreVertical, FiArrowLeft } from 'react-icons/fi'
 import Image from 'next/image'
 
 interface Post {
@@ -16,6 +17,7 @@ interface Post {
 }
 
 export default function CommunityPage() {
+  const router = useRouter()
   const [activeTab, setActiveTab] = useState<'all' | 'region' | 'questions' | 'news'>('all')
   const [postContent, setPostContent] = useState('')
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
@@ -100,8 +102,18 @@ export default function CommunityPage() {
       <div className="space-y-4 sm:space-y-6 px-3 sm:px-0">
         {/* Header */}
         <div className="mb-4 sm:mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Community Hub</h1>
-          <p className="text-sm sm:text-base text-gray-600">Connect with farmers in your community.</p>
+          <div className="flex items-center gap-3 mb-2">
+            <button
+              onClick={() => router.push('/dashboard')}
+              className="lg:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <FiArrowLeft className="text-xl" />
+            </button>
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Community Hub</h1>
+              <p className="text-sm sm:text-base text-gray-600">Connect with farmers in your community.</p>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
