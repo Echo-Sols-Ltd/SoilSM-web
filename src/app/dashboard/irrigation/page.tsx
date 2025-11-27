@@ -56,7 +56,8 @@ const historicalData = [
   { month: 'Jun', water: 1245, cost: 249 },
 ]
 
-const IrrigationPage = () => {
+export default function IrrigationPage() {
+  const router = useRouter()
   const [zones, setZones] = useState([
     { id: 1, name: 'Zone 1 - North Field', status: 'active', moisture: 65, flowRate: 12.5, lastWatered: '2 hours ago', area: 2.5, crop: 'Maize', schedule: 'Daily 6AM' },
     { id: 2, name: 'Zone 2 - South Field', status: 'idle', moisture: 58, flowRate: 0, lastWatered: '5 hours ago', area: 3.0, crop: 'Beans', schedule: 'Daily 7AM' },
@@ -140,13 +141,14 @@ const IrrigationPage = () => {
             >
               <FiArrowLeft className="text-xl" />
             </button>
-            <h1 className="text-3xl font-bold text-gray-900 font-display">
-              💧 Smart Irrigation System
-            </h1>
-          </div>
-            <p className="mt-2 text-gray-600">
-              Monitor and control your irrigation zones in real-time
-            </p>
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900 font-display">
+                💧 Smart Irrigation System
+              </h1>
+              <p className="mt-2 text-gray-600">
+                Monitor and control your irrigation zones in real-time
+              </p>
+            </div>
           </div>
           <div className="flex flex-wrap gap-3 mt-4 md:mt-0">
             <button 
@@ -682,5 +684,3 @@ const IrrigationPage = () => {
     </DashboardLayout>
   )
 }
-
-export default IrrigationPage
