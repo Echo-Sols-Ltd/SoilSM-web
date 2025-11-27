@@ -19,10 +19,9 @@ import {
   FiEdit,
   FiX,
   FiSave,
-  FiCalculator,
+  FiDollarSign,
   FiBell,
-  FiZap,
-  FiInfo
+  FiZap
 } from 'react-icons/fi'
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, AreaChart, Area } from 'recharts'
 
@@ -145,7 +144,7 @@ const IrrigationPage = () => {
               onClick={() => setShowCalculator(true)}
               className="btn-secondary flex items-center space-x-2"
             >
-              <FiCalculator className="text-lg" />
+              <FiDollarSign className="text-lg" />
               <span>Savings Calculator</span>
             </button>
             <button 
