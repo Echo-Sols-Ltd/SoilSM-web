@@ -3,21 +3,23 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { FiCheck } from 'react-icons/fi'
+import { GiPlantSeed } from 'react-icons/gi'
+import { FiUsers, FiZap } from 'react-icons/fi'
 
 const WhyChooseUs = () => {
   const values = [
     {
-      icon: '🌱',
+      icon: GiPlantSeed,
       title: 'Sustainability',
       description: 'We bring the long-term health and resource balance',
     },
     {
-      icon: '🤝',
+      icon: FiUsers,
       title: 'Community',
       description: "Farmers' trust, and local guardians working hand in hand",
     },
     {
-      icon: '💡',
+      icon: FiZap,
       title: 'Innovation',
       description: 'Simple UI and sensor tech that works offline, anywhere',
     },
@@ -101,7 +103,9 @@ const WhyChooseUs = () => {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   className="flex items-start gap-3 sm:gap-4"
                 >
-                  <div className="text-3xl sm:text-4xl flex-shrink-0 w-10 sm:w-12 flex items-center justify-center">{value.icon}</div>
+                  <div className="text-3xl sm:text-4xl flex-shrink-0 w-10 sm:w-12 flex items-center justify-center text-green-600">
+                    <value.icon className="w-full h-full" />
+                  </div>
                   <div className="flex-1">
                     <h3 className="font-bold text-gray-900 text-base sm:text-lg mb-1">{value.title}</h3>
                     <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{value.description}</p>
