@@ -49,16 +49,25 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen flex">
       {/* Left Side - Image */}
-      <div className="hidden lg:flex lg:w-1/2 relative">
+      <div className="hidden lg:flex lg:w-1/2 relative bg-gradient-to-br from-green-900 to-green-800">
         <Image
-          src="/images/Best Organic Fertilizers for Summer Growth are a… 1.png"
-          alt="SoilSmart Agriculture"
+          src="/images/800px-Agriculture_in_Vietnam_with_farmers.jpg"
+          alt="SoilSmart Agriculture - Sustainable Farming"
           fill
           className="object-cover"
           priority
           quality={100}
+          sizes="50vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-green-900/30 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-green-900/60 via-green-900/40 to-transparent"></div>
+        {/* Overlay Content */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-white z-10">
+          <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-6 backdrop-blur-sm">
+            <GiPlantSeed className="text-white text-4xl" />
+          </div>
+          <h2 className="text-4xl font-bold mb-4 text-center">SoilSmart</h2>
+          <p className="text-xl text-green-50 text-center max-w-md">Join thousands of farmers transforming agriculture with technology</p>
+        </div>
       </div>
 
       {/* Right Side - Form */}

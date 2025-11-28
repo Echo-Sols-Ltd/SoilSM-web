@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { FiSmartphone, FiDownload, FiCheck } from 'react-icons/fi'
+import { GiPlantSeed } from 'react-icons/gi'
 
 const MobileAppDownload = () => {
   const features = [
@@ -95,14 +96,58 @@ const MobileAppDownload = () => {
               {/* Phone Frame */}
               <div className="relative bg-gray-900 rounded-[3rem] p-3 sm:p-4 shadow-2xl">
                 <div className="bg-white rounded-[2.5rem] overflow-hidden">
-                  {/* Phone Screen */}
-                  <div className="relative aspect-[9/19.5] bg-gradient-to-br from-[#16a34a] to-[#15803d]">
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-white">
-                      <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-4">
-                        <FiSmartphone className="text-4xl text-white" />
+                  {/* Phone Screen - Welcome Screen Design */}
+                  <div className="relative aspect-[9/19.5] bg-white overflow-hidden">
+                    {/* Top Section - Background Image with Hands Holding Soil */}
+                    <div className="absolute top-0 left-0 right-0 h-[65%] bg-gradient-to-b from-green-600 to-green-700">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        {/* Simulated hands holding soil with plant */}
+                        <div className="relative w-full h-full flex items-center justify-center">
+                          <div className="absolute inset-0 bg-gradient-to-b from-green-800/40 via-green-700/30 to-transparent"></div>
+                          {/* Plant illustration */}
+                          <div className="relative z-10 flex flex-col items-center">
+                            <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-gradient-to-br from-amber-800/80 to-amber-900/90 mb-4 flex items-end justify-center pb-2">
+                              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-500 rounded-full flex items-center justify-center">
+                                <GiPlantSeed className="text-white text-3xl sm:text-4xl" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <h3 className="text-xl font-bold mb-2">SoilSmart</h3>
-                      <p className="text-sm text-center opacity-90">Smart Farming in Your Pocket</p>
+                    </div>
+                    
+                    {/* Bottom Section - Dark Green Overlay with Welcome Content */}
+                    <div className="absolute bottom-0 left-0 right-0 h-[35%] bg-gradient-to-t from-[#166534] via-[#15803d] to-[#16a34a] rounded-t-[2rem]">
+                      <div className="absolute top-0 left-0 right-0 h-8 -translate-y-4">
+                        <div className="absolute inset-0 bg-[#166534] rounded-full"></div>
+                      </div>
+                      
+                      <div className="relative h-full flex flex-col items-center justify-center px-6 pt-8 pb-6">
+                        {/* SoilSmart Logo and Name */}
+                        <div className="flex flex-col items-center mb-4">
+                          <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-3 shadow-lg">
+                            <GiPlantSeed className="text-[#16a34a] text-3xl" />
+                          </div>
+                          <h3 className="text-2xl font-bold text-white mb-1">SoilSmart</h3>
+                          <p className="text-sm text-green-100 font-medium">Smart Farming in Your Pocket</p>
+                        </div>
+                        
+                        {/* Welcome Text */}
+                        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 text-center">Welcome</h2>
+                        <p className="text-sm sm:text-base text-green-50 text-center mb-6 max-w-xs">
+                          Smart soil, healthier crops, sustainable farming.
+                        </p>
+                        
+                        {/* Action Buttons */}
+                        <div className="flex flex-col gap-3 w-full max-w-[200px]">
+                          <button className="w-full bg-white text-[#166534] font-semibold py-3 px-4 rounded-xl shadow-lg hover:bg-green-50 transition-all">
+                            Login
+                          </button>
+                          <button className="w-full bg-transparent border-2 border-white text-white font-semibold py-3 px-4 rounded-xl hover:bg-white/10 transition-all">
+                            Sign up
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
