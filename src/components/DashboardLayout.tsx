@@ -151,15 +151,15 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                   className="bg-transparent border-none outline-none text-sm text-gray-600 w-40"
                 />
               </div>
-              <button className="relative text-gray-600 hover:text-gray-900">
+              <Link href="/dashboard/notifications" className="relative text-gray-600 hover:text-gray-900">
                 <FiBell className="text-xl" />
                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-white flex items-center justify-center">
                   3
                 </span>
-              </button>
-              <div className="w-10 h-10 bg-[#16a34a] rounded-full flex items-center justify-center text-white font-bold cursor-pointer hover:bg-[#15803d] transition-colors">
-                {user?.name?.charAt(0) || 'U'}
-              </div>
+              </Link>
+              <Link href="/dashboard/profile" className="w-10 h-10 bg-[#16a34a] rounded-full flex items-center justify-center text-white font-bold cursor-pointer hover:bg-[#15803d] transition-colors">
+                {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+              </Link>
             </div>
           </div>
         </header>
