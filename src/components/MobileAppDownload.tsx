@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { FiSmartphone, FiDownload, FiCheck } from 'react-icons/fi'
+import { FiSmartphone, FiDownload, FiCheck, FiDroplet, FiThermometer, FiActivity, FiTrendingUp } from 'react-icons/fi'
 import { GiPlantSeed } from 'react-icons/gi'
 
 const MobileAppDownload = () => {
@@ -96,57 +96,164 @@ const MobileAppDownload = () => {
               {/* Phone Frame */}
               <div className="relative bg-gray-900 rounded-[3rem] p-3 sm:p-4 shadow-2xl">
                 <div className="bg-white rounded-[2.5rem] overflow-hidden">
-                  {/* Phone Screen - Welcome Screen Design */}
-                  <div className="relative aspect-[9/19.5] bg-white overflow-hidden">
-                    {/* Top Section - Background Image with Hands Holding Soil */}
-                    <div className="absolute top-0 left-0 right-0 h-[65%] bg-gradient-to-b from-green-600 to-green-700">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        {/* Simulated hands holding soil with plant */}
-                        <div className="relative w-full h-full flex items-center justify-center">
-                          <div className="absolute inset-0 bg-gradient-to-b from-green-800/40 via-green-700/30 to-transparent"></div>
-                          {/* Plant illustration */}
-                          <div className="relative z-10 flex flex-col items-center">
-                            <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-gradient-to-br from-amber-800/80 to-amber-900/90 mb-4 flex items-end justify-center pb-2">
-                              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-500 rounded-full flex items-center justify-center">
-                                <GiPlantSeed className="text-white text-3xl sm:text-4xl" />
+                  {/* Phone Screen - App Dashboard Design */}
+                  <div className="relative aspect-[9/19.5] bg-gray-50 overflow-hidden">
+                    {/* Status Bar */}
+                    <div className="absolute top-0 left-0 right-0 h-8 bg-white flex items-center justify-between px-6 text-xs font-semibold text-gray-900 z-20">
+                      <span>9:41</span>
+                      <div className="flex items-center gap-1">
+                        <div className="w-4 h-2 border border-gray-900 rounded-sm">
+                          <div className="w-3 h-1.5 bg-gray-900 rounded-sm m-0.5"></div>
+                        </div>
+                        <div className="w-1 h-1 bg-gray-900 rounded-full"></div>
+                      </div>
+                    </div>
+
+                    {/* App Header */}
+                    <div className="absolute top-8 left-0 right-0 bg-white px-4 py-3 flex items-center justify-between border-b border-gray-100 z-10">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-[#16a34a] rounded-full flex items-center justify-center">
+                          <GiPlantSeed className="text-white text-xl" />
+                        </div>
+                        <div>
+                          <h3 className="text-base font-bold text-gray-900">SoilSmart</h3>
+                          <p className="text-xs text-gray-500">Dashboard</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="absolute top-24 left-0 right-0 bottom-0 overflow-y-auto pb-4">
+                      {/* Stats Cards */}
+                      <div className="px-4 mb-4 grid grid-cols-2 gap-3">
+                        <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
+                          <div className="flex items-center justify-between mb-2">
+                            <FiDroplet className="text-blue-500 text-lg" />
+                            <span className="text-xs text-green-600 font-semibold">+5%</span>
+                          </div>
+                          <p className="text-xs text-gray-500 mb-1">Moisture</p>
+                          <p className="text-lg font-bold text-gray-900">45%</p>
+                        </div>
+                        <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
+                          <div className="flex items-center justify-between mb-2">
+                            <FiThermometer className="text-orange-500 text-lg" />
+                            <span className="text-xs text-gray-400">24°C</span>
+                          </div>
+                          <p className="text-xs text-gray-500 mb-1">Temperature</p>
+                          <p className="text-lg font-bold text-gray-900">Optimal</p>
+                        </div>
+                      </div>
+
+                      {/* Active Sensors */}
+                      <div className="px-4 mb-4">
+                        <h4 className="text-sm font-semibold text-gray-900 mb-3">Active Sensors</h4>
+                        <div className="space-y-2">
+                          <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
+                            <div className="flex items-center justify-between mb-2">
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span className="text-xs font-medium text-gray-700">SENS-001</span>
                               </div>
+                              <span className="text-xs text-gray-500">85%</span>
+                            </div>
+                            <p className="text-xs text-gray-500">Soil Moisture</p>
+                            <div className="mt-2 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                              <div className="h-full bg-green-500 rounded-full" style={{ width: '85%' }}></div>
+                            </div>
+                          </div>
+                          <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
+                            <div className="flex items-center justify-between mb-2">
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span className="text-xs font-medium text-gray-700">SENS-002</span>
+                              </div>
+                              <span className="text-xs text-gray-500">72%</span>
+                            </div>
+                            <p className="text-xs text-gray-500">Soil pH</p>
+                            <div className="mt-2 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                              <div className="h-full bg-green-500 rounded-full" style={{ width: '72%' }}></div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    
-                    {/* Bottom Section - Dark Green Overlay with Welcome Content */}
-                    <div className="absolute bottom-0 left-0 right-0 h-[35%] bg-gradient-to-t from-[#166534] via-[#15803d] to-[#16a34a] rounded-t-[2rem]">
-                      <div className="absolute top-0 left-0 right-0 h-8 -translate-y-4">
-                        <div className="absolute inset-0 bg-[#166534] rounded-full"></div>
-                      </div>
-                      
-                      <div className="relative h-full flex flex-col items-center justify-center px-6 pt-8 pb-6">
-                        {/* SoilSmart Logo and Name */}
-                        <div className="flex flex-col items-center mb-4">
-                          <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-3 shadow-lg">
-                            <GiPlantSeed className="text-[#16a34a] text-3xl" />
+
+                      {/* Chart Section */}
+                      <div className="px-4 mb-4">
+                        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                          <div className="flex items-center justify-between mb-3">
+                            <h4 className="text-sm font-semibold text-gray-900">Soil Health Trend</h4>
+                            <FiTrendingUp className="text-green-500 text-sm" />
                           </div>
-                          <h3 className="text-2xl font-bold text-white mb-1">SoilSmart</h3>
-                          <p className="text-sm text-green-100 font-medium">Smart Farming in Your Pocket</p>
+                          {/* Mini Chart Visualization */}
+                          <div className="h-24 flex items-end justify-between gap-1">
+                            {[40, 55, 48, 62, 58, 70, 65].map((value, index) => (
+                              <div key={index} className="flex-1 flex flex-col items-center">
+                                <div 
+                                  className="w-full bg-gradient-to-t from-green-500 to-green-400 rounded-t"
+                                  style={{ height: `${value}%` }}
+                                ></div>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="flex justify-between mt-2 text-xs text-gray-500">
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thu</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+                            <span>Sun</span>
+                          </div>
                         </div>
-                        
-                        {/* Welcome Text */}
-                        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 text-center">Welcome</h2>
-                        <p className="text-sm sm:text-base text-green-50 text-center mb-6 max-w-xs">
-                          Smart soil, healthier crops, sustainable farming.
-                        </p>
-                        
-                        {/* Action Buttons */}
-                        <div className="flex flex-col gap-3 w-full max-w-[200px]">
-                          <button className="w-full bg-white text-[#166534] font-semibold py-3 px-4 rounded-xl shadow-lg hover:bg-green-50 transition-all">
-                            Login
+                      </div>
+
+                      {/* AI Recommendations */}
+                      <div className="px-4 mb-4">
+                        <h4 className="text-sm font-semibold text-gray-900 mb-3">AI Recommendations</h4>
+                        <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-3 border border-green-100">
+                          <div className="flex items-start gap-2">
+                            <FiActivity className="text-green-600 text-base mt-0.5 flex-shrink-0" />
+                            <div className="flex-1">
+                              <p className="text-xs font-semibold text-gray-900 mb-1">Increase Irrigation</p>
+                              <p className="text-xs text-gray-600">Zone 1 moisture is below optimal level</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Quick Actions */}
+                      <div className="px-4">
+                        <h4 className="text-sm font-semibold text-gray-900 mb-3">Quick Actions</h4>
+                        <div className="grid grid-cols-2 gap-3">
+                          <button className="bg-[#16a34a] text-white rounded-xl p-3 text-xs font-semibold shadow-sm">
+                            Monitor Soil
                           </button>
-                          <button className="w-full bg-transparent border-2 border-white text-white font-semibold py-3 px-4 rounded-xl hover:bg-white/10 transition-all">
-                            Sign up
+                          <button className="bg-white border border-gray-200 text-gray-700 rounded-xl p-3 text-xs font-semibold shadow-sm">
+                            View Reports
                           </button>
                         </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Navigation */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-4 py-2 flex items-center justify-around">
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="w-6 h-6 bg-[#16a34a] rounded-lg flex items-center justify-center">
+                          <FiActivity className="text-white text-xs" />
+                        </div>
+                        <span className="text-xs text-[#16a34a] font-medium">Home</span>
+                      </div>
+                      <div className="flex flex-col items-center gap-1">
+                        <FiDroplet className="text-gray-400 text-lg" />
+                        <span className="text-xs text-gray-400">Irrigation</span>
+                      </div>
+                      <div className="flex flex-col items-center gap-1">
+                        <FiTrendingUp className="text-gray-400 text-lg" />
+                        <span className="text-xs text-gray-400">Reports</span>
+                      </div>
+                      <div className="flex flex-col items-center gap-1">
+                        <FiActivity className="text-gray-400 text-lg" />
+                        <span className="text-xs text-gray-400">More</span>
                       </div>
                     </div>
                   </div>
