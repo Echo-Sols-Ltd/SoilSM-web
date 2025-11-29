@@ -4,10 +4,12 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
 import { FiUser, FiMail, FiPhone, FiSave, FiBell, FiLock, FiSettings, FiShield, FiHelpCircle, FiArrowRight, FiEye, FiEyeOff, FiSun, FiGlobe, FiDownload, FiTrash2, FiX, FiCheck, FiArrowLeft } from 'react-icons/fi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 type SettingsTab = 'profile' | 'notification' | 'preferences' | 'privacy' | 'support'
 
 export default function SettingsPage() {
+  const { t } = useTranslation()
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<SettingsTab>('profile')
   const [user, setUser] = useState<any>(null)
@@ -179,11 +181,11 @@ export default function SettingsPage() {
   const bioWordCount = formData.bio.split(/\s+/).filter(word => word.length > 0).length
 
   const settingsTabs = [
-    { id: 'profile' as SettingsTab, label: 'Profile', icon: FiUser },
-    { id: 'notification' as SettingsTab, label: 'Notification', icon: FiBell },
-    { id: 'preferences' as SettingsTab, label: 'App Preferences', icon: FiSettings },
-    { id: 'privacy' as SettingsTab, label: 'Privacy & Security', icon: FiShield },
-    { id: 'support' as SettingsTab, label: 'Support & Feedback', icon: FiHelpCircle },
+    { id: 'profile' as SettingsTab, label: t('settings.profile'), icon: FiUser },
+    { id: 'notification' as SettingsTab, label: t('settings.notification'), icon: FiBell },
+    { id: 'preferences' as SettingsTab, label: t('settings.appPreferences'), icon: FiSettings },
+    { id: 'privacy' as SettingsTab, label: t('settings.privacySecurity'), icon: FiShield },
+    { id: 'support' as SettingsTab, label: t('settings.supportFeedback'), icon: FiHelpCircle },
   ]
 
   return (
@@ -199,8 +201,8 @@ export default function SettingsPage() {
               <FiArrowLeft className="text-xl" />
             </button>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Settings</h1>
-              <p className="text-sm sm:text-base text-gray-600">Customize your experience - your app your way.</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">{t('settings.title')}</h1>
+              <p className="text-sm sm:text-base text-gray-600">{t('settings.subtitle')}</p>
             </div>
           </div>
         </div>
@@ -209,7 +211,7 @@ export default function SettingsPage() {
           {/* Settings Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl shadow-lg p-2 sm:p-4">
-              <h3 className="text-sm sm:text-base font-semibold text-gray-700 mb-3 sm:mb-4 px-2">Settings</h3>
+              <h3 className="text-sm sm:text-base font-semibold text-gray-700 mb-3 sm:mb-4 px-2">{t('settings.title')}</h3>
               <div className="space-y-1">
                 {settingsTabs.map((tab) => {
                   const Icon = tab.icon
@@ -240,7 +242,7 @@ export default function SettingsPage() {
             {/* Profile Tab */}
             {activeTab === 'profile' && !showChangePassword && (
               <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Profile Information</h2>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">{t('settings.profileInformation')}</h2>
 
                 <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-6">
                   {/* Avatar */}
@@ -253,7 +255,7 @@ export default function SettingsPage() {
                   {/* Form Fields */}
                   <div className="flex-1 space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t('settings.fullName')}</label>
                       <input
                         type="text"
                         value={formData.name}
@@ -263,7 +265,7 @@ export default function SettingsPage() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t('profile.email')}</label>
                       <input
                         type="email"
                         value={formData.email}
@@ -273,7 +275,7 @@ export default function SettingsPage() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Phone number</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t('settings.phoneNumber')}</label>
                       <input
                         type="tel"
                         value={formData.phone}
@@ -286,7 +288,7 @@ export default function SettingsPage() {
 
                 {/* Bio */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Bio / Description</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t('settings.bioDescription')}</label>
                   <textarea
                     value={formData.bio}
                     onChange={(e) => {
@@ -425,8 +427,8 @@ export default function SettingsPage() {
                   {/* Task Reminders */}
                   <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
                     <div className="flex-1">
-                      <h3 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">Task Reminders</h3>
-                      <p className="text-sm text-gray-600">Get notified about upcoming tasks</p>
+                      <h3 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">{t('settings.taskReminders')}</h3>
+                      <p className="text-sm text-gray-600">{t('settings.taskRemindersDesc')}</p>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
                       <input
@@ -459,8 +461,8 @@ export default function SettingsPage() {
                   {/* System Announcements */}
                   <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
                     <div className="flex-1">
-                      <h3 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">System Announcements</h3>
-                      <p className="text-sm text-gray-600">Get notified about upcoming tasks</p>
+                      <h3 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">{t('settings.systemAnnouncements')}</h3>
+                      <p className="text-sm text-gray-600">{t('settings.systemAnnouncementsDesc')}</p>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
                       <input

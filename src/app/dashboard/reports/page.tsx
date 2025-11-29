@@ -5,8 +5,10 @@ import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
 import { FiArrowLeft, FiDownload, FiCalendar, FiTrendingUp, FiDroplet, FiThermometer, FiFileText } from 'react-icons/fi'
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts'
+import { useTranslation } from '@/hooks/useTranslation'
 
 export default function ReportsPage() {
+  const { t } = useTranslation()
   const router = useRouter()
   const [selectedPeriod, setSelectedPeriod] = useState<'week' | 'month' | 'year'>('month')
 
@@ -37,10 +39,10 @@ export default function ReportsPage() {
   ]
 
   const reports = [
-    { id: 1, title: 'Weekly Soil Analysis Report', date: 'Nov 20, 2025', type: 'PDF' },
-    { id: 2, title: 'Monthly Water Usage Report', date: 'Nov 1, 2025', type: 'PDF' },
-    { id: 3, title: 'Soil Health Trend Report', date: 'Oct 27, 2025', type: 'CSV' },
-    { id: 4, title: 'Irrigation Efficiency Report', date: 'Oct 20, 2025', type: 'PDF' },
+    { id: 1, title: t('reports.weeklySoilAnalysisReport'), date: 'Nov 20, 2025', type: 'PDF' },
+    { id: 2, title: t('reports.monthlyWaterUsageReport'), date: 'Nov 1, 2025', type: 'PDF' },
+    { id: 3, title: t('reports.soilHealthTrendReport'), date: 'Oct 27, 2025', type: 'CSV' },
+    { id: 4, title: t('reports.irrigationEfficiencyReport'), date: 'Oct 20, 2025', type: 'PDF' },
   ]
 
   const handleDownload = (reportId: number) => {
@@ -60,15 +62,15 @@ export default function ReportsPage() {
             <FiArrowLeft className="text-xl" />
           </button>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Reports</h1>
-            <p className="text-sm sm:text-base text-gray-600">Comprehensive analysis of your soil and farm data.</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">{t('reports.title')}</h1>
+            <p className="text-sm sm:text-base text-gray-600">{t('reports.subtitle')}</p>
           </div>
         </div>
 
         {/* Period Selector */}
         <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900">Select Period</h2>
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900">{t('reports.selectPeriod')}</h2>
             <div className="flex gap-2">
               {(['week', 'month', 'year'] as const).map((period) => (
                 <button
@@ -80,7 +82,7 @@ export default function ReportsPage() {
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  {period.charAt(0).toUpperCase() + period.slice(1)}
+                  {t(`reports.${period}`)}
                 </button>
               ))}
             </div>
@@ -96,7 +98,7 @@ export default function ReportsPage() {
               </div>
             </div>
             <div className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">76%</div>
-            <p className="text-xs sm:text-sm text-gray-600">Overall Soil Health</p>
+            <p className="text-xs sm:text-sm text-gray-600">{t('reports.overallSoilHealth')}</p>
           </div>
 
           <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
@@ -106,7 +108,7 @@ export default function ReportsPage() {
               </div>
             </div>
             <div className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">73%</div>
-            <p className="text-xs sm:text-sm text-gray-600">Water Efficiency</p>
+            <p className="text-xs sm:text-sm text-gray-600">{t('reports.waterEfficiency')}</p>
           </div>
 
           <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
@@ -116,7 +118,7 @@ export default function ReportsPage() {
               </div>
             </div>
             <div className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">30°C</div>
-            <p className="text-xs sm:text-sm text-gray-600">Avg Temperature</p>
+            <p className="text-xs sm:text-sm text-gray-600">{t('reports.avgTemperature')}</p>
           </div>
 
           <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
@@ -126,7 +128,7 @@ export default function ReportsPage() {
               </div>
             </div>
             <div className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">12</div>
-            <p className="text-xs sm:text-sm text-gray-600">Total Reports</p>
+            <p className="text-xs sm:text-sm text-gray-600">{t('reports.totalReports')}</p>
           </div>
         </div>
 
@@ -134,7 +136,7 @@ export default function ReportsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {/* Soil Health Trend */}
           <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">Soil Health Trend</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">{t('reports.soilHealthTrend')}</h3>
             <ResponsiveContainer width="100%" height={300}>
               <AreaChart data={soilHealthData}>
                 <defs>
@@ -154,7 +156,7 @@ export default function ReportsPage() {
 
           {/* Water Usage */}
           <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">Water Usage & Savings</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">{t('reports.waterUsageSavings')}</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={waterUsageData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -162,8 +164,8 @@ export default function ReportsPage() {
                 <YAxis tick={{ fontSize: 12 }} />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="used" fill="#3b82f6" name="Used (L)" />
-                <Bar dataKey="saved" fill="#16a34a" name="Saved (L)" />
+                <Bar dataKey="used" fill="#3b82f6" name={t('reports.usedLiters')} />
+                <Bar dataKey="saved" fill="#16a34a" name={t('reports.savedLiters')} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -171,7 +173,7 @@ export default function ReportsPage() {
 
         {/* Temperature Chart */}
         <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">Temperature Trend</h3>
+          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">{t('reports.temperatureTrend')}</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={temperatureData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -186,10 +188,10 @@ export default function ReportsPage() {
         {/* Available Reports */}
         <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900">Available Reports</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900">{t('reports.availableReports')}</h3>
             <button className="flex items-center gap-2 px-4 py-2 bg-[#16a34a] text-white rounded-lg hover:bg-[#15803d] transition-colors text-sm">
               <FiDownload className="text-base" />
-              <span className="hidden sm:inline">Export All</span>
+              <span className="hidden sm:inline">{t('reports.exportAll')}</span>
             </button>
           </div>
           <div className="space-y-3">
@@ -217,7 +219,7 @@ export default function ReportsPage() {
                   className="flex items-center gap-2 px-4 py-2 bg-[#16a34a] text-white rounded-lg hover:bg-[#15803d] transition-colors text-sm"
                 >
                   <FiDownload className="text-base" />
-                  <span className="hidden sm:inline">Download</span>
+                  <span className="hidden sm:inline">{t('reports.download')}</span>
                 </button>
               </div>
             ))}

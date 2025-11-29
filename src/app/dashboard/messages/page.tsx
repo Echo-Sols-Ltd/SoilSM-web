@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
 import { FiSend, FiPaperclip, FiPhone, FiVideo, FiMoreVertical, FiSearch, FiPlus, FiArrowLeft } from 'react-icons/fi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface ChatMessage {
   id: number
@@ -21,6 +22,7 @@ interface Conversation {
 }
 
 export default function MessagesPage() {
+  const { t } = useTranslation()
   const router = useRouter()
   const [selectedConversation, setSelectedConversation] = useState<number>(1)
   const [messageInput, setMessageInput] = useState('')
@@ -79,7 +81,7 @@ export default function MessagesPage() {
               <FiArrowLeft className="text-xl" />
             </button>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Messages</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">{t('messages.title')}</h1>
             </div>
           </div>
         </div>
@@ -94,7 +96,7 @@ export default function MessagesPage() {
                   <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                   <input
                     type="text"
-                    placeholder="Search"
+                    placeholder={t('messages.search')}
                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all text-sm"
                   />
                 </div>
@@ -144,7 +146,7 @@ export default function MessagesPage() {
                       </div>
                       <div>
                         <h3 className="font-semibold text-gray-900 text-sm sm:text-base">{selectedConv.name}</h3>
-                        <p className="text-xs text-gray-500">Active now</p>
+                        <p className="text-xs text-gray-500">{t('messages.activeNow')}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
@@ -165,7 +167,7 @@ export default function MessagesPage() {
                     <div className="space-y-4">
                       {/* Date Separator */}
                       <div className="text-center">
-                        <span className="text-xs text-gray-500 font-medium">TODAY 11:50 PM</span>
+                        <span className="text-xs text-gray-500 font-medium">{t('messages.today')} 11:50 PM</span>
                       </div>
 
                       {messages.map((message) => {
@@ -218,7 +220,7 @@ export default function MessagesPage() {
                         value={messageInput}
                         onChange={(e) => setMessageInput(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                        placeholder="Message SoilSmart AI"
+                        placeholder={t('messages.messagePlaceholder')}
                         className="flex-1 px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all text-sm sm:text-base"
                       />
                       <button className="p-2 text-gray-600 hover:text-[#16a34a] hover:bg-gray-100 rounded-lg transition-colors">
@@ -236,7 +238,7 @@ export default function MessagesPage() {
                 </>
               ) : (
                 <div className="flex-1 flex items-center justify-center">
-                  <p className="text-gray-500">Select a conversation to start chatting</p>
+                  <p className="text-gray-500">{t('messages.selectConversation')}</p>
                 </div>
               )}
             </div>
@@ -255,7 +257,7 @@ export default function MessagesPage() {
                   <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
                     <div className="space-y-4">
                       <div className="text-center">
-                        <span className="text-xs text-gray-500 font-medium">TODAY 11:50 PM</span>
+                        <span className="text-xs text-gray-500 font-medium">{t('messages.today')} 11:50 PM</span>
                       </div>
                       {messages.map((message) => {
                         if (message.sender === 'system') {
@@ -300,7 +302,7 @@ export default function MessagesPage() {
                         value={messageInput}
                         onChange={(e) => setMessageInput(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                        placeholder="Message SoilSmart AI"
+                        placeholder={t('messages.messagePlaceholder')}
                         className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm"
                       />
                       <button className="p-2 text-gray-600">

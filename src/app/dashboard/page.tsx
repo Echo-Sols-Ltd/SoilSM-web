@@ -105,11 +105,11 @@ export default function DashboardPage() {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
               <p className="text-sm sm:text-base text-gray-600">{currentDate}</p>
-              <p className="text-base sm:text-lg font-semibold text-gray-900">Ruyenzi, Komonyi</p>
+              <p className="text-base sm:text-lg font-semibold text-gray-900">{t('dashboard.location', { location: 'Ruyenzi, Komonyi' })}</p>
             </div>
             <div className="flex items-center gap-2">
               <FiSun className="text-orange-500 text-xl sm:text-2xl" />
-              <span className="text-base sm:text-lg font-semibold text-gray-900">30°C Sunny cloudy</span>
+              <span className="text-base sm:text-lg font-semibold text-gray-900">{t('dashboard.weather', { temp: 30, condition: 'Sunny cloudy' })}</span>
             </div>
           </div>
         </div>
@@ -125,8 +125,8 @@ export default function DashboardPage() {
             </div>
             <div className="mb-2">
               <div className="text-3xl sm:text-4xl font-bold text-gray-900 mb-1">76%</div>
-              <p className="text-xs sm:text-sm text-gray-600">Overall Soil Health</p>
-              <p className="text-xs text-gray-500 mt-1">Last updated 2 minutes ago</p>
+              <p className="text-xs sm:text-sm text-gray-600">{t('dashboard.overallSoilHealth')}</p>
+              <p className="text-xs text-gray-500 mt-1">{t('dashboard.lastUpdated', { minutes: 2 })}</p>
             </div>
           </div>
 
@@ -138,9 +138,9 @@ export default function DashboardPage() {
               </div>
             </div>
             <div className="mb-2">
-              <p className="text-sm sm:text-base text-gray-600 mb-1">Used 245L</p>
-              <p className="text-sm sm:text-base text-gray-600 mb-1">Saved 89L</p>
-              <p className="text-xs sm:text-sm font-semibold text-green-600">73% efficiency today</p>
+              <p className="text-sm sm:text-base text-gray-600 mb-1">{t('dashboard.used', { liters: 245 })}</p>
+              <p className="text-sm sm:text-base text-gray-600 mb-1">{t('dashboard.saved', { liters: 89 })}</p>
+              <p className="text-xs sm:text-sm font-semibold text-green-600">{t('dashboard.efficiencyToday', { percent: 73 })}</p>
             </div>
           </div>
 
@@ -152,10 +152,10 @@ export default function DashboardPage() {
               </div>
             </div>
             <div className="mb-2">
-              <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">2h 45 min</h3>
-              <p className="text-xs sm:text-sm text-gray-600 mb-2">Zone A tomatoes</p>
+              <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">{t('dashboard.nextIrrigation', { hours: 2, minutes: 45 })}</h3>
+              <p className="text-xs sm:text-sm text-gray-600 mb-2">{t('dashboard.zoneCrop', { zone: 'A', crop: 'tomatoes' })}</p>
               <button className="text-xs sm:text-sm bg-[#16a34a] text-white px-3 py-1 rounded-lg hover:bg-[#15803d] transition-colors">
-                Do it now
+                {t('dashboard.doItNow')}
               </button>
             </div>
           </div>
@@ -168,7 +168,7 @@ export default function DashboardPage() {
               </div>
             </div>
             <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">30°C</h3>
-            <p className="text-xs sm:text-sm text-gray-600">Temperature</p>
+            <p className="text-xs sm:text-sm text-gray-600">{t('dashboard.temperature')}</p>
           </div>
         </div>
 
@@ -196,14 +196,14 @@ export default function DashboardPage() {
           {/* My Tasks */}
           <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
             <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <h2 className="text-lg sm:text-xl font-bold text-gray-900 font-display">My Tasks</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 font-display">{t('dashboard.myTasks')}</h2>
               <button 
                 onClick={() => setShowAddTaskModal(true)}
                 className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#16a34a] text-white rounded-lg hover:bg-[#15803d] transition-colors text-xs sm:text-sm font-medium"
               >
                 <FiPlus className="text-xs sm:text-sm" />
-                <span className="hidden xs:inline">Add Task</span>
-                <span className="xs:hidden">Add</span>
+                <span className="hidden xs:inline">{t('dashboard.addTask')}</span>
+                <span className="xs:hidden">{t('dashboard.add')}</span>
               </button>
             </div>
             <div className="space-y-2 sm:space-y-3">
@@ -234,26 +234,26 @@ export default function DashboardPage() {
 
           {/* Quick Actions */}
           <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 font-display">Quick Actions</h2>
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 font-display">{t('dashboard.quickActions')}</h2>
             <div className="grid grid-cols-2 gap-2 sm:gap-3">
               <button 
                 onClick={() => setShowAddTaskModal(true)}
                 className="flex flex-col items-center justify-center p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-[#16a34a] hover:bg-green-50 transition-all group"
               >
                 <FiPlus className="text-xl sm:text-2xl text-gray-600 group-hover:text-[#16a34a] mb-1 sm:mb-2" />
-                <span className="text-xs sm:text-sm font-medium text-gray-700 group-hover:text-[#16a34a] text-center">Add Task</span>
+                <span className="text-xs sm:text-sm font-medium text-gray-700 group-hover:text-[#16a34a] text-center">{t('dashboard.addTask')}</span>
               </button>
               <Link href="/dashboard/ai-chat" className="flex flex-col items-center justify-center p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-[#16a34a] hover:bg-green-50 transition-all group">
                 <FiMessageSquare className="text-xl sm:text-2xl text-gray-600 group-hover:text-[#16a34a] mb-1 sm:mb-2" />
-                <span className="text-xs sm:text-sm font-medium text-gray-700 group-hover:text-[#16a34a] text-center">Ask AI</span>
+                <span className="text-xs sm:text-sm font-medium text-gray-700 group-hover:text-[#16a34a] text-center">{t('dashboard.askAI')}</span>
               </Link>
               <Link href="/dashboard/reports" className="flex flex-col items-center justify-center p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-[#16a34a] hover:bg-green-50 transition-all group">
                 <FiFileText className="text-xl sm:text-2xl text-gray-600 group-hover:text-[#16a34a] mb-1 sm:mb-2" />
-                <span className="text-xs sm:text-sm font-medium text-gray-700 group-hover:text-[#16a34a] text-center">View Reports</span>
+                <span className="text-xs sm:text-sm font-medium text-gray-700 group-hover:text-[#16a34a] text-center">{t('dashboard.viewReports')}</span>
               </Link>
               <Link href="/dashboard/community" className="flex flex-col items-center justify-center p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-[#16a34a] hover:bg-green-50 transition-all group">
                 <FiUsers className="text-xl sm:text-2xl text-gray-600 group-hover:text-[#16a34a] mb-1 sm:mb-2" />
-                <span className="text-xs sm:text-sm font-medium text-gray-700 group-hover:text-[#16a34a] text-center">Post Update</span>
+                <span className="text-xs sm:text-sm font-medium text-gray-700 group-hover:text-[#16a34a] text-center">{t('dashboard.postUpdate')}</span>
               </Link>
             </div>
           </div>
@@ -265,7 +265,7 @@ export default function DashboardPage() {
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 relative">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-gray-900">Add a task</h2>
+              <h2 className="text-xl font-bold text-gray-900">{t('dashboard.addATask')}</h2>
               <button
                 onClick={() => setShowAddTaskModal(false)}
                 className="text-gray-400 hover:text-gray-600 transition-colors"
@@ -276,7 +276,7 @@ export default function DashboardPage() {
             <form onSubmit={handleAddTask} className="space-y-4">
               <div>
                 <label htmlFor="taskName" className="block text-sm font-medium text-gray-700 mb-2">
-                  Task name
+                  {t('dashboard.taskName')}
                 </label>
                 <input
                   id="taskName"
@@ -284,13 +284,13 @@ export default function DashboardPage() {
                   value={newTask.name}
                   onChange={(e) => setNewTask({ ...newTask, name: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all"
-                  placeholder="Enter task name"
+                  placeholder={t('dashboard.enterTaskName')}
                   required
                 />
               </div>
               <div>
                 <label htmlFor="taskDate" className="block text-sm font-medium text-gray-700 mb-2">
-                  Date
+                  {t('dashboard.date')}
                 </label>
                 <div className="relative">
                   <FiCalendar className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -305,7 +305,7 @@ export default function DashboardPage() {
               </div>
               <div>
                 <label htmlFor="taskTime" className="block text-sm font-medium text-gray-700 mb-2">
-                  Time
+                  {t('dashboard.time')}
                 </label>
                 <div className="relative">
                   <FiClock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -320,7 +320,7 @@ export default function DashboardPage() {
               </div>
               <div>
                 <label htmlFor="taskDescription" className="block text-sm font-medium text-gray-700 mb-2">
-                  Description
+                  {t('dashboard.description')}
                 </label>
                 <textarea
                   id="taskDescription"
@@ -328,14 +328,14 @@ export default function DashboardPage() {
                   onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
                   rows={3}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all resize-none"
-                  placeholder="Enter task description"
+                  placeholder={t('dashboard.enterTaskDescription')}
                 />
               </div>
               <button
                 type="submit"
                 className="w-full bg-[#15803d] hover:bg-[#166534] text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
               >
-                Add Task
+                {t('dashboard.addTask')}
               </button>
             </form>
           </div>

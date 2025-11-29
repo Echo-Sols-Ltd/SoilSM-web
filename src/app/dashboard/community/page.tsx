@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
 import { FiHeart, FiMessageCircle, FiShare2, FiImage, FiVideo, FiMoreVertical, FiArrowLeft } from 'react-icons/fi'
 import Image from 'next/image'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface Post {
   id: number
@@ -17,6 +18,7 @@ interface Post {
 }
 
 export default function CommunityPage() {
+  const { t } = useTranslation()
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<'all' | 'region' | 'questions' | 'news'>('all')
   const [postContent, setPostContent] = useState('')
@@ -110,8 +112,8 @@ export default function CommunityPage() {
               <FiArrowLeft className="text-xl" />
             </button>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Community Hub</h1>
-              <p className="text-sm sm:text-base text-gray-600">Connect with farmers in your community.</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">{t('community.title')}</h1>
+              <p className="text-sm sm:text-base text-gray-600">{t('community.subtitle')}</p>
             </div>
           </div>
         </div>
@@ -122,12 +124,12 @@ export default function CommunityPage() {
             {/* Post Creation */}
             <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
               <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 sm:mb-4">
-                Share an update with your community
+                {t('community.shareUpdate')}
               </h3>
               <textarea
                 value={postContent}
                 onChange={(e) => setPostContent(e.target.value)}
-                placeholder="What's on your mind?"
+                placeholder={t('community.whatsOnMind')}
                 rows={3}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all resize-none text-sm sm:text-base mb-3 sm:mb-4"
               />
@@ -135,7 +137,7 @@ export default function CommunityPage() {
                 <div className="flex items-center gap-3 sm:gap-4">
                   <label className="flex items-center gap-2 text-gray-600 hover:text-[#16a34a] transition-colors text-sm sm:text-base cursor-pointer">
                     <FiImage className="text-lg sm:text-xl" />
-                    <span className="hidden sm:inline">Photo</span>
+                    <span className="hidden sm:inline">{t('community.photo')}</span>
                     <input
                       type="file"
                       accept="image/*"
@@ -154,7 +156,7 @@ export default function CommunityPage() {
                   </label>
                   <button className="flex items-center gap-2 text-gray-600 hover:text-[#16a34a] transition-colors text-sm sm:text-base">
                     <FiVideo className="text-lg sm:text-xl" />
-                    <span className="hidden sm:inline">Video</span>
+                    <span className="hidden sm:inline">{t('community.video')}</span>
                   </button>
                 </div>
                 <button
@@ -179,7 +181,7 @@ export default function CommunityPage() {
                   }}
                   className="px-4 sm:px-6 py-2 bg-[#16a34a] text-white rounded-lg hover:bg-[#15803d] transition-colors text-sm sm:text-base font-medium"
                 >
-                  Post updates
+                  {t('community.postUpdates')}
                 </button>
               </div>
             </div>
@@ -188,10 +190,10 @@ export default function CommunityPage() {
             <div className="bg-white rounded-xl shadow-lg p-1 sm:p-2">
               <div className="flex gap-2 sm:gap-4">
                 {[
-                  { id: 'all', label: 'All posts' },
-                  { id: 'region', label: 'My region' },
-                  { id: 'questions', label: 'Questions' },
-                  { id: 'news', label: 'News' },
+                  { id: 'all', label: t('community.allPosts') },
+                  { id: 'region', label: t('community.myRegion') },
+                  { id: 'questions', label: t('community.questions') },
+                  { id: 'news', label: t('community.news') },
                 ].map((tab) => (
                   <button
                     key={tab.id}
@@ -280,7 +282,7 @@ export default function CommunityPage() {
           <div className="space-y-4 sm:space-y-6">
             {/* Announcements */}
             <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Announcements</h3>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">{t('community.announcements')}</h3>
               <div className="space-y-3 sm:space-y-4">
                 {announcements.map((announcement) => (
                   <div key={announcement.id} className="border-l-4 border-[#16a34a] pl-3 sm:pl-4 py-2">

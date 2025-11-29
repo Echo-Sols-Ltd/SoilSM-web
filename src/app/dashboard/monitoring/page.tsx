@@ -5,8 +5,10 @@ import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
 import { FiDownload, FiAlertCircle, FiTrendingUp, FiCloud, FiArrowLeft } from 'react-icons/fi'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts'
+import { useTranslation } from '@/hooks/useTranslation'
 
 export default function MonitoringPage() {
+  const { t } = useTranslation()
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<'nutrients' | 'temperature' | 'ph'>('nutrients')
 
@@ -21,9 +23,9 @@ export default function MonitoringPage() {
   ]
 
   const soilReports = [
-    { id: 1, title: 'Weekly Soil Analysis', date: 'Oct 24, 2023' },
-    { id: 2, title: 'Weekly Soil Analysis', date: 'Oct 17, 2023' },
-    { id: 3, title: 'Weekly Soil Analysis', date: 'Oct 10, 2023' },
+    { id: 1, title: t('monitoring.weeklySoilAnalysis'), date: 'Oct 24, 2023' },
+    { id: 2, title: t('monitoring.weeklySoilAnalysis'), date: 'Oct 17, 2023' },
+    { id: 3, title: t('monitoring.weeklySoilAnalysis'), date: 'Oct 10, 2023' },
   ]
 
   return (
@@ -39,8 +41,8 @@ export default function MonitoringPage() {
               <FiArrowLeft className="text-xl" />
             </button>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Your soil</h1>
-              <p className="text-sm sm:text-base text-gray-600">See your soil's health and know what it needs.</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">{t('monitoring.title')}</h1>
+              <p className="text-sm sm:text-base text-gray-600">{t('monitoring.subtitle')}</p>
             </div>
           </div>
         </div>
@@ -56,7 +58,7 @@ export default function MonitoringPage() {
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
-              Nutrients
+              {t('monitoring.nutrients')}
             </button>
             <button
               onClick={() => setActiveTab('temperature')}
@@ -66,7 +68,7 @@ export default function MonitoringPage() {
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
-              Temperature
+              {t('monitoring.temperature')}
             </button>
             <button
               onClick={() => setActiveTab('ph')}
@@ -76,7 +78,7 @@ export default function MonitoringPage() {
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
-              pH
+              {t('monitoring.ph')}
             </button>
           </div>
         </div>
@@ -87,7 +89,7 @@ export default function MonitoringPage() {
             {/* Soil Health Overview */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-                <h3 className="text-sm sm:text-base font-semibold text-gray-700 mb-3 sm:mb-4">Moisture level</h3>
+                <h3 className="text-sm sm:text-base font-semibold text-gray-700 mb-3 sm:mb-4">{t('monitoring.moistureLevel')}</h3>
                 <div className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">51.8%</div>
                 <div className="w-full bg-gray-200 rounded-full h-3">
                   <div className="bg-[#16a34a] h-3 rounded-full" style={{ width: '51.8%' }}></div>
@@ -95,18 +97,18 @@ export default function MonitoringPage() {
               </div>
 
               <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-                <h3 className="text-sm sm:text-base font-semibold text-gray-700 mb-3 sm:mb-4">Nutrient Status</h3>
+                <h3 className="text-sm sm:text-base font-semibold text-gray-700 mb-3 sm:mb-4">{t('monitoring.nutrientStatus')}</h3>
                 <div className="space-y-3 sm:space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm sm:text-base text-gray-600">N (Nitrogen)</span>
+                    <span className="text-sm sm:text-base text-gray-600">{t('monitoring.nitrogen')}</span>
                     <span className="text-lg sm:text-xl font-bold text-gray-900">45%</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm sm:text-base text-gray-600">P (Phosphorus)</span>
+                    <span className="text-sm sm:text-base text-gray-600">{t('monitoring.phosphorus')}</span>
                     <span className="text-lg sm:text-xl font-bold text-gray-900">32%</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm sm:text-base text-gray-600">K (Potassium)</span>
+                    <span className="text-sm sm:text-base text-gray-600">{t('monitoring.potassium')}</span>
                     <span className="text-lg sm:text-xl font-bold text-gray-900">28%</span>
                   </div>
                 </div>
@@ -120,7 +122,7 @@ export default function MonitoringPage() {
 
             {/* Graph */}
             <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Soil Health Trend</h3>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">{t('monitoring.soilHealthTrend')}</h3>
               <ResponsiveContainer width="100%" height={300}>
                 <AreaChart data={chartData}>
                   <defs>
@@ -147,15 +149,15 @@ export default function MonitoringPage() {
 
             {/* AI Recommendations */}
             <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">AI Recommendations</h3>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">{t('monitoring.aiRecommendations')}</h3>
               <div className="space-y-3 sm:space-y-4">
                 <div className="border-l-4 border-orange-500 pl-4 py-2 bg-orange-50 rounded-r-lg">
                   <div className="flex items-start gap-3">
                     <FiAlertCircle className="text-orange-600 text-xl flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">Irrigation Alert</h4>
+                      <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">{t('monitoring.irrigationAlert')}</h4>
                       <p className="text-sm sm:text-base text-gray-700">
-                        Excess irrigation detected. Current levels are above optimal range. Reduce watering frequency.
+                        {t('monitoring.irrigationAlertDesc')}
                       </p>
                     </div>
                   </div>
@@ -165,9 +167,9 @@ export default function MonitoringPage() {
                   <div className="flex items-start gap-3">
                     <FiTrendingUp className="text-blue-600 text-xl flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">Fertilizer Schedule</h4>
+                      <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">{t('monitoring.fertilizerSchedule')}</h4>
                       <p className="text-sm sm:text-base text-gray-700">
-                        Apply nitrogen-rich fertilizer this week. Optimal range maintained.
+                        {t('monitoring.fertilizerScheduleDesc')}
                       </p>
                     </div>
                   </div>
@@ -177,9 +179,9 @@ export default function MonitoringPage() {
                   <div className="flex items-start gap-3">
                     <FiCloud className="text-gray-600 text-xl flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">Weather Advisory</h4>
+                      <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">{t('monitoring.weatherAdvisory')}</h4>
                       <p className="text-sm sm:text-base text-gray-700">
-                        Avoid irrigation during cloudy weather. Wait for clear conditions.
+                        {t('monitoring.weatherAdvisoryDesc')}
                       </p>
                     </div>
                   </div>
@@ -189,7 +191,7 @@ export default function MonitoringPage() {
 
             {/* Soil Reports */}
             <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Soil Reports</h3>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">{t('monitoring.soilReports')}</h3>
               <div className="space-y-3 sm:space-y-4">
                 {soilReports.map((report) => (
                   <div
@@ -202,7 +204,7 @@ export default function MonitoringPage() {
                     </div>
                     <button className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#16a34a] text-white rounded-lg hover:bg-[#15803d] transition-colors text-xs sm:text-sm font-medium">
                       <FiDownload className="text-sm sm:text-base" />
-                      <span className="hidden sm:inline">Download PDF</span>
+                      <span className="hidden sm:inline">{t('monitoring.downloadPDF')}</span>
                     </button>
                   </div>
                 ))}
@@ -214,14 +216,14 @@ export default function MonitoringPage() {
         {/* Temperature Tab */}
         {activeTab === 'temperature' && (
           <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Temperature Monitoring</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">{t('monitoring.temperatureMonitoring')}</h3>
             <ResponsiveContainer width="100%" height={400}>
               <LineChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis dataKey="time" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} />
                 <Tooltip />
-                <Line type="monotone" dataKey="value" stroke="#f59e0b" strokeWidth={2} name="Temperature (°C)" />
+                <Line type="monotone" dataKey="value" stroke="#f59e0b" strokeWidth={2} name={t('monitoring.temperatureUnit')} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -230,14 +232,14 @@ export default function MonitoringPage() {
         {/* pH Tab */}
         {activeTab === 'ph' && (
           <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">pH Levels</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">{t('monitoring.phLevels')}</h3>
             <ResponsiveContainer width="100%" height={400}>
               <LineChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis dataKey="time" tick={{ fontSize: 12 }} />
                 <YAxis domain={[5, 8]} tick={{ fontSize: 12 }} />
                 <Tooltip />
-                <Line type="monotone" dataKey="value" stroke="#8b5cf6" strokeWidth={2} name="pH Level" />
+                <Line type="monotone" dataKey="value" stroke="#8b5cf6" strokeWidth={2} name={t('monitoring.phLevel')} />
               </LineChart>
             </ResponsiveContainer>
           </div>

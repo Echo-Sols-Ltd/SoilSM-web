@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { FiSend, FiMic, FiArrowLeft } from 'react-icons/fi'
 import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface Message {
   id: number
@@ -14,6 +15,7 @@ interface Message {
 }
 
 export default function AIChatPage() {
+  const { t } = useTranslation()
   const router = useRouter()
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
@@ -95,8 +97,8 @@ export default function AIChatPage() {
               <FiArrowLeft className="text-xl" />
             </button>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">SoilSmart AI Chat</h1>
-              <p className="text-sm sm:text-base text-gray-600">Your soil's daily story, powered by smart sensors.</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">{t('aiChat.title')}</h1>
+              <p className="text-sm sm:text-base text-gray-600">{t('aiChat.subtitle')}</p>
             </div>
           </div>
         </div>
@@ -112,7 +114,7 @@ export default function AIChatPage() {
             {messages.length === 0 ? (
               <div className="flex items-center justify-center h-full min-h-[400px]">
                 <div className="text-center">
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">What can I help with?</h2>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">{t('aiChat.whatCanIHelp')}</h2>
                 </div>
               </div>
             ) : (
@@ -166,7 +168,7 @@ export default function AIChatPage() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder="Message SoilSmart AI"
+                  placeholder={t('messages.messagePlaceholder')}
                   className="w-full px-4 py-3 sm:py-4 pr-20 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all text-sm sm:text-base"
                 />
                 <button

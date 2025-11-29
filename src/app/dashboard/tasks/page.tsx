@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
 import { FiCheck, FiZap, FiPlus, FiX, FiCalendar, FiClock, FiEdit, FiTrash2, FiChevronLeft, FiChevronRight, FiArrowLeft } from 'react-icons/fi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface Task {
   id: number
@@ -22,6 +23,7 @@ interface Reminder {
 }
 
 export default function TasksPage() {
+  const { t } = useTranslation()
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<'today' | 'calendar' | 'reminders'>('today')
   const [showAddTaskModal, setShowAddTaskModal] = useState(false)
@@ -120,12 +122,12 @@ export default function TasksPage() {
 
   const getStatusText = (status: string) => {
     const texts: { [key: string]: string } = {
-      completed: 'Completed',
-      pending: 'Pending',
-      'in-progress': 'In progress',
-      'not-started': 'Not started',
+      completed: t('tasks.statusCompleted'),
+      pending: t('tasks.statusPending'),
+      'in-progress': t('tasks.statusInProgress'),
+      'not-started': t('tasks.statusNotStarted'),
     }
-    return texts[status] || 'Pending'
+    return texts[status] || t('tasks.statusPending')
   }
 
   const getPriorityColor = (priority: string) => {
@@ -158,8 +160,8 @@ export default function TasksPage() {
     return days
   }
 
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  const dayNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+  const monthNames = [t('tasks.january'), t('tasks.february'), t('tasks.march'), t('tasks.april'), t('tasks.may'), t('tasks.june'), t('tasks.july'), t('tasks.august'), t('tasks.september'), t('tasks.october'), t('tasks.november'), t('tasks.december')]
+  const dayNames = [t('tasks.sun'), t('tasks.mon'), t('tasks.tue'), t('tasks.wed'), t('tasks.thu'), t('tasks.fri'), t('tasks.sat')]
   const calendarDays = getDaysInMonth(currentMonth)
 
   const calendarTasks: { [key: number]: string[] } = {
@@ -182,8 +184,8 @@ export default function TasksPage() {
               <FiArrowLeft className="text-xl" />
             </button>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Tasks</h1>
-              <p className="text-sm sm:text-base text-gray-600">"What should I do today?" - one tap, one answer.</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">{t('tasks.title')}</h1>
+              <p className="text-sm sm:text-base text-gray-600">{t('tasks.subtitle')}</p>
             </div>
           </div>
         </div>
@@ -199,7 +201,7 @@ export default function TasksPage() {
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
-              Today's Tasks
+              {t('tasks.todaysTasks')}
             </button>
             <button
               onClick={() => setActiveTab('calendar')}
@@ -209,7 +211,7 @@ export default function TasksPage() {
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
-              Planting calendar
+              {t('tasks.plantingCalendar')}
             </button>
             <button
               onClick={() => setActiveTab('reminders')}
@@ -219,7 +221,7 @@ export default function TasksPage() {
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
-              Reminders
+              {t('tasks.reminders')}
             </button>
           </div>
         </div>
@@ -232,9 +234,9 @@ export default function TasksPage() {
               <div className="flex items-start gap-3 sm:gap-4">
                 <FiZap className="text-xl sm:text-2xl flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-semibold text-sm sm:text-base mb-1">Suggestion</h3>
+                  <h3 className="font-semibold text-sm sm:text-base mb-1">{t('tasks.suggestion')}</h3>
                   <p className="text-sm sm:text-base opacity-90">
-                    Remember your pick by adding compost tomorrow.
+                    {t('tasks.suggestionText')}
                   </p>
                 </div>
               </div>
@@ -243,9 +245,9 @@ export default function TasksPage() {
             {/* Today's Progress */}
             <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-sm sm:text-base font-semibold text-gray-900">Today's progress</h3>
+                <h3 className="text-sm sm:text-base font-semibold text-gray-900">{t('tasks.todaysProgress')}</h3>
                 <span className="text-sm sm:text-base font-bold text-gray-900">
-                  {completedCount} of {totalCount} completed
+                  {t('tasks.completedOf', { completed: completedCount, total: totalCount })}
                 </span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3">
@@ -282,7 +284,7 @@ export default function TasksPage() {
                       >
                         {task.text}
                       </p>
-                      <p className="text-xs sm:text-sm text-gray-500 mt-1">{task.time}</p>
+                      <p className="text-xs sm:text-sm text-gray-500 mt-1">{task.time === 'All day' ? t('tasks.allDay') : task.time}</p>
                     </div>
                     <span
                       className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${getStatusBadge(
@@ -324,7 +326,7 @@ export default function TasksPage() {
                 className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#16a34a] text-white rounded-lg hover:bg-[#15803d] transition-colors text-sm sm:text-base"
               >
                 <FiPlus className="text-sm sm:text-base" />
-                <span className="hidden sm:inline">Add Task</span>
+                <span className="hidden sm:inline">{t('dashboard.addTask')}</span>
               </button>
             </div>
 
@@ -376,9 +378,9 @@ export default function TasksPage() {
               <div className="flex items-start gap-3 sm:gap-4">
                 <FiZap className="text-xl sm:text-2xl flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-semibold text-sm sm:text-base mb-1">Suggestion</h3>
+                  <h3 className="font-semibold text-sm sm:text-base mb-1">{t('tasks.suggestion')}</h3>
                   <p className="text-sm sm:text-base opacity-90">
-                    This week is ideal for planting maize - soil nitrogen is sufficient.
+                    {t('tasks.suggestionReminders')}
                   </p>
                 </div>
               </div>
@@ -388,15 +390,15 @@ export default function TasksPage() {
             <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
               <div className="flex items-center justify-between mb-4 sm:mb-6">
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">Reminders</h3>
-                  <p className="text-xs sm:text-sm text-gray-600">Upcoming</p>
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">{t('tasks.reminders')}</h3>
+                  <p className="text-xs sm:text-sm text-gray-600">{t('tasks.upcoming')}</p>
                 </div>
                 <button
                   onClick={() => setShowAddReminderModal(true)}
                   className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#16a34a] text-white rounded-lg hover:bg-[#15803d] transition-colors text-sm sm:text-base"
                 >
                   <FiPlus className="text-sm sm:text-base" />
-                  <span className="hidden sm:inline">Add Reminder</span>
+                  <span className="hidden sm:inline">{t('tasks.addReminder')}</span>
                 </button>
               </div>
 
@@ -414,7 +416,7 @@ export default function TasksPage() {
                       </p>
                     </div>
                     <div className="px-2 sm:px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs sm:text-sm font-medium">
-                      {reminder.priority}
+                      {t(`tasks.${reminder.priority}`)}
                     </div>
                     <button
                       onClick={() => {
@@ -437,7 +439,7 @@ export default function TasksPage() {
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
             <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 relative">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-900">Add a task</h2>
+                <h2 className="text-xl font-bold text-gray-900">{t('dashboard.addATask')}</h2>
                 <button
                   onClick={() => setShowAddTaskModal(false)}
                   className="text-gray-400 hover:text-gray-600 transition-colors"
@@ -448,7 +450,7 @@ export default function TasksPage() {
               <form onSubmit={handleAddTask} className="space-y-4">
                 <div>
                   <label htmlFor="taskName" className="block text-sm font-medium text-gray-700 mb-2">
-                    Task name
+                    {t('dashboard.taskName')}
                   </label>
                   <input
                     id="taskName"
@@ -456,13 +458,13 @@ export default function TasksPage() {
                     value={newTask.name}
                     onChange={(e) => setNewTask({ ...newTask, name: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all"
-                    placeholder="Enter task name"
+                    placeholder={t('dashboard.enterTaskName')}
                     required
                   />
                 </div>
                 <div>
                   <label htmlFor="taskDate" className="block text-sm font-medium text-gray-700 mb-2">
-                    Date
+                    {t('dashboard.date')}
                   </label>
                   <div className="relative">
                     <FiCalendar className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -477,7 +479,7 @@ export default function TasksPage() {
                 </div>
                 <div>
                   <label htmlFor="taskTime" className="block text-sm font-medium text-gray-700 mb-2">
-                    Time
+                    {t('dashboard.time')}
                   </label>
                   <div className="relative">
                     <FiClock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -492,7 +494,7 @@ export default function TasksPage() {
                 </div>
                 <div>
                   <label htmlFor="taskDescription" className="block text-sm font-medium text-gray-700 mb-2">
-                    Description
+                    {t('dashboard.description')}
                   </label>
                   <textarea
                     id="taskDescription"
@@ -500,14 +502,14 @@ export default function TasksPage() {
                     onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
                     rows={3}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all resize-none"
-                    placeholder="Enter task description"
+                    placeholder={t('dashboard.enterTaskDescription')}
                   />
                 </div>
                 <button
                   type="submit"
                   className="w-full bg-[#15803d] hover:bg-[#166534] text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
                 >
-                  Add Task
+                  {t('dashboard.addTask')}
                 </button>
               </form>
             </div>
@@ -519,7 +521,7 @@ export default function TasksPage() {
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
             <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 relative">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-900">Add a reminder</h2>
+                <h2 className="text-xl font-bold text-gray-900">{t('tasks.addAReminder')}</h2>
                 <button
                   onClick={() => setShowAddReminderModal(false)}
                   className="text-gray-400 hover:text-gray-600 transition-colors"
@@ -530,7 +532,7 @@ export default function TasksPage() {
               <form onSubmit={handleAddReminder} className="space-y-4">
                 <div>
                   <label htmlFor="reminderName" className="block text-sm font-medium text-gray-700 mb-2">
-                    Task name
+                    {t('dashboard.taskName')}
                   </label>
                   <input
                     id="reminderName"
@@ -538,13 +540,13 @@ export default function TasksPage() {
                     value={newReminder.name}
                     onChange={(e) => setNewReminder({ ...newReminder, name: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all"
-                    placeholder="Enter task name"
+                    placeholder={t('dashboard.enterTaskName')}
                     required
                   />
                 </div>
                 <div>
                   <label htmlFor="reminderDate" className="block text-sm font-medium text-gray-700 mb-2">
-                    Date
+                    {t('dashboard.date')}
                   </label>
                   <div className="relative">
                     <FiCalendar className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -560,7 +562,7 @@ export default function TasksPage() {
                 </div>
                 <div>
                   <label htmlFor="reminderTime" className="block text-sm font-medium text-gray-700 mb-2">
-                    Time
+                    {t('dashboard.time')}
                   </label>
                   <div className="relative">
                     <FiClock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -576,7 +578,7 @@ export default function TasksPage() {
                 </div>
                 <div>
                   <label htmlFor="reminderDescription" className="block text-sm font-medium text-gray-700 mb-2">
-                    Description
+                    {t('dashboard.description')}
                   </label>
                   <textarea
                     id="reminderDescription"
@@ -584,11 +586,11 @@ export default function TasksPage() {
                     onChange={(e) => setNewReminder({ ...newReminder, description: e.target.value })}
                     rows={3}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all resize-none"
-                    placeholder="Enter reminder description"
+                    placeholder={t('tasks.enterReminderDescription')}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('tasks.category')}</label>
                   <div className="flex gap-3">
                     <button
                       type="button"
@@ -629,7 +631,7 @@ export default function TasksPage() {
                   type="submit"
                   className="w-full bg-[#15803d] hover:bg-[#166534] text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
                 >
-                  Add Reminder
+                  {t('tasks.addReminder')}
                 </button>
               </form>
             </div>
@@ -640,9 +642,9 @@ export default function TasksPage() {
         {showDeleteModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
             <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 relative">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Want to delete this Task/Reminder?</h2>
+              <h2 className="text-xl font-bold text-gray-900 mb-4">{t('tasks.deleteConfirmTitle')}</h2>
               <p className="text-gray-600 mb-6">
-                This action will permanently delete this task/reminder. Are you sure you want to continue?
+                {t('tasks.deleteConfirmMessage')}
               </p>
               <div className="flex gap-3">
                 <button
@@ -652,13 +654,13 @@ export default function TasksPage() {
                   }}
                   className="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all"
                 >
-                  Cancel
+                  {t('common.cancel')}
                 </button>
                 <button
                   onClick={handleDelete}
                   className="flex-1 px-4 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all"
                 >
-                  Yes, Delete
+                  {t('tasks.yesDelete')}
                 </button>
               </div>
             </div>
