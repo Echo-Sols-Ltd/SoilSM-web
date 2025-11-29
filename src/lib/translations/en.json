@@ -1,0 +1,65 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "login": "Login",
+    "signup": "Sign up",
+    "logout": "Logout",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "solutions": "Solutions",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Smart Agriculture Technology",
+    "title": "Empowering Farmers with",
+    "titleHighlight": "Data-Driven Solutions",
+    "description": "Transform your farming with affordable soil monitoring, smart irrigation, and AI-powered guidance. Join the agricultural revolution in Africa.",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back",
+    "activeSensors": "Active Sensors",
+    "soilMoisture": "Soil Moisture",
+    "temperature": "Temperature",
+    "yieldImprovement": "Yield Improvement"
+  },
+  "profile": {
+    "title": "Farmer Profile",
+    "personalInfo": "Personal Information",
+    "farmInfo": "Farm Information",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "location": "Location",
+    "farmName": "Farm Name",
+    "farmSize": "Farm Size",
+    "memberSince": "Member Since",
+    "cropsGrown": "Crops Grown",
+    "bio": "Bio",
+    "editProfile": "Edit Profile",
+    "saveChanges": "Save Changes"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "markAsRead": "Mark as read",
+    "noNotifications": "No notifications",
+    "allCaughtUp": "You're all caught up! Check back later for updates.",
+    "unreadCount": "{{count}} unread notification",
+    "unreadCount_plural": "{{count}} unread notifications"
+  }
+}
+

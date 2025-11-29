@@ -1,0 +1,65 @@
+{
+  "common": {
+    "welcome": "Murakaza neza",
+    "login": "Injira",
+    "signup": "Kwiyandikisha",
+    "logout": "Sohoka",
+    "save": "Bika",
+    "cancel": "Kureka",
+    "edit": "Guhindura",
+    "delete": "Siba",
+    "search": "Shakisha",
+    "loading": "Bitegereza...",
+    "error": "Ikosa",
+    "success": "Intsinzi"
+  },
+  "nav": {
+    "home": "Ahabanza",
+    "about": "Ibyerekeye",
+    "services": "Serivisi",
+    "solutions": "Ibisubizo",
+    "contact": "Twandikire"
+  },
+  "hero": {
+    "badge": "Tekinoloji y'Ubuhinzi bw'Ubwoba",
+    "title": "Gufasha Abahinzi",
+    "titleHighlight": "Amashusho y'Ubwoba",
+    "description": "Guhindura ubuhinzi bwawe ukoresheje ubwoba bwo gukurikirana ubutaka, gutanga amazi n'ubwoba, na AI ifasha. Jya mu mihindagurikire y'ubuhinzi muri Afurika.",
+    "getStarted": "Tangira",
+    "learnMore": "Menya byinshi"
+  },
+  "dashboard": {
+    "title": "Ikibaho",
+    "welcome": "Murakaza neza",
+    "activeSensors": "Senseri Zikora",
+    "soilMoisture": "Ubwoba bw'Ubutaka",
+    "temperature": "Ubushyuhe",
+    "yieldImprovement": "Kongera Umusaruro"
+  },
+  "profile": {
+    "title": "Umwirondoro w'Umuhinzi",
+    "personalInfo": "Amakuru y'Umuntu",
+    "farmInfo": "Amakuru y'Ubuhinzi",
+    "fullName": "Amazina Yuzuye",
+    "email": "Imeyili",
+    "phone": "Nomero ya Telefoni",
+    "location": "Aho Utuye",
+    "farmName": "Izina ry'Ubuhinzi",
+    "farmSize": "Ingano y'Ubuhinzi",
+    "memberSince": "Mufite Kuva",
+    "cropsGrown": "Ibyatsi Bikurwa",
+    "bio": "Amakuru",
+    "editProfile": "Guhindura Umwirondoro",
+    "saveChanges": "Bika Amahinduka"
+  },
+  "notifications": {
+    "title": "Amatangazo",
+    "markAllRead": "Ongera ubyanditse byose",
+    "markAsRead": "Ongera ubyanditse",
+    "noNotifications": "Nta tangazo",
+    "allCaughtUp": "Wujuje byose! Subira inyuma hanyuma wongere.",
+    "unreadCount": "Tangazo {{count}} ridasomwe",
+    "unreadCount_plural": "Amatangazo {{count}} adasomwe"
+  }
+}
+

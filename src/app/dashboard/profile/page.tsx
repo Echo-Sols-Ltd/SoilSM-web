@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
 import { FiArrowLeft, FiUser, FiMail, FiPhone, FiMapPin, FiCalendar, FiEdit, FiSave, FiX } from 'react-icons/fi'
 import { GiPlantSeed } from 'react-icons/gi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface FarmerProfile {
   name: string
@@ -20,6 +21,7 @@ interface FarmerProfile {
 
 export default function ProfilePage() {
   const router = useRouter()
+  const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
   const [user, setUser] = useState<any>(null)
   const [profile, setProfile] = useState<FarmerProfile>({
@@ -76,7 +78,7 @@ export default function ProfilePage() {
                 <FiArrowLeft className="text-xl" />
               </button>
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Farmer Profile</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">{t('profile.title')}</h1>
                 <p className="text-sm sm:text-base text-gray-600">Manage your profile information and farm details</p>
               </div>
             </div>
@@ -86,7 +88,7 @@ export default function ProfilePage() {
                 className="flex items-center gap-2 px-4 py-2 bg-[#16a34a] hover:bg-[#15803d] text-white rounded-lg transition-colors text-sm font-medium"
               >
                 <FiEdit className="text-base" />
-                Edit Profile
+                {t('profile.editProfile')}
               </button>
             ) : (
               <div className="flex items-center gap-2">
@@ -95,14 +97,14 @@ export default function ProfilePage() {
                   className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium"
                 >
                   <FiX className="text-base" />
-                  Cancel
+                  {t('common.cancel')}
                 </button>
                 <button
                   onClick={handleSave}
                   className="flex items-center gap-2 px-4 py-2 bg-[#16a34a] hover:bg-[#15803d] text-white rounded-lg transition-colors text-sm font-medium"
                 >
                   <FiSave className="text-base" />
-                  Save Changes
+                  {t('profile.saveChanges')}
                 </button>
               </div>
             )}
@@ -134,11 +136,11 @@ export default function ProfilePage() {
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                   <FiUser className="text-[#16a34a]" />
-                  Personal Information
+                  {t('profile.personalInfo')}
                 </h3>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">{t('profile.fullName')}</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -154,7 +156,7 @@ export default function ProfilePage() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
                     <FiMail className="text-gray-400" />
-                    Email
+                    {t('profile.email')}
                   </label>
                   {isEditing ? (
                     <input
@@ -171,7 +173,7 @@ export default function ProfilePage() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
                     <FiPhone className="text-gray-400" />
-                    Phone Number
+                    {t('profile.phone')}
                   </label>
                   {isEditing ? (
                     <input
@@ -188,7 +190,7 @@ export default function ProfilePage() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
                     <FiMapPin className="text-gray-400" />
-                    Location
+                    {t('profile.location')}
                   </label>
                   {isEditing ? (
                     <input
@@ -207,11 +209,11 @@ export default function ProfilePage() {
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                   <GiPlantSeed className="text-[#16a34a]" />
-                  Farm Information
+                  {t('profile.farmInfo')}
                 </h3>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Farm Name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">{t('profile.farmName')}</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -225,7 +227,7 @@ export default function ProfilePage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Farm Size</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">{t('profile.farmSize')}</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -241,13 +243,13 @@ export default function ProfilePage() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
                     <FiCalendar className="text-gray-400" />
-                    Member Since
+                    {t('profile.memberSince')}
                   </label>
                   <p className="text-gray-900">{profile.joinDate}</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Crops Grown</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('profile.cropsGrown')}</label>
                   <div className="flex flex-wrap gap-2">
                     {profile.crops.map((crop, index) => (
                       <span
@@ -264,7 +266,7 @@ export default function ProfilePage() {
 
             {/* Bio Section */}
             <div className="mt-6 pt-6 border-t border-gray-200">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Bio</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">{t('profile.bio')}</label>
               {isEditing ? (
                 <textarea
                   value={profile.bio}
@@ -282,4 +284,6 @@ export default function ProfilePage() {
     </DashboardLayout>
   )
 }
+
+
 

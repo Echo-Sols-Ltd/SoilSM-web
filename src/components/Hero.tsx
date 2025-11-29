@@ -3,8 +3,11 @@
 import { motion } from 'framer-motion'
 import { FiArrowRight } from 'react-icons/fi'
 import { GiPlantRoots, GiWaterDrop, GiArtificialIntelligence } from 'react-icons/gi'
+import { useTranslation } from '@/hooks/useTranslation'
+import Link from 'next/link'
 
 const Hero = () => {
+  const { t } = useTranslation()
   const floatingIcons = [
     { Icon: GiPlantRoots, delay: 0, position: 'top-20 left-10' },
     { Icon: GiWaterDrop, delay: 0.2, position: 'top-40 right-20' },
@@ -44,26 +47,27 @@ const Hero = () => {
               className="inline-block mb-4 sm:mb-6"
             >
               <span className="bg-primary-100 text-primary-700 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
-                🌱 Smart Agriculture Technology
+                🌱 {t('hero.badge')}
               </span>
             </motion.div>
 
             <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold font-display text-gray-900 mb-4 sm:mb-6 leading-tight px-2 sm:px-0">
-              Empowering Farmers with{' '}
-              <span className="text-gradient">Data-Driven Solutions</span>
+              {t('hero.title')}{' '}
+              <span className="text-gradient">{t('hero.titleHighlight')}</span>
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0 px-4 sm:px-0">
-              Transform your farming with affordable soil monitoring, smart irrigation, and AI-powered guidance. 
-              Join the agricultural revolution in Africa.
+              {t('hero.description')}
             </p>
 
             <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-4 sm:px-0">
-              <button className="btn-primary flex items-center justify-center gap-2 group text-sm sm:text-base px-4 sm:px-6 py-2.5 sm:py-3">
-                Get Started
-                <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="btn-secondary text-sm sm:text-base px-4 sm:px-6 py-2.5 sm:py-3">Learn More</button>
+              <Link href="/signup">
+                <button className="btn-primary flex items-center justify-center gap-2 group text-sm sm:text-base px-4 sm:px-6 py-2.5 sm:py-3">
+                  {t('hero.getStarted')}
+                  <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+                </button>
+              </Link>
+              <button className="btn-secondary text-sm sm:text-base px-4 sm:px-6 py-2.5 sm:py-3">{t('hero.learnMore')}</button>
             </div>
 
             {/* Stats */}

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
 import { FiArrowLeft, FiBell, FiCheck, FiX, FiTrash2 } from 'react-icons/fi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface Notification {
   id: number
@@ -16,6 +17,7 @@ interface Notification {
 
 export default function NotificationsPage() {
   const router = useRouter()
+  const { t } = useTranslation()
   const [notifications, setNotifications] = useState<Notification[]>([
     {
       id: 1,
@@ -121,9 +123,9 @@ export default function NotificationsPage() {
                 <FiArrowLeft className="text-xl" />
               </button>
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Notifications</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">{t('notifications.title')}</h1>
                 <p className="text-sm sm:text-base text-gray-600">
-                  {unreadCount > 0 ? `${unreadCount} unread notification${unreadCount > 1 ? 's' : ''}` : 'All caught up!'}
+                  {unreadCount > 0 ? t('notifications.unreadCount', { count: unreadCount }) : t('notifications.allCaughtUp')}
                 </p>
               </div>
             </div>
@@ -132,7 +134,7 @@ export default function NotificationsPage() {
                 onClick={markAllAsRead}
                 className="text-sm text-[#16a34a] hover:text-[#15803d] font-medium px-4 py-2 rounded-lg hover:bg-green-50 transition-colors"
               >
-                Mark all as read
+                {t('notifications.markAllRead')}
               </button>
             )}
           </div>
@@ -143,8 +145,8 @@ export default function NotificationsPage() {
           {notifications.length === 0 ? (
             <div className="bg-white rounded-xl shadow-lg p-12 text-center">
               <FiBell className="text-6xl text-gray-300 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">No notifications</h3>
-              <p className="text-gray-600">You're all caught up! Check back later for updates.</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('notifications.noNotifications')}</h3>
+              <p className="text-gray-600">{t('notifications.allCaughtUp')}</p>
             </div>
           ) : (
             notifications.map((notification) => (
@@ -183,7 +185,7 @@ export default function NotificationsPage() {
                             className="text-xs text-[#16a34a] hover:text-[#15803d] font-medium px-3 py-1 rounded-lg hover:bg-green-50 transition-colors flex items-center gap-1"
                           >
                             <FiCheck className="text-sm" />
-                            Mark as read
+                            {t('notifications.markAsRead')}
                           </button>
                         )}
                         <button
@@ -204,4 +206,6 @@ export default function NotificationsPage() {
     </DashboardLayout>
   )
 }
+
+
 

@@ -5,17 +5,20 @@ import Link from 'next/link'
 import { FiMenu, FiX } from 'react-icons/fi'
 import { GiPlantSeed } from 'react-icons/gi'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
+import { useTranslation } from '@/hooks/useTranslation'
+import LanguageSwitcher from './LanguageSwitcher'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { t } = useTranslation()
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Solutions', href: '#solutions' },
-    { name: 'Contact', href: '#contact' },
+    { name: t('nav.home'), href: '#home' },
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.services'), href: '#services' },
+    { name: t('nav.solutions'), href: '#solutions' },
+    { name: t('nav.contact'), href: '#contact' },
   ]
 
   const sectionIds = navLinks.map(link => link.href.replace('#', ''))
@@ -81,11 +84,12 @@ const Navbar = () => {
                 </button>
               )
             })}
+            <LanguageSwitcher />
             <Link href="/login">
-              <button className="btn-secondary mr-2 sm:mr-3 text-xs sm:text-sm px-3 sm:px-6 py-2 sm:py-3">Sign In</button>
+              <button className="btn-secondary mr-2 sm:mr-3 text-xs sm:text-sm px-3 sm:px-6 py-2 sm:py-3">{t('common.login')}</button>
             </Link>
             <Link href="/signup">
-              <button className="btn-primary text-xs sm:text-sm px-3 sm:px-6 py-2 sm:py-3">Get Started</button>
+              <button className="btn-primary text-xs sm:text-sm px-3 sm:px-6 py-2 sm:py-3">{t('hero.getStarted')}</button>
             </Link>
           </div>
 
@@ -119,11 +123,14 @@ const Navbar = () => {
                   </button>
                 )
               })}
+              <div className="px-4 mb-3">
+                <LanguageSwitcher />
+              </div>
               <Link href="/login" onClick={() => setIsOpen(false)} className="block">
-                <button className="btn-secondary w-full mb-3">Sign In</button>
+                <button className="btn-secondary w-full mb-3">{t('common.login')}</button>
               </Link>
               <Link href="/signup" onClick={() => setIsOpen(false)} className="block">
-                <button className="btn-primary w-full">Get Started</button>
+                <button className="btn-primary w-full">{t('hero.getStarted')}</button>
               </Link>
             </div>
           </div>

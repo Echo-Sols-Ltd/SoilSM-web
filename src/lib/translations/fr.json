@@ -1,0 +1,65 @@
+{
+  "common": {
+    "welcome": "Bienvenue",
+    "login": "Connexion",
+    "signup": "S'inscrire",
+    "logout": "Déconnexion",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "search": "Rechercher",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "services": "Services",
+    "solutions": "Solutions",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Technologie Agricole Intelligente",
+    "title": "Autonomiser les Agriculteurs avec",
+    "titleHighlight": "Solutions Basées sur les Données",
+    "description": "Transformez votre agriculture avec un suivi abordable du sol, une irrigation intelligente et des conseils alimentés par l'IA. Rejoignez la révolution agricole en Afrique.",
+    "getStarted": "Commencer",
+    "learnMore": "En savoir plus"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "welcome": "Bon retour",
+    "activeSensors": "Capteurs Actifs",
+    "soilMoisture": "Humidité du Sol",
+    "temperature": "Température",
+    "yieldImprovement": "Amélioration du Rendement"
+  },
+  "profile": {
+    "title": "Profil de l'Agriculteur",
+    "personalInfo": "Informations Personnelles",
+    "farmInfo": "Informations de la Ferme",
+    "fullName": "Nom Complet",
+    "email": "Email",
+    "phone": "Numéro de Téléphone",
+    "location": "Localisation",
+    "farmName": "Nom de la Ferme",
+    "farmSize": "Taille de la Ferme",
+    "memberSince": "Membre depuis",
+    "cropsGrown": "Cultures Cultivées",
+    "bio": "Biographie",
+    "editProfile": "Modifier le Profil",
+    "saveChanges": "Enregistrer les Modifications"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Tout marquer comme lu",
+    "markAsRead": "Marquer comme lu",
+    "noNotifications": "Aucune notification",
+    "allCaughtUp": "Vous êtes à jour! Revenez plus tard pour les mises à jour.",
+    "unreadCount": "{{count}} notification non lue",
+    "unreadCount_plural": "{{count}} notifications non lues"
+  }
+}
+
