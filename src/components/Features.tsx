@@ -2,42 +2,44 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const Features = () => {
+  const { t } = useTranslation()
   const services = [
     {
-      title: 'Soil Testing',
-      description: 'Get comprehensive soil analysis with our advanced testing technology to optimize your farming.',
+      title: t('features.soilTesting'),
+      description: t('features.soilTestingDesc'),
       image: '/images/414b4422a7252fce9cc35e06ef2e0367.jpg',
       bgGradient: 'from-green-600 to-green-700',
     },
     {
-      title: 'Smart Irrigation',
-      description: 'Automated water management system that saves up to 30% water while improving crop yields.',
+      title: t('features.smartIrrigation'),
+      description: t('features.smartIrrigationDesc'),
       image: '/images/470188c19df5b72272dfd3048ffe1fc7.jpg',
       bgGradient: 'from-blue-600 to-cyan-600',
     },
     {
-      title: 'Crop Monitoring',
-      description: 'Real-time crop health monitoring with AI-powered insights and recommendations.',
+      title: t('features.cropMonitoring'),
+      description: t('features.cropMonitoringDesc'),
       image: '/images/95d225cd0eaeb990224ee01db5bb59e2.jpg',
       bgGradient: 'from-amber-600 to-orange-600',
     },
     {
-      title: 'NPK Fertilizers',
-      description: 'Customized fertilizer recommendations based on your soil composition and crop needs.',
+      title: t('features.npkFertilizers'),
+      description: t('features.npkFertilizersDesc'),
       image: '/images/Best Organic Fertilizers for Summer Growth are a… 1.png',
       bgGradient: 'from-purple-600 to-pink-600',
     },
     {
-      title: 'Water Management',
-      description: 'Efficient water distribution and conservation strategies for sustainable agriculture.',
+      title: t('features.waterManagement'),
+      description: t('features.waterManagementDesc'),
       image: '/images/470188c19df5b72272dfd3048ffe1fc7.jpg',
       bgGradient: 'from-teal-600 to-cyan-600',
     },
     {
-      title: 'Sustainable Farming',
-      description: 'Eco-friendly farming practices that protect the environment and increase productivity.',
+      title: t('features.sustainableFarming'),
+      description: t('features.sustainableFarmingDesc'),
       image: '/images/800px-Agriculture_in_Vietnam_with_farmers.jpg',
       bgGradient: 'from-green-700 to-emerald-700',
     },
@@ -63,11 +65,11 @@ const Features = () => {
           className="text-center mb-8 sm:mb-12 md:mb-16 px-4 sm:px-0"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-display text-white mb-4 sm:mb-6">
-            Explore our wide range of services
+            {t('features.title')}
           </h2>
           <div className="flex justify-center">
             <button className="bg-white text-green-800 px-4 sm:px-6 py-2 rounded-full font-semibold hover:bg-green-50 transition-colors text-sm sm:text-base">
-              Browse Catalogue
+              {t('features.browseCatalogue')}
             </button>
           </div>
         </motion.div>
@@ -101,7 +103,7 @@ const Features = () => {
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">{service.title}</h3>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-3 sm:mb-4">{service.description}</p>
                 <button className="text-green-700 font-semibold hover:text-green-800 transition-colors flex items-center gap-2 group text-sm sm:text-base">
-                  Learn More
+                  {t('common.learnMore')}
                   <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -120,10 +122,10 @@ const Features = () => {
           className="text-center mt-8 sm:mt-12 px-4 sm:px-0"
         >
           <p className="text-white text-base sm:text-lg mb-4 sm:mb-6">
-            Ready to transform your farming with our comprehensive services?
+            {t('features.readyToTransform')}
           </p>
           <button className="bg-white text-green-800 px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-bold hover:bg-green-50 transition-colors shadow-lg text-sm sm:text-base">
-            Get Started Today
+            {t('features.getStartedToday')}
           </button>
         </motion.div>
       </div>

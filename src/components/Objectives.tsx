@@ -3,31 +3,33 @@
 import { motion } from 'framer-motion'
 import { GiPlantSeed } from 'react-icons/gi'
 import { FiTarget, FiActivity, FiZap, FiCpu, FiUsers, FiSmartphone } from 'react-icons/fi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const Objectives = () => {
+  const { t } = useTranslation()
   const objectives = [
     {
       icon: FiActivity,
-      title: 'Monitor Soil Health',
-      description: 'Real-time monitoring using affordable sensors.',
+      title: t('objectives.monitorSoilHealth'),
+      description: t('objectives.monitorSoilHealthDesc'),
       gradient: 'from-green-500 to-emerald-600',
     },
     {
       icon: FiZap,
-      title: 'Automate Delivery',
-      description: 'Smart automation for water and compost delivery.',
+      title: t('objectives.automateDelivery'),
+      description: t('objectives.automateDeliveryDesc'),
       gradient: 'from-blue-500 to-cyan-600',
     },
     {
       icon: FiCpu,
-      title: 'AI-Powered Guidance',
-      description: 'Intelligent recommendations for optimal farming.',
+      title: t('objectives.aiPoweredGuidance'),
+      description: t('objectives.aiPoweredGuidanceDesc'),
       gradient: 'from-purple-500 to-pink-600',
     },
     {
       icon: FiSmartphone,
-      title: 'Mobile App',
-      description: 'Access all features on-the-go with offline support.',
+      title: t('objectives.mobileApp'),
+      description: t('objectives.mobileAppDesc'),
       gradient: 'from-orange-500 to-red-600',
     },
   ]
@@ -45,13 +47,13 @@ const Objectives = () => {
         >
           <div className="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
             <FiTarget className="text-sm sm:text-base" />
-            Our Solution
+            {t('objectives.badge')}
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-3 sm:mb-4">
-            <span className="text-gradient">SoilSmart</span> Objectives
+            <span className="text-gradient">SoilSmart</span> {t('objectives.title').replace('SoilSmart ', '')}
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto mt-3 sm:mt-4">
-            Closing the gap with affordable, data-driven tools for sustainable and effective soil management
+            {t('objectives.subtitle')}
           </p>
         </motion.div>
 
@@ -94,7 +96,7 @@ const Objectives = () => {
           <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 bg-primary-50 px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl">
             <GiPlantSeed className="text-primary-600 text-2xl sm:text-3xl" />
             <p className="text-base sm:text-lg font-semibold text-gray-900 text-center sm:text-left">
-              Join <span className="text-primary-600">10,000+</span> farmers already using SoilSmart
+              {t('objectives.joinFarmers')}
             </p>
           </div>
         </motion.div>

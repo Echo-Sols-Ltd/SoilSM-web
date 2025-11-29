@@ -4,13 +4,15 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { FiSmartphone, FiDownload, FiCheck, FiDroplet, FiThermometer, FiActivity, FiTrendingUp } from 'react-icons/fi'
 import { GiPlantSeed } from 'react-icons/gi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const MobileAppDownload = () => {
+  const { t } = useTranslation()
   const features = [
-    'Real-time soil monitoring',
-    'Offline mode support',
-    'AI-powered recommendations',
-    'Community sharing',
+    t('mobileApp.realTimeMonitoring'),
+    t('mobileApp.offlineMode'),
+    t('mobileApp.aiRecommendations'),
+    t('mobileApp.communitySharing'),
   ]
 
   return (
@@ -27,15 +29,15 @@ const MobileAppDownload = () => {
           >
             <div className="inline-flex items-center gap-2 bg-[#16a34a]/10 text-[#16a34a] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
               <FiSmartphone className="text-sm sm:text-base" />
-              Mobile App
+              {t('mobileApp.badge')}
             </div>
             
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-              Download <span className="text-[#16a34a]">SoilSmart</span> Mobile App
+              {t('mobileApp.title')}
             </h2>
             
             <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 leading-relaxed">
-              Take your farming management on the go. Monitor soil health, receive AI recommendations, and connect with the farming community—all from your mobile device.
+              {t('mobileApp.description')}
             </p>
 
             {/* Features List */}
@@ -68,7 +70,7 @@ const MobileAppDownload = () => {
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.5,14.5L15.07,12.06L17.5,9.63L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
                 </svg>
-                <span className="text-sm sm:text-base font-semibold">Google Play</span>
+                <span className="text-sm sm:text-base font-semibold">{t('mobileApp.googlePlay')}</span>
               </a>
               <a
                 href="https://apps.apple.com/app/soilsmart/id123456789"
@@ -79,7 +81,7 @@ const MobileAppDownload = () => {
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.05,20.28L14.18,23.22C13.03,24.37 11.37,24.37 10.22,23.22L4.95,17.96C4.17,17.19 4.17,15.94 4.95,15.17L7.82,12.22C8.97,11.07 10.63,11.07 11.78,12.22L17.05,17.5C17.83,18.27 17.83,19.53 17.05,20.28M19.3,9.25L12.78,2.64C11.63,1.5 9.97,1.5 8.82,2.64L5.95,5.58C5.17,6.36 5.17,7.61 5.95,8.39L12.47,15C13.63,16.15 15.28,16.15 16.43,15L19.3,12.06C20.08,11.29 20.08,10.03 19.3,9.25Z" />
                 </svg>
-                <span className="text-sm sm:text-base font-semibold">App Store</span>
+                <span className="text-sm sm:text-base font-semibold">{t('mobileApp.appStore')}</span>
               </a>
             </div>
           </motion.div>
@@ -117,7 +119,7 @@ const MobileAppDownload = () => {
                         </div>
                         <div>
                           <h3 className="text-base font-bold text-gray-900">SoilSmart</h3>
-                          <p className="text-xs text-gray-500">Dashboard</p>
+                          <p className="text-xs text-gray-500">{t('dashboard.title')}</p>
                         </div>
                       </div>
                     </div>
@@ -131,7 +133,7 @@ const MobileAppDownload = () => {
                             <FiDroplet className="text-blue-500 text-lg" />
                             <span className="text-xs text-green-600 font-semibold">+5%</span>
                           </div>
-                          <p className="text-xs text-gray-500 mb-1">Moisture</p>
+                          <p className="text-xs text-gray-500 mb-1">{t('dashboard.soilMoisture')}</p>
                           <p className="text-lg font-bold text-gray-900">45%</p>
                         </div>
                         <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
@@ -139,14 +141,14 @@ const MobileAppDownload = () => {
                             <FiThermometer className="text-orange-500 text-lg" />
                             <span className="text-xs text-gray-400">24°C</span>
                           </div>
-                          <p className="text-xs text-gray-500 mb-1">Temperature</p>
+                          <p className="text-xs text-gray-500 mb-1">{t('dashboard.temperature')}</p>
                           <p className="text-lg font-bold text-gray-900">Optimal</p>
                         </div>
                       </div>
 
                       {/* Active Sensors */}
                       <div className="px-4 mb-4">
-                        <h4 className="text-sm font-semibold text-gray-900 mb-3">Active Sensors</h4>
+                        <h4 className="text-sm font-semibold text-gray-900 mb-3">{t('dashboard.activeSensors')}</h4>
                         <div className="space-y-2">
                           <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
                             <div className="flex items-center justify-between mb-2">
@@ -156,7 +158,7 @@ const MobileAppDownload = () => {
                               </div>
                               <span className="text-xs text-gray-500">85%</span>
                             </div>
-                            <p className="text-xs text-gray-500">Soil Moisture</p>
+                            <p className="text-xs text-gray-500">{t('dashboard.soilMoisture')}</p>
                             <div className="mt-2 h-1.5 bg-gray-100 rounded-full overflow-hidden">
                               <div className="h-full bg-green-500 rounded-full" style={{ width: '85%' }}></div>
                             </div>
@@ -209,13 +211,13 @@ const MobileAppDownload = () => {
 
                       {/* AI Recommendations */}
                       <div className="px-4 mb-4">
-                        <h4 className="text-sm font-semibold text-gray-900 mb-3">AI Recommendations</h4>
+                        <h4 className="text-sm font-semibold text-gray-900 mb-3">{t('dashboard.aiRecommendations')}</h4>
                         <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-3 border border-green-100">
                           <div className="flex items-start gap-2">
                             <FiActivity className="text-green-600 text-base mt-0.5 flex-shrink-0" />
                             <div className="flex-1">
-                              <p className="text-xs font-semibold text-gray-900 mb-1">Increase Irrigation</p>
-                              <p className="text-xs text-gray-600">Zone 1 moisture is below optimal level</p>
+                              <p className="text-xs font-semibold text-gray-900 mb-1">{t('dashboard.increaseIrrigation')}</p>
+                              <p className="text-xs text-gray-600">{t('dashboard.increaseIrrigationDesc')}</p>
                             </div>
                           </div>
                         </div>
@@ -223,13 +225,13 @@ const MobileAppDownload = () => {
 
                       {/* Quick Actions */}
                       <div className="px-4">
-                        <h4 className="text-sm font-semibold text-gray-900 mb-3">Quick Actions</h4>
+                        <h4 className="text-sm font-semibold text-gray-900 mb-3">{t('dashboard.quickActions')}</h4>
                         <div className="grid grid-cols-2 gap-3">
                           <button className="bg-[#16a34a] text-white rounded-xl p-3 text-xs font-semibold shadow-sm">
-                            Monitor Soil
+                            {t('nav.monitoring')}
                           </button>
                           <button className="bg-white border border-gray-200 text-gray-700 rounded-xl p-3 text-xs font-semibold shadow-sm">
-                            View Reports
+                            {t('dashboard.viewReports')}
                           </button>
                         </div>
                       </div>
@@ -241,15 +243,15 @@ const MobileAppDownload = () => {
                         <div className="w-6 h-6 bg-[#16a34a] rounded-lg flex items-center justify-center">
                           <FiActivity className="text-white text-xs" />
                         </div>
-                        <span className="text-xs text-[#16a34a] font-medium">Home</span>
+                        <span className="text-xs text-[#16a34a] font-medium">{t('nav.home')}</span>
                       </div>
                       <div className="flex flex-col items-center gap-1">
                         <FiDroplet className="text-gray-400 text-lg" />
-                        <span className="text-xs text-gray-400">Irrigation</span>
+                        <span className="text-xs text-gray-400">{t('nav.irrigation')}</span>
                       </div>
                       <div className="flex flex-col items-center gap-1">
                         <FiTrendingUp className="text-gray-400 text-lg" />
-                        <span className="text-xs text-gray-400">Reports</span>
+                        <span className="text-xs text-gray-400">{t('nav.reports')}</span>
                       </div>
                       <div className="flex flex-col items-center gap-1">
                         <FiActivity className="text-gray-400 text-lg" />

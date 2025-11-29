@@ -7,8 +7,10 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi'
 import { GiPlantSeed } from 'react-icons/gi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 export default function LoginPage() {
+  const { t } = useTranslation()
   const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -80,8 +82,8 @@ export default function LoginPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-[#16a34a] rounded-full mb-4">
               <GiPlantSeed className="text-white text-3xl" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">SoilSmart</h1>
-            <h2 className="text-xl font-semibold text-gray-800">Login</h2>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">{t('login.title')}</h1>
+            <h2 className="text-xl font-semibold text-gray-800">{t('login.subtitle')}</h2>
           </div>
 
           {/* Login Form */}
@@ -89,7 +91,7 @@ export default function LoginPage() {
             {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email
+                {t('login.email')}
               </label>
               <div className="relative">
                 <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -101,7 +103,7 @@ export default function LoginPage() {
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all"
-                  placeholder="Enter your email"
+                  placeholder={t('login.enterEmail')}
                 />
               </div>
             </div>
@@ -110,10 +112,10 @@ export default function LoginPage() {
             <div>
               <div className="flex items-center justify-between mb-2">
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                  Password
+                  {t('login.password')}
                 </label>
                 <Link href="/forgot-password" className="text-sm text-[#16a34a] hover:text-[#15803d]">
-                  Forgot password?
+                  {t('common.forgotPassword')}
                 </Link>
               </div>
               <div className="relative">
@@ -126,7 +128,7 @@ export default function LoginPage() {
                   value={formData.password}
                   onChange={handleChange}
                   className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16a34a] focus:border-[#16a34a] transition-all"
-                  placeholder="Enter your password"
+                  placeholder={t('login.enterPassword')}
                 />
                 <button
                   type="button"
@@ -147,10 +149,10 @@ export default function LoginPage() {
               {isLoading ? (
                 <span className="flex items-center justify-center gap-2">
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  Logging in...
+                  {t('login.loggingIn')}
                 </span>
               ) : (
-                'Login'
+                t('common.login')
               )}
             </button>
           </form>
@@ -162,7 +164,7 @@ export default function LoginPage() {
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">— Or continue with —</span>
+                <span className="px-2 bg-white text-gray-500">{t('common.orContinueWith')}</span>
               </div>
             </div>
 
@@ -182,9 +184,9 @@ export default function LoginPage() {
 
           {/* Sign Up Link */}
           <p className="mt-6 text-center text-sm text-gray-600">
-            Don't have an account?{' '}
+            {t('common.dontHaveAccount')}{' '}
             <Link href="/signup" className="font-medium text-[#16a34a] hover:text-[#15803d]">
-              Signup
+              {t('common.signup')}
             </Link>
           </p>
         </motion.div>

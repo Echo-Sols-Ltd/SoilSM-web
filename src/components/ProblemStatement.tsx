@@ -2,27 +2,29 @@
 
 import { motion } from 'framer-motion'
 import { FiAlertCircle, FiTrendingDown, FiDroplet, FiHelpCircle } from 'react-icons/fi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const ProblemStatement = () => {
+  const { t } = useTranslation()
   const problems = [
     {
       icon: FiTrendingDown,
-      title: 'Declining Soil Fertility',
-      description: 'Continuous farming without proper soil management leads to nutrient depletion and reduced productivity.',
+      title: t('problem.decliningSoilFertility'),
+      description: t('problem.decliningSoilFertilityDesc'),
       color: 'text-red-500',
       bgColor: 'bg-red-50',
     },
     {
       icon: FiDroplet,
-      title: 'Poor Irrigation Practices',
-      description: 'Inefficient water usage and lack of proper irrigation systems result in crop stress and water waste.',
+      title: t('problem.poorIrrigation'),
+      description: t('problem.poorIrrigationDesc'),
       color: 'text-blue-500',
       bgColor: 'bg-blue-50',
     },
     {
       icon: FiHelpCircle,
-      title: 'Limited Modern Guidance',
-      description: 'Traditional methods rely on guesswork, lacking access to data-driven insights and expert advice.',
+      title: t('problem.limitedGuidance'),
+      description: t('problem.limitedGuidanceDesc'),
       color: 'text-yellow-500',
       bgColor: 'bg-yellow-50',
     },
@@ -41,11 +43,11 @@ const ProblemStatement = () => {
         >
           <div className="inline-flex items-center gap-2 bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
             <FiAlertCircle />
-            The Challenge
+            {t('problem.challenge')}
           </div>
-          <h2 className="section-title">The Problem We're Solving</h2>
+          <h2 className="section-title">{t('problem.title')}</h2>
           <p className="section-subtitle mx-auto mt-4">
-            Farmers across Africa face critical challenges that threaten food security and livelihoods
+            {t('problem.subtitle')}
           </p>
         </motion.div>
 
@@ -78,11 +80,10 @@ const ProblemStatement = () => {
           className="bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl p-8 md:p-12 text-white text-center"
         >
           <h3 className="text-2xl md:text-3xl font-bold mb-4">
-            Climate change is making these challenges worse
+            {t('problem.climateChange')}
           </h3>
           <p className="text-lg md:text-xl opacity-90 max-w-4xl mx-auto">
-            Without smart solutions, soil degradation and low productivity will continue to harm livelihoods 
-            and local economies, leaving communities vulnerable and threatening food security.
+            {t('problem.climateChangeDesc')}
           </p>
         </motion.div>
       </div>

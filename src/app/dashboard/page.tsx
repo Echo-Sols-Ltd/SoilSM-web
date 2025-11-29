@@ -20,8 +20,10 @@ import {
 import { format } from 'date-fns'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useTranslation } from '@/hooks/useTranslation'
 
 export default function DashboardPage() {
+  const { t } = useTranslation()
   const router = useRouter()
   const [tasks, setTasks] = useState([
     { id: 1, text: 'Apply organic compost', completed: false },
@@ -39,21 +41,21 @@ export default function DashboardPage() {
   const announcements = [
     {
       id: 1,
-      title: 'New AI Soil Analysis Update Released',
-      description: 'Get more accurate soil health insights with our latest AI update.',
-      link: 'Read more'
+      title: t('dashboard.newAISoilAnalysis'),
+      description: t('dashboard.newAISoilAnalysisDesc'),
+      link: t('common.readMore')
     },
     {
       id: 2,
-      title: 'Rainy Week Ahead',
-      description: 'Weather forecast shows rain expected this week. Plan accordingly.',
-      link: 'Read more'
+      title: t('dashboard.rainyWeekAhead'),
+      description: t('dashboard.rainyWeekAheadDesc'),
+      link: t('common.readMore')
     },
     {
       id: 3,
-      title: 'Join the 30-day Soil Challenge',
-      description: 'Improve your soil health in just 30 days with our guided program.',
-      link: 'Read more'
+      title: t('dashboard.join30DayChallenge'),
+      description: t('dashboard.join30DayChallengeDesc'),
+      link: t('common.readMore')
     },
   ]
 
@@ -92,8 +94,8 @@ export default function DashboardPage() {
               <FiArrowLeft className="text-xl" />
             </button>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">Dashboard</h1>
-              <p className="text-sm sm:text-base text-gray-600">Your soil's daily story, powered by smart sensors.</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-display mb-1 sm:mb-2">{t('dashboard.title')}</h1>
+              <p className="text-sm sm:text-base text-gray-600">{t('dashboard.subtitle')}</p>
             </div>
           </div>
         </div>
@@ -172,7 +174,7 @@ export default function DashboardPage() {
 
         {/* Latest Announcements */}
         <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-          <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 font-display">Latest Announcements</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 font-display">{t('dashboard.announcements')}</h2>
           <div className="space-y-3 sm:space-y-4">
             {announcements.map((announcement) => (
               <div 

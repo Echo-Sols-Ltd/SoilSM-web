@@ -3,34 +3,36 @@
 import Link from 'next/link'
 import { GiPlantSeed } from 'react-icons/gi'
 import { FiMail, FiPhone, FiMapPin, FiGithub, FiTwitter, FiLinkedin, FiFacebook } from 'react-icons/fi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const Footer = () => {
+  const { t } = useTranslation()
   const currentYear = new Date().getFullYear()
 
   const footerLinks = {
     product: [
-      { name: 'Features', href: '#features' },
-      { name: 'How It Works', href: '#how-it-works' },
-      { name: 'Pricing', href: '#pricing' },
-      { name: 'Case Studies', href: '#case-studies' },
+      { name: t('footer.features'), href: '#features' },
+      { name: t('footer.howItWorks'), href: '#how-it-works' },
+      { name: t('footer.pricing'), href: '#pricing' },
+      { name: t('footer.caseStudies'), href: '#case-studies' },
     ],
     company: [
-      { name: 'About Us', href: '#about' },
-      { name: 'Careers', href: '#careers' },
-      { name: 'Blog', href: '#blog' },
-      { name: 'Press Kit', href: '#press' },
+      { name: t('footer.aboutUs'), href: '#about' },
+      { name: t('footer.careers'), href: '#careers' },
+      { name: t('footer.blog'), href: '#blog' },
+      { name: t('footer.pressKit'), href: '#press' },
     ],
     resources: [
-      { name: 'Documentation', href: '#docs' },
-      { name: 'API Reference', href: '#api' },
-      { name: 'Community', href: '#community' },
-      { name: 'Support', href: '#support' },
+      { name: t('footer.documentation'), href: '#docs' },
+      { name: t('footer.apiReference'), href: '#api' },
+      { name: t('footer.community'), href: '#community' },
+      { name: t('footer.support'), href: '#support' },
     ],
     legal: [
-      { name: 'Privacy Policy', href: '#privacy' },
-      { name: 'Terms of Service', href: '#terms' },
-      { name: 'Cookie Policy', href: '#cookies' },
-      { name: 'Licenses', href: '#licenses' },
+      { name: t('footer.privacyPolicy'), href: '#privacy' },
+      { name: t('footer.termsOfService'), href: '#terms' },
+      { name: t('footer.cookiePolicy'), href: '#cookies' },
+      { name: t('footer.licenses'), href: '#licenses' },
     ],
   }
 
@@ -56,8 +58,7 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-gray-400 mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm">
-              Empowering African farmers with affordable, data-driven tools for sustainable agriculture 
-              and improved crop yields.
+              {t('footer.description')}
             </p>
             
             {/* Contact Info */}
@@ -76,14 +77,14 @@ const Footer = () => {
               </div>
               <div className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm">
                 <FiMapPin className="text-[#4ade80] flex-shrink-0 mt-0.5" />
-                <span>Kigali, Rwanda</span>
+                <span>{t('footer.kigaliRwanda')}</span>
               </div>
             </div>
           </div>
 
           {/* Links Columns */}
           <div>
-            <h3 className="text-white font-bold mb-3 sm:mb-4 text-sm sm:text-base">Product</h3>
+            <h3 className="text-white font-bold mb-3 sm:mb-4 text-sm sm:text-base">{t('footer.product')}</h3>
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.product.map((link) => (
                 <li key={link.name}>
@@ -96,7 +97,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-white font-bold mb-3 sm:mb-4 text-sm sm:text-base">Company</h3>
+            <h3 className="text-white font-bold mb-3 sm:mb-4 text-sm sm:text-base">{t('footer.company')}</h3>
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
@@ -109,7 +110,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-white font-bold mb-3 sm:mb-4 text-sm sm:text-base">Resources</h3>
+            <h3 className="text-white font-bold mb-3 sm:mb-4 text-sm sm:text-base">{t('footer.resources')}</h3>
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
@@ -122,7 +123,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-white font-bold mb-3 sm:mb-4 text-sm sm:text-base">Legal</h3>
+            <h3 className="text-white font-bold mb-3 sm:mb-4 text-sm sm:text-base">{t('footer.legal')}</h3>
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
@@ -139,7 +140,7 @@ const Footer = () => {
         <div className="border-t border-[#166534] pt-6 sm:pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
             <p className="text-xs sm:text-sm text-gray-400 text-center sm:text-left">
-              © {currentYear} Echo Solutions Ltd. All rights reserved.
+              {t('footer.copyright', { year: currentYear })}
             </p>
 
             {/* Social Links */}

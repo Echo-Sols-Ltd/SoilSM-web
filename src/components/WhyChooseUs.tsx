@@ -5,23 +5,25 @@ import Image from 'next/image'
 import { FiCheck } from 'react-icons/fi'
 import { GiPlantSeed } from 'react-icons/gi'
 import { FiUsers, FiZap } from 'react-icons/fi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const WhyChooseUs = () => {
+  const { t } = useTranslation()
   const values = [
     {
       icon: GiPlantSeed,
-      title: 'Sustainability',
-      description: 'We bring the long-term health and resource balance',
+      title: t('whyChooseUs.sustainability'),
+      description: t('whyChooseUs.sustainabilityDesc'),
     },
     {
       icon: FiUsers,
-      title: 'Community',
-      description: "Farmers' trust, and local guardians working hand in hand",
+      title: t('whyChooseUs.community'),
+      description: t('whyChooseUs.communityDesc'),
     },
     {
       icon: FiZap,
-      title: 'Innovation',
-      description: 'Simple UI and sensor tech that works offline, anywhere',
+      title: t('whyChooseUs.innovation'),
+      description: t('whyChooseUs.innovationDesc'),
     },
   ]
 
@@ -52,8 +54,8 @@ const WhyChooseUs = () => {
               <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 text-white">
                 <div className="text-center">
                   <span className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-4 block">🌾</span>
-                  <p className="text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2">Thriving Green Farm</p>
-                  <p className="text-green-100 text-sm sm:text-base">Sustainable Agriculture in Action</p>
+                  <p className="text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2">{t('whyChooseUs.thrivingGreenFarm')}</p>
+                  <p className="text-green-100 text-sm sm:text-base">{t('whyChooseUs.sustainableAgriculture')}</p>
                 </div>
               </div>
             </div>
@@ -73,23 +75,23 @@ const WhyChooseUs = () => {
           >
             <div className="inline-flex items-center gap-2 text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4">
               <span className="w-6 sm:w-8 h-px bg-gray-400"></span>
-              About us
+              {t('whyChooseUs.aboutUs')}
             </div>
             
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-              Why choose us?
+              {t('whyChooseUs.title')}
             </h2>
             
             <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">
-              Soilsmart began with a simple idea: what if the soil itself could guide the farmer?
+              {t('whyChooseUs.description1')}
             </p>
             
             <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 md:mb-8 leading-relaxed">
-              We saw the immense economic and community burden created billowed to make soil health visible, actionable, and accessible — even next knowledge.
+              {t('whyChooseUs.description2')}
             </p>
 
             <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 md:mb-10 leading-relaxed">
-              From local hubs to global partnerships, we're building tools that empower smallholder farmers to save water, grow more, and protect their land for the next generation.
+              {t('whyChooseUs.description3')}
             </p>
 
             {/* Value Cards - Aligned with icons */}

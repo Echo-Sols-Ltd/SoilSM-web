@@ -2,8 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { FiMail, FiPhone, FiMapPin, FiSend } from 'react-icons/fi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const CallToAction = () => {
+  const { t } = useTranslation()
   return (
     <section id="contact" className="py-12 sm:py-16 md:py-20 bg-gray-50">
       <div className="container-custom">
@@ -15,10 +17,10 @@ const CallToAction = () => {
           className="text-center mb-8 sm:mb-12 px-4 sm:px-0"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-3 sm:mb-4">
-            Let's Grow Smarter Together!
+            {t('cta.title')}
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
-            Have questions or need support? Fill out the form below and our team will get back to you within 24 hours.
+            {t('cta.subtitle')}
           </p>
         </motion.div>
 
@@ -31,7 +33,7 @@ const CallToAction = () => {
             transition={{ duration: 0.6 }}
             className="space-y-4 sm:space-y-6 order-2 lg:order-1"
           >
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Get in Touch</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">{t('cta.getInTouch')}</h3>
             
             <div className="space-y-3 sm:space-y-4">
               <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-white rounded-lg shadow-sm">
@@ -39,7 +41,7 @@ const CallToAction = () => {
                   <FiMail className="text-green-700 text-lg sm:text-xl" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">Email Us</h4>
+                  <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">{t('cta.emailUs')}</h4>
                   <p className="text-xs sm:text-sm text-gray-600">info@soilsmart.com</p>
                   <p className="text-xs sm:text-sm text-gray-600">support@soilsmart.com</p>
                 </div>
@@ -50,9 +52,9 @@ const CallToAction = () => {
                   <FiPhone className="text-green-700 text-lg sm:text-xl" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">Call Us</h4>
+                  <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">{t('cta.callUs')}</h4>
                   <p className="text-xs sm:text-sm text-gray-600">+250 788 123 456</p>
-                  <p className="text-xs sm:text-sm text-gray-600">Mon-Fri: 8AM - 6PM</p>
+                  <p className="text-xs sm:text-sm text-gray-600">{t('common.monFri')}</p>
                 </div>
               </div>
 
@@ -61,7 +63,7 @@ const CallToAction = () => {
                   <FiMapPin className="text-green-700 text-lg sm:text-xl" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">Visit Us</h4>
+                  <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1">{t('cta.visitUs')}</h4>
                   <p className="text-xs sm:text-sm text-gray-600">KG 123 St, Kigali</p>
                   <p className="text-xs sm:text-sm text-gray-600">Rwanda, East Africa</p>
                 </div>
@@ -70,7 +72,7 @@ const CallToAction = () => {
 
             {/* Social Links */}
             <div className="pt-4 sm:pt-6">
-              <h4 className="font-semibold text-gray-900 mb-3 sm:mb-4 text-sm sm:text-base">Follow Us</h4>
+              <h4 className="font-semibold text-gray-900 mb-3 sm:mb-4 text-sm sm:text-base">{t('common.followUs')}</h4>
               <div className="flex gap-2 sm:gap-3">
                 <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 bg-green-600 hover:bg-green-700 rounded-full flex items-center justify-center text-white transition-colors text-xs sm:text-sm font-bold">
                   f
@@ -96,7 +98,7 @@ const CallToAction = () => {
             <form className="space-y-4 sm:space-y-5">
               <div>
                 <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                  Your Name
+                  {t('common.yourName')}
                 </label>
                 <input
                   type="text"
@@ -108,7 +110,7 @@ const CallToAction = () => {
 
               <div>
                 <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                  Email Address
+                  {t('common.emailAddress')}
                 </label>
                 <input
                   type="email"
@@ -120,25 +122,25 @@ const CallToAction = () => {
 
               <div>
                 <label htmlFor="subject" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                  Subject
+                  {t('common.subject')}
                 </label>
                 <input
                   type="text"
                   id="subject"
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
-                  placeholder="How can we help?"
+                  placeholder={t('common.howCanWeHelp')}
                 />
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                  Message
+                  {t('common.message')}
                 </label>
                 <textarea
                   id="message"
                   rows={4}
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none text-sm sm:text-base"
-                  placeholder="Tell us more about your needs..."
+                  placeholder={t('common.tellUsMore')}
                 ></textarea>
               </div>
 
@@ -146,7 +148,7 @@ const CallToAction = () => {
                 type="submit"
                 className="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-3 sm:py-4 rounded-lg transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
               >
-                Send Message
+                {t('common.sendMessage')}
                 <FiSend className="text-sm sm:text-base" />
               </button>
             </form>

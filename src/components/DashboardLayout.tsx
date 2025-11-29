@@ -16,6 +16,7 @@ import {
   FiSearch,
 } from 'react-icons/fi'
 import { GiPlantSeed } from 'react-icons/gi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -44,12 +45,13 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     router.push('/')
   }
 
+  const { t } = useTranslation()
   const navItems = [
-    { name: 'Home', href: '/dashboard', icon: FiHome },
-    { name: 'Tasks', href: '/dashboard/tasks', icon: FiCheckSquare },
-    { name: 'Community Hub', href: '/dashboard/community', icon: FiUsers },
-    { name: 'Your soil', href: '/dashboard/monitoring', icon: GiPlantSeed },
-    { name: 'Messages', href: '/dashboard/messages', icon: FiMessageSquare },
+    { name: t('nav.dashboard'), href: '/dashboard', icon: FiHome },
+    { name: t('nav.tasks'), href: '/dashboard/tasks', icon: FiCheckSquare },
+    { name: t('nav.communityHub'), href: '/dashboard/community', icon: FiUsers },
+    { name: t('nav.yourSoil'), href: '/dashboard/monitoring', icon: GiPlantSeed },
+    { name: t('nav.messages'), href: '/dashboard/messages', icon: FiMessageSquare },
   ]
 
   if (!user) {
@@ -123,7 +125,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             className="w-full text-left text-white/80 hover:text-white px-4 py-2 rounded-lg hover:bg-[#166534] transition-colors text-sm font-medium flex items-center gap-2"
           >
             <FiLogOut className="text-lg" />
-            Log out
+            {t('common.logout')}
           </button>
         </div>
       </aside>
@@ -147,7 +149,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 <FiSearch className="text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Search posts, farmers"
+                  placeholder={t('common.search')}
                   className="bg-transparent border-none outline-none text-sm text-gray-600 w-40"
                 />
               </div>
@@ -181,13 +183,13 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 onClick={() => setShowLogoutModal(false)}
                 className="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all text-sm sm:text-base"
               >
-                Cancel
+                {t('common.cancel')}
               </button>
               <button
                 onClick={handleLogout}
                 className="flex-1 px-4 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all text-sm sm:text-base"
               >
-                Logout
+                {t('common.logout')}
               </button>
             </div>
           </div>
