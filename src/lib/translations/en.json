@@ -253,8 +253,8 @@
     "doItNow": "Do it now",
     "location": "{{location}}",
     "weather": "{{temp}}°C {{condition}}",
-    "logoutConfirmTitle": "Confirm Logout",
-    "logoutConfirmMessage": "Are you sure you want to logout?",
+    "logoutConfirmTitle": "Want to logout?",
+    "logoutConfirmMessage": "Are you sure you want to log out? You will be signed out of your account and any unsaved changes may be lost. You can always log back in at any time.",
     "searchPlaceholder": "Search"
   },
   "tasks": {

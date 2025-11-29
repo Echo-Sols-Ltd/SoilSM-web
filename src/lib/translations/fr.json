@@ -253,8 +253,8 @@
     "doItNow": "Faire maintenant",
     "location": "{{location}}",
     "weather": "{{temp}}°C {{condition}}",
-    "logoutConfirmTitle": "Confirmer la Déconnexion",
-    "logoutConfirmMessage": "Êtes-vous sûr de vouloir vous déconnecter?",
+    "logoutConfirmTitle": "Voulez-vous vous déconnecter?",
+    "logoutConfirmMessage": "Êtes-vous sûr de vouloir vous déconnecter? Vous serez déconnecté de votre compte et toutes les modifications non enregistrées peuvent être perdues. Vous pouvez toujours vous reconnecter à tout moment.",
     "searchPlaceholder": "Rechercher"
   },
   "tasks": {

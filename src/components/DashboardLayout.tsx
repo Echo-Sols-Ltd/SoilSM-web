@@ -174,9 +174,9 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       {showLogoutModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 relative">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Want to logout?</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">{t('dashboard.logoutConfirmTitle')}</h2>
             <p className="text-gray-600 mb-6 text-sm sm:text-base">
-              Are you sure you want to log out? You will be signed out of your account and any unsaved changes may be lost. You can always log back in at any time.
+              {t('dashboard.logoutConfirmMessage')}
             </p>
             <div className="flex gap-3">
               <button

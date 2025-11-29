@@ -253,8 +253,8 @@
     "doItNow": "Bikore ubu",
     "location": "{{location}}",
     "weather": "{{temp}}°C {{condition}}",
-    "logoutConfirmTitle": "Emeza Gusohoka",
-    "logoutConfirmMessage": "Wizeye ko ushaka gusohoka?",
+    "logoutConfirmTitle": "Wifuza gusohoka?",
+    "logoutConfirmMessage": "Wizeye ko ushaka gusohoka? Uzazasohoka mu konti yawe kandi amakuru atabikwa ashobora kuzangira. Usanganywe gusubira mu konti yawe igihe icyo ari cyo cyose.",
     "searchPlaceholder": "Shakisha"
   },
   "tasks": {
