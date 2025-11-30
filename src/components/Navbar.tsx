@@ -25,6 +25,7 @@ const Navbar = () => {
   const sectionIds = navLinks.map(link => link.href.replace('#', ''))
   const activeSection = useScrollSpy(sectionIds, 100)
 
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
@@ -32,6 +33,29 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
+
+  // Handle escape key to close menu
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleEscape)
+    return () => window.removeEventListener('keydown', handleEscape)
+  }, [isOpen])
 
   const handleNavClick = (href: string) => {
     setIsOpen(false)
@@ -44,6 +68,10 @@ const Navbar = () => {
         behavior: 'smooth'
       })
     }
+  }
+
+  const closeMenu = () => {
+    setIsOpen(false)
   }
 
   return (
@@ -97,59 +125,103 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-gray-900 text-2xl sm:text-3xl p-2 -mr-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="md:hidden text-gray-900 text-xl sm:text-2xl p-2 -mr-2 hover:bg-gray-100 rounded-lg transition-colors z-50 relative"
             aria-label="Toggle menu"
+            aria-expanded={isOpen}
           >
             {isOpen ? <FiX className="w-6 h-6 sm:w-7 sm:h-7" /> : <FiMenu className="w-6 h-6 sm:w-7 sm:h-7" />}
           </button>
         </div>
+      </div>
 
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isOpen && (
+      {/* Mobile Menu Overlay & Sidebar */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop Overlay */}
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden mt-4 pb-4 overflow-hidden"
+              onClick={closeMenu}
+              className="fixed inset-0 bg-black bg-opacity-50 z-[60] md:hidden"
+            />
+
+            {/* Slide-in Menu Panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
+              className="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl z-[70] md:hidden overflow-y-auto"
             >
-              <div className="flex flex-col space-y-2 sm:space-y-3">
-                {navLinks.map((link) => {
-                  const isActive = activeSection === link.href.replace('#', '')
-                  return (
-                    <motion.button
-                      key={link.name}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.2 }}
-                      onClick={() => handleNavClick(link.href)}
-                      className={`text-left font-medium transition-all duration-300 py-3 sm:py-3.5 rounded-lg px-4 ${
-                        isActive 
-                          ? 'text-cyan-600 font-bold border-l-4 border-cyan-500 bg-gradient-to-r from-cyan-50 to-blue-50 shadow-sm' 
-                          : 'text-gray-700 hover:text-cyan-500 hover:bg-gray-50'
-                      }`}
-                    >
-                      {link.name}
-                    </motion.button>
-                  )
-                })}
-                <div className="px-4 mb-2 sm:mb-3 pt-2">
+              {/* Menu Header */}
+              <div className="sticky top-0 bg-white border-b border-gray-200 px-4 sm:px-6 py-4 flex items-center justify-between z-10">
+                <Link href="/" className="flex items-center space-x-2" onClick={closeMenu}>
+                  <div className="bg-primary-600 p-1.5 sm:p-2 rounded-lg">
+                    <GiPlantSeed className="text-white text-xl sm:text-2xl" />
+                  </div>
+                  <span className="text-lg sm:text-xl font-bold font-display text-gray-900">
+                    Soil<span className="text-[#16a34a]">Smart</span>
+                  </span>
+                </Link>
+                <button
+                  onClick={closeMenu}
+                  className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 p-2 rounded-lg transition-colors"
+                  aria-label="Close menu"
+                >
+                  <FiX className="w-6 h-6" />
+                </button>
+              </div>
+
+              {/* Menu Content */}
+              <div className="px-4 sm:px-6 py-6">
+                <nav className="flex flex-col space-y-1 mb-6">
+                  {navLinks.map((link, index) => {
+                    const isActive = activeSection === link.href.replace('#', '')
+                    return (
+                      <motion.button
+                        key={link.name}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.2, delay: index * 0.05 }}
+                        onClick={() => handleNavClick(link.href)}
+                        className={`text-left font-medium transition-all duration-300 py-3 sm:py-3.5 rounded-lg px-4 ${
+                          isActive 
+                            ? 'text-cyan-600 font-bold border-l-4 border-cyan-500 bg-gradient-to-r from-cyan-50 to-blue-50 shadow-sm' 
+                            : 'text-gray-700 hover:text-cyan-500 hover:bg-gray-50'
+                        }`}
+                      >
+                        {link.name}
+                      </motion.button>
+                    )
+                  })}
+                </nav>
+
+                {/* Language Switcher */}
+                <div className="mb-6 pb-6 border-b border-gray-200">
                   <LanguageSwitcher />
                 </div>
-                <div className="px-4 space-y-2 sm:space-y-3">
-                  <Link href="/login" onClick={() => setIsOpen(false)} className="block">
-                    <button className="btn-secondary w-full py-3 sm:py-3.5 text-sm sm:text-base">{t('common.login')}</button>
+
+                {/* Action Buttons */}
+                <div className="space-y-3">
+                  <Link href="/login" onClick={closeMenu} className="block">
+                    <button className="btn-secondary w-full py-3 sm:py-3.5 text-sm sm:text-base font-semibold">
+                      {t('common.login')}
+                    </button>
                   </Link>
-                  <Link href="/signup" onClick={() => setIsOpen(false)} className="block">
-                    <button className="btn-primary w-full py-3 sm:py-3.5 text-sm sm:text-base">{t('hero.getStarted')}</button>
+                  <Link href="/signup" onClick={closeMenu} className="block">
+                    <button className="btn-primary w-full py-3 sm:py-3.5 text-sm sm:text-base font-semibold">
+                      {t('hero.getStarted')}
+                    </button>
                   </Link>
                 </div>
               </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+          </>
+        )}
+      </AnimatePresence>
     </nav>
   )
 }
