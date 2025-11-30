@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { FiMenu, FiX } from 'react-icons/fi'
 import { GiPlantSeed } from 'react-icons/gi'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
 import { useTranslation } from '@/hooks/useTranslation'
 import LanguageSwitcher from './LanguageSwitcher'
@@ -96,45 +97,58 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-gray-900 text-2xl"
+            className="md:hidden text-gray-900 text-2xl sm:text-3xl p-2 -mr-2 hover:bg-gray-100 rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
-            {isOpen ? <FiX /> : <FiMenu />}
+            {isOpen ? <FiX className="w-6 h-6 sm:w-7 sm:h-7" /> : <FiMenu className="w-6 h-6 sm:w-7 sm:h-7" />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden mt-4 pb-4">
-            <div className="flex flex-col space-y-4">
-              {navLinks.map((link) => {
-                const isActive = activeSection === link.href.replace('#', '')
-                return (
-                  <button
-                    key={link.name}
-                    onClick={() => handleNavClick(link.href)}
-                    className={`text-left font-medium transition-all duration-300 py-2 rounded-r-lg ${
-                      isActive 
-                        ? 'text-cyan-600 font-bold border-l-4 border-cyan-500 bg-gradient-to-r from-cyan-50 to-blue-50 pl-3 pr-4 shadow-sm' 
-                        : 'text-gray-700 hover:text-cyan-500 hover:bg-gray-50 pl-4 pr-4'
-                    }`}
-                  >
-                    {link.name}
-                  </button>
-                )
-              })}
-              <div className="px-4 mb-3">
-                <LanguageSwitcher />
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden mt-4 pb-4 overflow-hidden"
+            >
+              <div className="flex flex-col space-y-2 sm:space-y-3">
+                {navLinks.map((link) => {
+                  const isActive = activeSection === link.href.replace('#', '')
+                  return (
+                    <motion.button
+                      key={link.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.2 }}
+                      onClick={() => handleNavClick(link.href)}
+                      className={`text-left font-medium transition-all duration-300 py-3 sm:py-3.5 rounded-lg px-4 ${
+                        isActive 
+                          ? 'text-cyan-600 font-bold border-l-4 border-cyan-500 bg-gradient-to-r from-cyan-50 to-blue-50 shadow-sm' 
+                          : 'text-gray-700 hover:text-cyan-500 hover:bg-gray-50'
+                      }`}
+                    >
+                      {link.name}
+                    </motion.button>
+                  )
+                })}
+                <div className="px-4 mb-2 sm:mb-3 pt-2">
+                  <LanguageSwitcher />
+                </div>
+                <div className="px-4 space-y-2 sm:space-y-3">
+                  <Link href="/login" onClick={() => setIsOpen(false)} className="block">
+                    <button className="btn-secondary w-full py-3 sm:py-3.5 text-sm sm:text-base">{t('common.login')}</button>
+                  </Link>
+                  <Link href="/signup" onClick={() => setIsOpen(false)} className="block">
+                    <button className="btn-primary w-full py-3 sm:py-3.5 text-sm sm:text-base">{t('hero.getStarted')}</button>
+                  </Link>
+                </div>
               </div>
-              <Link href="/login" onClick={() => setIsOpen(false)} className="block">
-                <button className="btn-secondary w-full mb-3">{t('common.login')}</button>
-              </Link>
-              <Link href="/signup" onClick={() => setIsOpen(false)} className="block">
-                <button className="btn-primary w-full">{t('hero.getStarted')}</button>
-              </Link>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   )

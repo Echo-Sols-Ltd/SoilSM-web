@@ -79,24 +79,31 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full bg-[#15803d] shadow-xl z-50 transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-full bg-[#15803d] shadow-xl z-50 transition-transform duration-300 ease-in-out flex flex-col ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } lg:translate-x-0 w-64`}
+        } lg:translate-x-0 w-64 sm:w-72`}
       >
         {/* Logo */}
-        <div className="p-6 border-b border-[#166534]">
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-              <GiPlantSeed className="text-[#16a34a] text-2xl" />
+        <div className="p-4 sm:p-6 border-b border-[#166534] flex items-center justify-between flex-shrink-0">
+          <Link href="/dashboard" className="flex items-center gap-2 sm:gap-3" onClick={() => setSidebarOpen(false)}>
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+              <GiPlantSeed className="text-[#16a34a] text-xl sm:text-2xl" />
             </div>
-            <span className="text-xl font-bold font-display text-white">
+            <span className="text-lg sm:text-xl font-bold font-display text-white">
               SoilSmart
             </span>
           </Link>
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="lg:hidden text-white hover:bg-[#166534] p-2 rounded-lg transition-colors"
+            aria-label="Close menu"
+          >
+            <FiX className="text-xl" />
+          </button>
         </div>
 
         {/* Navigation */}
-        <nav className="p-4 space-y-1">
+        <nav className="p-3 sm:p-4 space-y-1 overflow-y-auto flex-1">
           {navItems.map((item) => {
             const Icon = item.icon
             const isActive = pathname === item.href || (item.href === '/dashboard' && pathname === '/dashboard')
@@ -105,27 +112,30 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 key={item.name}
                 href={item.href}
                 onClick={() => setSidebarOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
+                className={`flex items-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg transition-all duration-300 ${
                   isActive
                     ? 'bg-[#16a34a] text-white font-semibold'
                     : 'text-white/80 hover:bg-[#166534] hover:text-white'
                 }`}
               >
-                <Icon className="text-xl" />
-                <span className="font-medium">{item.name}</span>
+                <Icon className="text-lg sm:text-xl flex-shrink-0" />
+                <span className="font-medium text-sm sm:text-base">{item.name}</span>
               </Link>
             )
           })}
         </nav>
 
         {/* Log out Link */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#166534]">
+        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 border-t border-[#166534] bg-[#15803d]">
           <button
-            onClick={() => setShowLogoutModal(true)}
-            className="w-full text-left text-white/80 hover:text-white px-4 py-2 rounded-lg hover:bg-[#166534] transition-colors text-sm font-medium flex items-center gap-2"
+            onClick={() => {
+              setShowLogoutModal(true)
+              setSidebarOpen(false)
+            }}
+            className="w-full text-left text-white/80 hover:text-white px-3 sm:px-4 py-2.5 sm:py-2 rounded-lg hover:bg-[#166534] transition-colors text-sm sm:text-base font-medium flex items-center gap-2 sm:gap-3"
           >
-            <FiLogOut className="text-lg" />
-            {t('common.logout')}
+            <FiLogOut className="text-lg sm:text-xl flex-shrink-0" />
+            <span>{t('common.logout')}</span>
           </button>
         </div>
       </aside>
@@ -134,40 +144,41 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <div className="lg:ml-64 bg-gray-50 min-h-screen">
         {/* Top Header */}
         <header className="bg-white shadow-sm sticky top-0 z-30">
-          <div className="flex items-center justify-between px-4 sm:px-6 py-4">
+          <div className="flex items-center justify-between px-3 sm:px-4 md:px-6 py-3 sm:py-4">
             {/* Mobile Menu Button */}
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="lg:hidden text-gray-600 hover:text-gray-900"
+              className="lg:hidden text-gray-600 hover:text-gray-900 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              aria-label="Toggle menu"
             >
-              {sidebarOpen ? <FiX className="text-2xl" /> : <FiMenu className="text-2xl" />}
+              {sidebarOpen ? <FiX className="text-xl sm:text-2xl" /> : <FiMenu className="text-xl sm:text-2xl" />}
             </button>
 
             {/* Right Actions */}
-            <div className="flex items-center gap-3 sm:gap-4 ml-auto">
+            <div className="flex items-center gap-2 sm:gap-3 md:gap-4 ml-auto">
               <div className="hidden md:flex items-center gap-2 bg-gray-100 rounded-lg px-3 py-2">
-                <FiSearch className="text-gray-400" />
+                <FiSearch className="text-gray-400 text-lg" />
                 <input
                   type="text"
                   placeholder={t('common.search')}
-                  className="bg-transparent border-none outline-none text-sm text-gray-600 w-40"
+                  className="bg-transparent border-none outline-none text-sm text-gray-600 w-32 lg:w-40"
                 />
               </div>
-              <Link href="/dashboard/notifications" className="relative text-gray-600 hover:text-gray-900">
-                <FiBell className="text-xl" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-white flex items-center justify-center">
+              <Link href="/dashboard/notifications" className="relative text-gray-600 hover:text-gray-900 p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <FiBell className="text-lg sm:text-xl" />
+                <span className="absolute top-0 right-0 w-4 h-4 sm:w-5 sm:h-5 bg-red-500 rounded-full text-[10px] sm:text-xs text-white flex items-center justify-center font-semibold">
                   3
                 </span>
               </Link>
-              <Link href="/dashboard/profile" className="w-10 h-10 bg-[#16a34a] rounded-full flex items-center justify-center text-white font-bold cursor-pointer hover:bg-[#15803d] transition-colors">
-                {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+              <Link href="/dashboard/profile" className="w-9 h-9 sm:w-10 sm:h-10 bg-[#16a34a] rounded-full flex items-center justify-center text-white font-bold cursor-pointer hover:bg-[#15803d] transition-colors flex-shrink-0">
+                <span className="text-sm sm:text-base">{user?.name?.charAt(0)?.toUpperCase() || 'U'}</span>
               </Link>
             </div>
           </div>
         </header>
 
         {/* Page Content */}
-        <main className="p-4 sm:p-6">{children}</main>
+        <main className="p-3 sm:p-4 md:p-6">{children}</main>
       </div>
 
       {/* Logout Confirmation Modal */}
