@@ -87,7 +87,7 @@ export default function AIChatPage() {
 
   return (
     <DashboardLayout>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto pb-4 sm:pb-6">
         <div className="mb-4 sm:mb-6">
           <div className="flex items-center gap-3 mb-2">
             <button

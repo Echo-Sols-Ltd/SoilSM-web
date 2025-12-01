@@ -131,7 +131,7 @@ export default function IrrigationPage() {
 
   return (
     <DashboardLayout>
-      <div className="space-y-6">
+      <div className="space-y-6 pb-4 sm:pb-6">
         {/* Header with Quick Actions */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-3">

@@ -83,7 +83,7 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="space-y-4 sm:space-y-6 px-3 sm:px-0">
+      <div className="space-y-4 sm:space-y-6 px-3 sm:px-0 pb-4 sm:pb-6">
         {/* Header */}
         <div className="mb-4 sm:mb-6">
           <div className="flex items-center gap-3 mb-2">

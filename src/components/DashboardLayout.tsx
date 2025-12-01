@@ -81,7 +81,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <aside
         className={`fixed top-0 left-0 h-full bg-[#15803d] shadow-xl z-50 transition-transform duration-300 ease-in-out flex flex-col ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } lg:translate-x-0 w-64 sm:w-72`}
+        } lg:translate-x-0 w-64 sm:w-72 lg:w-64`}
       >
         {/* Logo */}
         <div className="p-4 sm:p-6 border-b border-[#166534] flex items-center justify-between flex-shrink-0">
@@ -103,7 +103,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         </div>
 
         {/* Navigation */}
-        <nav className="p-3 sm:p-4 space-y-1 overflow-y-auto flex-1">
+        <nav className="p-3 sm:p-4 space-y-1 overflow-y-auto flex-1 pb-16 sm:pb-20">
           {navItems.map((item) => {
             const Icon = item.icon
             const isActive = pathname === item.href || (item.href === '/dashboard' && pathname === '/dashboard')
@@ -126,7 +126,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         </nav>
 
         {/* Log out Link */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 border-t border-[#166534] bg-[#15803d]">
+        <div className="sticky bottom-0 left-0 right-0 p-3 sm:p-4 border-t border-[#166534] bg-[#15803d] mt-auto flex-shrink-0">
           <button
             onClick={() => {
               setShowLogoutModal(true)
@@ -141,9 +141,9 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       </aside>
 
       {/* Main Content */}
-      <div className="lg:ml-64 bg-gray-50 min-h-screen">
+      <div className="lg:ml-64 bg-gray-50 min-h-screen flex flex-col w-full lg:w-[calc(100%-16rem)]">
         {/* Top Header */}
-        <header className="bg-white shadow-sm sticky top-0 z-30">
+        <header className="bg-white shadow-sm sticky top-0 z-30 flex-shrink-0">
           <div className="flex items-center justify-between px-3 sm:px-4 md:px-6 py-3 sm:py-4">
             {/* Mobile Menu Button */}
             <button
@@ -178,7 +178,11 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         </header>
 
         {/* Page Content */}
-        <main className="p-3 sm:p-4 md:p-6">{children}</main>
+        <main className="flex-1 p-3 sm:p-4 md:p-6 pb-8 sm:pb-12 md:pb-16 relative">
+          {children}
+          {/* Bottom padding using ::after pseudo element */}
+          <div className="dashboard-content-spacer"></div>
+        </main>
       </div>
 
       {/* Logout Confirmation Modal */}
