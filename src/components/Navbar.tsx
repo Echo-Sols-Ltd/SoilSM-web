@@ -81,7 +81,7 @@ const Navbar = () => {
       }`}
     >
       <div className="container-custom">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4 xl:gap-6">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-1.5 sm:space-x-2 group">
             <div className="bg-primary-600 p-1.5 sm:p-2 rounded-lg group-hover:bg-primary-700 transition-colors">
@@ -93,14 +93,14 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden xl:flex items-center space-x-6 xl:space-x-8">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.replace('#', '')
               return (
                 <button
                   key={link.name}
                   onClick={() => handleNavClick(link.href)}
-                  className={`relative font-medium transition-all duration-300 ${
+                  className={`relative font-medium transition-all duration-300 text-sm xl:text-base ${
                     isActive 
                       ? 'text-cyan-600 font-bold' 
                       : 'text-gray-700 hover:text-cyan-500'
@@ -113,19 +113,23 @@ const Navbar = () => {
                 </button>
               )
             })}
-            <LanguageSwitcher />
-            <Link href="/login">
-              <button className="btn-secondary mr-2 sm:mr-3 text-xs sm:text-sm px-3 sm:px-6 py-2 sm:py-3">{t('common.login')}</button>
-            </Link>
-            <Link href="/signup">
-              <button className="btn-primary text-xs sm:text-sm px-3 sm:px-6 py-2 sm:py-3">{t('hero.getStarted')}</button>
-            </Link>
+            <div className="ml-2 xl:ml-4">
+              <LanguageSwitcher />
+            </div>
+            <div className="flex items-center gap-2 xl:gap-3 ml-2 xl:ml-4">
+              <Link href="/login">
+                <button className="btn-secondary text-xs xl:text-sm px-3 xl:px-6 py-2 xl:py-3 whitespace-nowrap">{t('common.login')}</button>
+              </Link>
+              <Link href="/signup">
+                <button className="btn-primary text-xs xl:text-sm px-3 xl:px-6 py-2 xl:py-3 whitespace-nowrap">{t('hero.getStarted')}</button>
+              </Link>
+            </div>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile/Tablet Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-gray-900 text-xl sm:text-2xl p-2 -mr-2 hover:bg-gray-100 rounded-lg transition-colors z-50 relative"
+            className="xl:hidden text-gray-900 text-xl sm:text-2xl p-2 -mr-2 hover:bg-gray-100 rounded-lg transition-colors z-50 relative"
             aria-label="Toggle menu"
             aria-expanded={isOpen}
           >
@@ -145,7 +149,7 @@ const Navbar = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={closeMenu}
-              className="fixed inset-0 bg-black bg-opacity-50 z-[60] md:hidden"
+              className="fixed inset-0 bg-black bg-opacity-50 z-[60] xl:hidden"
             />
 
             {/* Slide-in Menu Panel */}
@@ -154,7 +158,7 @@ const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
-              className="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl z-[70] md:hidden overflow-y-auto"
+              className="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl z-[70] xl:hidden overflow-y-auto"
             >
               {/* Menu Header */}
               <div className="sticky top-0 bg-white border-b border-gray-200 px-4 sm:px-6 py-4 flex items-center justify-between z-10">
